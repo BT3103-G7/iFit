@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # bt3103
+=======
+# test-project
+>>>>>>> dedad46... Add project config files
 
 ## Project setup
 ```
