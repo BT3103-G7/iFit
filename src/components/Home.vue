@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
     body {
-        background-image: url("../assets/training-pic.jpg");
+        background-image: url('../assets/training-pic.jpg');
         background-attachment: scroll;
         background-repeat: none;
         overflow: auto;
