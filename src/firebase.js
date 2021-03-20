@@ -1,6 +1,6 @@
 import firebase from "firebase"
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyBIGrd-UhDZMJPrmvx_q0QYjBhBA5bz0ok",
     authDomain: "bt3103-test-project-750e2.firebaseapp.com",
     projectId: "bt3103-test-project-750e2",
@@ -9,6 +9,9 @@ var firebaseConfig = {
     appId: "1:424721779966:web:0f51a977b94f58c6f269af",
     measurementId: "G-7DDRBMTV77"
   };
+  // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 firebase.initializeApp(firebaseConfig);
 var database = firebase.firestore();

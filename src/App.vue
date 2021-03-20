@@ -9,7 +9,6 @@
 <script>
 import Header from './components/Header.vue'
 
-
 export default {
   name: 'App',
   components: {
@@ -26,7 +25,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  }
+<<<<<<< HEAD
+<<<<<<< HEAD
+}
+</style>
 </style>
 
 
@@ -91,3 +93,7 @@ export default {
 
 
 
+<<<<<<< HEAD
+>>>>>>> 188743d... Add src files and .gitignore file
+=======
+>>>>>>> dfa2069a99036437241549fb3550d4a07f17274d
