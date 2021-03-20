@@ -1,19 +1,7 @@
 <template>
   <div id="app">
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <line-chart></line-chart>
-  </div>
-</template>
-
-<script>
-import LineChart from './components/LineChart.vue'
-=======
-    <Home></Home>
-=======
     <Header> </Header>
     <router-view> </router-view>
->>>>>>> dfa2069... Fix router issues in Header
   </div>
 </template>
 
@@ -21,20 +9,10 @@ import LineChart from './components/LineChart.vue'
 <script>
 import Header from './components/Header.vue'
 
->>>>>>> 188743d... Add src files and .gitignore file
-
 export default {
   name: 'App',
   components: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    LineChart,
-=======
-    Home
->>>>>>> 188743d... Add src files and .gitignore file
-=======
     Header
->>>>>>> dfa2069... Fix router issues in Header
   }
 }
 </script>
@@ -48,10 +26,9 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 </style>
-=======
-  }
 </style>
 
 
@@ -116,4 +93,7 @@ export default {
 
 
 
+<<<<<<< HEAD
 >>>>>>> 188743d... Add src files and .gitignore file
+=======
+>>>>>>> dfa2069a99036437241549fb3550d4a07f17274d
