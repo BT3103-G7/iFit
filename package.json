@@ -1,5 +1,4 @@
 {
-  "name": "bt3103",
   "name": "test-project",
   "version": "0.1.0",
   "private": true,
@@ -9,8 +8,6 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.9.1",
