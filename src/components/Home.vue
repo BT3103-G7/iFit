@@ -1,6 +1,7 @@
 <template>
 <div>
     <div id="content-wrap">
+        <div id="bg"></div>
         <div id="overlay"></div>
         <div id="text-placeholder">
             <p id="tagline">COMMIT TO BE FIT</p>
@@ -12,7 +13,7 @@
         </div>
 
         <div id="login-placeholder">
-            <h5 id="login-msg">Already have an account? Log in <span id="login-link">here</span>.</h5>
+            <h5 id="login-msg">Already have an account? Log in <router-link to="/login" id="login-link">here</router-link>.</h5>
         </div>
     </div>
 </div>
@@ -27,11 +28,15 @@ export default {
 </script>
 
 <style scoped>
-    body {
-        background-image: url('../assets/training-pic.jpg');
-        background-attachment: scroll;
-        background-repeat: none;
-        overflow: auto;
+    #bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 120%;
+        background: url(../assets/training-pic.jpg);
+        opacity: 1;
+        z-index: -1;
     }
     #overlay {
         position: absolute;
@@ -40,7 +45,7 @@ export default {
         width: 100%;
         height: 100%;
         background-color: black;
-        opacity: 0.4;
+        opacity: 0.25;
         z-index: 0;
     }
     #text-placeholder {
@@ -61,6 +66,7 @@ export default {
         width: 50%;
         left: 25%;
         position: absolute;
+        font-size: 18px;
     }
     #button-placeholder {
         top: 55%;
@@ -91,7 +97,7 @@ export default {
         color: gold;
     }
     #login-link:hover {
-        cursor: pointer;
+        text-decoration: none;
     }
     #content-wrap {
         padding-bottom: 150px;
