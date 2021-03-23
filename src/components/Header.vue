@@ -40,7 +40,8 @@
 export default {
   data() {
     return {
-      isLogged: false,
+      // to be updated when user authentication is done
+      isLogged: true,
     };
   },
 };
