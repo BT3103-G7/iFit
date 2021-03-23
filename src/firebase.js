@@ -10,9 +10,8 @@ const firebaseConfig = {
     measurementId: "G-7DDRBMTV77"
   };
   // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 var database = firebase.firestore();
 export default database;
