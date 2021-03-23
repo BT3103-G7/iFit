@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="placeholder">
     <div id="dropdown">
     <b-form-select v-model="selected" :options="options"></b-form-select>
     </div>
@@ -31,7 +31,13 @@ export default {
 <style scoped>
 #dropdown {
     width: 15%;
-    margin: auto
+    margin: auto;
 }
-
+#placeholder {
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+    height: 500px;
+}
 </style>
