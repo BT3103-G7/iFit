@@ -14,7 +14,11 @@
     "firebase": "^8.3.0",
     "moment": "^2.29.1",
     "vue": "^2.6.12",
-    "vue-router": "^3.5.1"
+    "vue-chart-js": "^1.4.1",
+    "vue-chartjs": "^3.5.1",
+    "vue-router": "^3.5.1",
+    "vue2-google-maps": "^0.10.7",
+    "x5-gmaps": "^0.3.34"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
