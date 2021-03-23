@@ -25,22 +25,6 @@ export default {
             ]
         }
     },
-    /*methods: {
-        getDaily() {
-            this.timeframe = "Daily"
-        },
-        getWeekly() {
-            this.timeframe = "Weekly"
-        },
-        getMonthly() {
-            this.timeframe = "Monthly"
-        }
-    }*/
-    /*<b-dropdown-item-button @click= "getDaily">Daily</b-dropdown-item-button>
-        <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item-button @click= "getWeekly">Weekly</b-dropdown-item-button>
-        <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item-button @click= "getMonthly">Monthly</b-dropdown-item-button>*/
 }
 </script>
 

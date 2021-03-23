@@ -14,7 +14,6 @@ export default {
                 labels: [],
                 datasets: [{
                     data: [],
-                    //label: "",
                     borderColor: "#B71C1C",
                     fill: false
                 }],
