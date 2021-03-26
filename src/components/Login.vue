@@ -1,54 +1,59 @@
 <template>
-  <div>
-    <b-form @submit="onSubmit" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          placeholder="Enter email"
-          class="mb-2 mr-sm-2 mb-sm-0"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <label for="text-password">Password</label>
-      <b-form-input
-        type="password"
-        id="text-password"
-        v-on:keyup.enter="onSubmit"
-        class="mb-2 mr-sm-2 mb-sm-0"
-        required
-      ></b-form-input>
-      <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>
-      <b-button type="submit" variant="primary">LOG IN</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
+    <div id="background">
+    <b-card id="loginDiv" bg-variant="light">
+      <h1>Login</h1><br>
+      <form @submit.prevent="login">
+        <b-form-group id="input-group-1" label="Email address:" label-for="input-1" label-cols-sm="3">
+          <b-form-input id="input-1" v-model="email" type="email" placeholder="Enter your email" required></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-2" label="Password:" label-for="text-password" label-cols-sm="3">
+          <b-form-input type="password" id="text-password" v-model="password" placeholder="Enter your password" required></b-form-input>
+        </b-form-group>
+        <br><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
+      </form>
+      <br><br><span><b>Forgot your password? </b></span>
+      <b-button type="button" v-on:click="reset">click here</b-button>
     </b-card>
-  </div>
+    </div>
 </template>
+
 <script>
+import firebase from "firebase"
+
 export default {
   data() {
     return {
-      form: {
         email: "",
         password: "",
-      },
-      show: true,
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-    }
+    login() {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then(() => {
+        alert('Successfully logged in');
+        this.$router.push('/overview');
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+    },
   }
 };
 </script>
+
 <style scoped>
+#loginDiv {
+  width: 40%;
+  height: 65%;
+  margin: auto;
+  border: 3px solid rgb(95, 93, 93);
+  border-radius: 20px;
+  background-color: rgb(207, 203, 203);
+}
+#background {
+  background-image: url('https://www.marinabaysands.com/content/dam/revamp/hotel/banyan-tree-fitness-club/banyan-tree-fitness-club-masthead-m.jpg');
+  height: 660px;
+}
 </style>
