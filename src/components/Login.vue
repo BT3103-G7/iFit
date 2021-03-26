@@ -5,10 +5,10 @@
       <b-form v-on:submit.native.prevent="login">
 
         <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
-          <b-form-input id="input-1" v-model="form.email" type="email" placeholder="Enter your email" class="mb-2 mr-sm-2 mb-sm-0" required></b-form-input>
+          <b-form-input id="input-1" v-model="email" type="email" placeholder="Enter your email" class="mb-2 mr-sm-2 mb-sm-0" required></b-form-input>
         </b-form-group>
         <label for="text-password">Password:</label>
-        <b-form-input type="password" id="text-password" v-on:keyup.enter="onSubmit" required></b-form-input>
+        <b-form-input type="password" id="text-password" v-model="password" required></b-form-input>
 
         <!--<br><b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>-->
         <br><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
@@ -23,10 +23,8 @@ import firebase from 'firebase'
 export default {
   data() {
     return {
-      form: {
         email: "",
         password: "",
-      },
       //show: true,
     };
   },
