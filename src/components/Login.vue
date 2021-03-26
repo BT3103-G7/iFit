@@ -1,35 +1,20 @@
 <template>
-    <div>
-    <!--<b-card id="loginDiv" bg-variant="light">
-      <h1>Login</h1>
-      <b-form v-on:submit.native.prevent="login">
-
-        <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
-          <b-form-input id="input-1" v-model="email" type="email" placeholder="Enter your email" class="mb-2 mr-sm-2 mb-sm-0" required></b-form-input>
+    <div id="background">
+    <b-card id="loginDiv" bg-variant="light">
+      <h1>Login</h1><br>
+      <form @submit.prevent="login">
+        <b-form-group id="input-group-1" label="Email address:" label-for="input-1" label-cols-sm="3">
+          <b-form-input id="input-1" v-model="email" type="email" placeholder="Enter your email" required></b-form-input>
         </b-form-group>
-        <label for="text-password">Password:</label>
-        <b-form-input type="password" id="text-password" v-model="password" required></b-form-input>
 
-        <br><b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>
+        <b-form-group id="input-group-2" label="Password:" label-for="text-password" label-cols-sm="3">
+          <b-form-input type="password" id="text-password" v-model="password" placeholder="Enter your password" required></b-form-input>
+        </b-form-group>
         <br><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
-      </b-form>
-    </b-card>-->
-      <form @submit.prevent="login">     
-        <h2>Login</h2>     
-        <input       
-          type="email"       
-          placeholder="Email address..."       
-          v-model="email"     
-        />     
-        <input       
-          type="password"       
-          placeholder="password..."       
-          v-model="password"     
-        />     
-        <button type="submit">
-        Login
-        </button>  
       </form>
+      <br><br><span><b>Forgot your password? </b></span>
+      <b-button type="button" v-on:click="reset">click here</b-button>
+    </b-card>
     </div>
 </template>
 
@@ -41,7 +26,6 @@ export default {
     return {
         email: "",
         password: "",
-      //show: true,
     };
   },
   methods: {
@@ -61,12 +45,15 @@ export default {
 
 <style scoped>
 #loginDiv {
-  margin-top: 100px;
-  width: 60%;
-  height: 80%;
+  width: 40%;
+  height: 65%;
   margin: auto;
   border: 3px solid rgb(95, 93, 93);
   border-radius: 20px;
   background-color: rgb(207, 203, 203);
+}
+#background {
+  background-image: url('https://www.marinabaysands.com/content/dam/revamp/hotel/banyan-tree-fitness-club/banyan-tree-fitness-club-masthead-m.jpg');
+  height: 660px;
 }
 </style>
