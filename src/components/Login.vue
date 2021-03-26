@@ -1,6 +1,6 @@
 <template>
     <div>
-    <b-card id="loginDiv" bg-variant="light">
+    <!--<b-card id="loginDiv" bg-variant="light">
       <h1>Login</h1>
       <b-form v-on:submit.native.prevent="login">
 
@@ -10,15 +10,31 @@
         <label for="text-password">Password:</label>
         <b-form-input type="password" id="text-password" v-model="password" required></b-form-input>
 
-        <!--<br><b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>-->
+        <br><b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember my preference</b-form-checkbox>
         <br><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
       </b-form>
-    </b-card>
-  </div>
+    </b-card>-->
+      <form @submit.prevent="login">     
+        <h2>Login</h2>     
+        <input       
+          type="email"       
+          placeholder="Email address..."       
+          v-model="email"     
+        />     
+        <input       
+          type="password"       
+          placeholder="password..."       
+          v-model="password"     
+        />     
+        <button type="submit">
+        Login
+        </button>  
+      </form>
+    </div>
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase"
 
 export default {
   data() {
@@ -30,9 +46,7 @@ export default {
   },
   methods: {
     login() {
-      firebase
-      .auth()
-      .signInWithEmailAndPassword(this.email, this.password)
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
         alert('Successfully logged in');
         this.$router.push('/overview');
