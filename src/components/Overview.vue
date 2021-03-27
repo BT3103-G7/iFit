@@ -5,6 +5,9 @@
       <div id="bmi"><Bmi></Bmi></div>
       <div id="pieChart"><PieChart></PieChart></div>
       <div id="doughnutChart"><DoughnutChart></DoughnutChart></div>
+      <div id="button-placeholder">
+        <router-link to="/inputactivity"><b-button>Input Activity</b-button></router-link>
+      </div>
     </div>
 </template>
 
@@ -74,5 +77,13 @@ export default {
   width: 40%;
   top: 630px;
   right: 9%;
+}
+#button-placeholder {
+  top: 60%;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+  padding-left: 50%;
 }
 </style>
