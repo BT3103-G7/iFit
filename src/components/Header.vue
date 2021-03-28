@@ -6,7 +6,7 @@
       variant="light-transparent"
       fixed="top"
     >
-      <b-navbar-brand href="#">iFIT</b-navbar-brand>
+      <b-navbar-brand to="/">iFIT</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -14,7 +14,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="overview" v-if="isLogged"> OVERVIEW </b-nav-item>
-          <b-nav-item to="leaderboard" v-if="isLogged"> MEMBERS </b-nav-item>
+          <b-nav-item to="members" v-if="isLogged"> MEMBERS </b-nav-item>
           <b-nav-item to="locations"> LOCATIONS </b-nav-item>
           <b-nav-item to="schedule"> SCHEDULE </b-nav-item>
           <b-nav-item to="about"> ABOUT </b-nav-item>
