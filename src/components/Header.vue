@@ -49,6 +49,7 @@ export default {
   methods: {
     logout() {
       if (firebase.auth().currentUser) {
+        //this.isLogged = !this.isLogged; //hides the necessary components in navbar when user logouts
         firebase
           .auth()
           .signOut()
