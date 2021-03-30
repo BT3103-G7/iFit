@@ -28,7 +28,7 @@
               <em>User</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item href="#" v-on:click="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   data() {
     return {
@@ -44,6 +46,24 @@ export default {
       isLogged: true,
     };
   },
+  methods: {
+    logout() {
+      if (firebase.auth().currentUser) {
+        //this.isLogged = !this.isLogged; //hides the necessary components in navbar when user logouts
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            alert('Successfully logged out');
+            this.$router.push('/');
+          })
+          .catch(error => {
+            alert(error.message);
+            this.$router.push('/');
+          });
+      }
+    }
+  }
 };
 </script>
 

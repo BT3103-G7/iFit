@@ -14,7 +14,7 @@
         </b-form-group>
 
         <b-form-group id="input-group-3" label="Telegram:" label-for="input-3" label-cols-sm="3">
-            <b-form-input id="input-3" v-model="tele" placeholder="Enter Telegram username" required></b-form-input>
+            <b-form-input id="input-3" v-model="tele" placeholder="@username" required></b-form-input>
         </b-form-group>
 
         <b-form-group id="input-group-4" label="Height:" label-for="input-4" label-cols-sm="3">
