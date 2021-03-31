@@ -1,10 +1,14 @@
 <template>
     <div id="placeholder">
       <div id="bg"></div>
-      <div id="lineChart"><LineChart></LineChart></div>
-      <div id="bmi"><Bmi></Bmi></div>
-      <div id="pieChart"><PieChart></PieChart></div>
-      <div id="doughnutChart"><DoughnutChart></DoughnutChart></div>
+      <div id="top">
+        <LineChart></LineChart>
+        <Bmi></Bmi>
+      </div>
+      <div id="bottom">
+        <PieChart></PieChart>
+        <DoughnutChart></DoughnutChart>
+      </div>
     </div>
 </template>
 
@@ -32,47 +36,28 @@ export default {
 </script>
 
 <style scoped>
+#top {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 45%;
+  top: 5%;
+}
+#bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50%;
+  bottom: 0;
+}
 #bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 150%;
+  height: 100%;
   background-color: black;
   opacity: 1;
   z-index: -1;
-  overflow: hidden;
-}
-#placeholder {
-  margin: 40px;
-
-}
-#lineChart {
-  width: 60%;
-  height: 200px;
-  position: absolute;
-  top: 50px;
-  left: 5%;
-  background-color: transparent;
-}
-#bmi {
-  position: absolute;
-  right: 2%;
-  top: 50px;
-  width: 30%;
-  height: 2000px;
-  background-color: transparent;
-}
-#pieChart {
-  position: absolute;
-  width: 40%;
-  top: 630px;
-  left: 7%;
-}
-#doughnutChart  {
-  position: absolute;
-  width: 40%;
-  top: 630px;
-  right: 9%;
 }
 </style>

@@ -16,7 +16,8 @@ export default {
         options: {
             title: {
               display: true,
-              //text: ''
+              text: "Calories Burnt Today vs. Goal",
+              fontSize: 16
             },
             responsive: true,
             maintainAspectRatio: false
