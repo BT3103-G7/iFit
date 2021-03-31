@@ -6,7 +6,7 @@
       <div id="pieChart"><PieChart></PieChart></div>
       <div id="doughnutChart"><DoughnutChart></DoughnutChart></div>
       <div id="button-placeholder">
-        <router-link to="/inputactivity"><b-button>Input Activity</b-button></router-link>
+        <router-link to="/inputactivity"><b-button variant="outline-primary">Input Activity</b-button></router-link>
       </div>
     </div>
 </template>
@@ -85,5 +85,13 @@ export default {
   text-align: center;
   width: 100%;
   padding-left: 50%;
+}
+#button-placeholder2 {
+  top: 60%;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+  padding-left: 70%;
 }
 </style>

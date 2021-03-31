@@ -1,28 +1,55 @@
 <template>
-  <div>
-    <label for="example-datepicker">Choose a date</label>
+  <div id="background">
+    <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
     <b-form-datepicker id="example-datepicker" v-model="date" class="mb-2"></b-form-datepicker>
     <p>Value: {{ date }}</p>
     <br>
 
-    <label for="example-datepicker">Choose an activity</label>
+    <p class="p-3 mb-2 bg-danger text-white">Choose an activity</p>
     <div>
-        <b-dropdown id="dropdown-1" text="No activity selected" class="m-md-2">
-            <b-dropdown-item>First Action</b-dropdown-item>
-            <b-dropdown-item>Second Action</b-dropdown-item>
-            <b-dropdown-item>Third Action</b-dropdown-item>
-        </b-dropdown>
+        <b-form-select v-model="selected" :options="options" class="mb-3">
+            <!-- This slot appears above the options from 'options' prop -->
+            <template #first>
+                <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+            </template>
+
+            <!-- These options will appear after the ones from 'options' prop -->
+            <b-form-select-option value="Static Cycling">Static Cycling</b-form-select-option>
+            <b-form-select-option value="Running">Running</b-form-select-option>
+            <b-form-select-option value="Rowing Machine">Rowing Machine</b-form-select-option>
+            <b-form-select-option value="Elliptical">Elliptical</b-form-select-option>
+            <b-form-select-option value="RStairmaster">Stairmaster</b-form-select-option>
+        </b-form-select>
+        <div class="mt-2">Value: <strong>{{ selected }}</strong></div>
     </div>
     <br>
-
-    <label for="example-datepicker">Choose duration</label>
     <div>
-        <b-form-timepicker v-model="value" locale="en"></b-form-timepicker>
-        <div class="mt-2">Value: '{{ value }}'</div>
+        <div style='width:20%; height:100%; float:left'><br></div>
+        <div style='width:20%; height:100%; float:left'>
+            <p class="p-3 mb-2 bg-danger text-white">Start time</p>
+            <div>
+                <b-time v-model="start" locale="en"></b-time>
+                <div class="mt-2">Value: {{ start }}</div>
+            </div>
+            <br>
+        </div>
+        <div style='width:20%; height:100%; float:left'><br></div>
+        
+        <div style='width:20%; height:100%; float:left'>
+            <p class="p-3 mb-2 bg-danger text-white">End time</p>
+            <div>
+                <b-time v-model="end" locale="en"></b-time>
+                <div class="mt-2">Value: {{ end }}</div>
+            </div>
+            <br>
+        </div>
+        <div style='width:20%; height:100%; float:left'><br></div>
+        
     </div>
-    <br>
 
-    <br><b-button type="submit" size=lg v-on:click="onSubmit()">SUBMIT</b-button>
+    <div>
+        <b-button type="submit" size=lg v-on:click="onSubmit()">SUBMIT</b-button>
+    </div>
   </div>
 </template>
 
@@ -30,7 +57,10 @@
   export default {
     data() {
       return {
-          date: '',
+        selected: null,
+        date: '',
+        start: '',
+        end: '',
       }
     },
     methods: {
@@ -48,3 +78,9 @@
     }
   }
 </script>
+
+<style scoped>
+#background {
+    background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3ltfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80');
+}
+</style>
