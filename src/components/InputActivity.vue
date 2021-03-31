@@ -1,8 +1,10 @@
 <template>
-  <div id="background">
+  <div id="content-wrap">
+    <div id="background"></div>
+    <br><br>
     <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
     <b-form-datepicker id="example-datepicker" v-model="date" class="mb-2"></b-form-datepicker>
-    <p>Value: {{ date }}</p>
+    <!-- <p>Value: {{ date }}</p> -->
     <br>
 
     <p class="p-3 mb-2 bg-danger text-white">Choose an activity</p>
@@ -20,7 +22,7 @@
             <b-form-select-option value="Elliptical">Elliptical</b-form-select-option>
             <b-form-select-option value="RStairmaster">Stairmaster</b-form-select-option>
         </b-form-select>
-        <div class="mt-2">Value: <strong>{{ selected }}</strong></div>
+        <!-- <div class="mt-2">Value: <strong>{{ selected }}</strong></div> -->
     </div>
     <br>
     <div>
@@ -29,7 +31,7 @@
             <p class="p-3 mb-2 bg-danger text-white">Start time</p>
             <div>
                 <b-time v-model="start" locale="en"></b-time>
-                <div class="mt-2">Value: {{ start }}</div>
+                <!-- <div class="mt-2">Value: {{ start }}</div> -->
             </div>
             <br>
         </div>
@@ -39,7 +41,7 @@
             <p class="p-3 mb-2 bg-danger text-white">End time</p>
             <div>
                 <b-time v-model="end" locale="en"></b-time>
-                <div class="mt-2">Value: {{ end }}</div>
+                <!-- <div class="mt-2">Value: {{ end }}</div> -->
             </div>
             <br>
         </div>
@@ -47,7 +49,7 @@
         
     </div>
 
-    <div>
+    <div id="button-placeholder">
         <b-button type="submit" size=lg v-on:click="onSubmit()">SUBMIT</b-button>
     </div>
   </div>
@@ -81,6 +83,20 @@
 
 <style scoped>
 #background {
-    background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3ltfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80');
+    background: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3ltfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    opacity: 1;
+    z-index: -1;
+}
+#button-placeholder {
+    top: 70%;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
 }
 </style>

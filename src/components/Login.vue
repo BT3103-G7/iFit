@@ -13,7 +13,9 @@
         <br><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
       </form>
       <br><br><span><b>Forgot your password? </b></span>
-      <b-button type="button" v-on:click="reset">click here</b-button>
+      <p><i>*key in your email address above, then click the button below.</i></p>
+
+      <b-button type="button" v-on:click="reset">Reset my password</b-button>
     </b-card>
     </div>
 </template>
@@ -39,6 +41,17 @@ export default {
         alert(error.message);
       });
     },
+    
+    reset() {
+      var auth = firebase.auth();
+      auth.sendPasswordResetEmail(this.email).then(() => {
+        alert('Password reset link has been sent to your email.');
+      // Email sent.
+      }).catch(error => {
+            alert(error.message);
+      // An error happened.
+      });
+    }
   }
 };
 </script>
@@ -46,7 +59,7 @@ export default {
 <style scoped>
 #loginDiv {
   width: 40%;
-  height: 65%;
+  height: 75%;
   margin: auto;
   border: 3px solid rgb(95, 93, 93);
   border-radius: 20px;
@@ -55,5 +68,8 @@ export default {
 #background {
   background-image: url('https://www.marinabaysands.com/content/dam/revamp/hotel/banyan-tree-fitness-club/banyan-tree-fitness-club-masthead-m.jpg');
   height: 660px;
+}
+p {
+  font-size: 85%;
 }
 </style>

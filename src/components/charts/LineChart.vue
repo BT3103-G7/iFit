@@ -3,7 +3,7 @@
     <div id="dropdown">
     <b-form-select v-model="selected" :options="options"></b-form-select>
     </div>
-    <chart v-bind:period = "selected"></chart>
+    <chart id="chart" v-bind:period="selected"></chart>
 </div>
 </template>
 
@@ -35,9 +35,14 @@ export default {
 }
 #placeholder {
     background-color: white;
+    padding: 1%;
     border-radius: 10px;
-    width: 100%;
-    padding: 20px;
-    height: 500px;
+    width: 55%;
+    margin: 2% 0 0 12%;
+    height: 90%;
+    float: left;
+}
+#chart {
+    max-height: 80%;
 }
 </style>

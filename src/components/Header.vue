@@ -6,7 +6,7 @@
       variant="light-transparent"
       fixed="top"
     >
-      <b-navbar-brand href="#">iFIT</b-navbar-brand>
+      <b-navbar-brand to="/">iFIT</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -14,7 +14,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="overview" v-if="isLogged"> OVERVIEW </b-nav-item>
-          <b-nav-item to="leaderboard" v-if="isLogged"> MEMBERS </b-nav-item>
+          <b-nav-item to="members" v-if="isLogged"> MEMBERS </b-nav-item>
           <b-nav-item to="locations"> LOCATIONS </b-nav-item>
           <b-nav-item to="schedule"> SCHEDULE </b-nav-item>
           <b-nav-item to="about"> ABOUT </b-nav-item>
@@ -28,7 +28,7 @@
               <em>User</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item href="#" v-on:click="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   data() {
     return {
@@ -44,6 +46,24 @@ export default {
       isLogged: true,
     };
   },
+  methods: {
+    logout() {
+      if (firebase.auth().currentUser) {
+        //this.isLogged = !this.isLogged; //hides the necessary components in navbar when user logouts
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            alert('Successfully logged out');
+            this.$router.push('/');
+          })
+          .catch(error => {
+            alert(error.message);
+            this.$router.push('/');
+          });
+      }
+    }
+  }
 };
 </script>
 
