@@ -19,7 +19,8 @@ export default {
                 legend: { display: true },
                 title: {
                     display: true,
-                    text: 'Calories/Activity This Week'
+                    text: 'Calories/Activity This Week',
+                    fontSize: 16
                 },
                 tooltips: {
                     callbacks: {

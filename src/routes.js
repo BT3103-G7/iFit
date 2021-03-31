@@ -4,10 +4,11 @@ import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 import Overview from './components/Overview.vue'
 import Leaderboard from './components/Leaderboard.vue'
-import Locations from './components/Locations.vue'
+import Locations from './components/Map.vue'
 import Schedule from './components/Schedule.vue'
 import About from './components/About.vue'
 import Contact from './components/Contact.vue'
+import InputActivity from './components/InputActivity.vue'
 
 export default [
   { path: '/', component: Home },
@@ -18,5 +19,6 @@ export default [
   { path: '/locations', component: Locations },
   { path: '/schedule', component: Schedule },
   { path: '/about', component: About },
-  { path: '/contact', component: Contact }
+  { path: '/contact', component: Contact },
+  { path: '/inputactivity', component: InputActivity },
 ]
