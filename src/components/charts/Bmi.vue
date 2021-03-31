@@ -49,36 +49,38 @@ export default {
         font-family: 'Lucida Sans';
     }
     #placeholder {
-        height: 500px;
-        width: 400px;
+        width: 20%;
+        height: 90%;
         background-color: white;
         border-radius: 10px;
+        margin: 2% 12% 0 0;
+        float: right;
     }
     #stats {
         line-height: 50px;
         position: relative;
-        top: 70px;
+        top: 15%;
         font-weight: bold;
     }
     #arrow {
         position: relative;
-        top: 120px;
+        top: 25%;
         z-index: 1;
     }
     .progressBar {
-        height: 35px;
-        width: 300px;
+        height: 8%;
+        width: 80%;
         position: relative;
-        top: 100px;
-        left: 50px;
+        top: 20%;
+        left: 10%;
     }
     .label {
-        width: 300px;
+        width: 80%;
         position: relative;
         font-weight: bold;
         font-size: 12px;
-        top: 100px;
-        left: 50px;
+        top: 20%;
+        left: 10%;
         padding: 0px;
         word-spacing: 40px;
     }    
