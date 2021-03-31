@@ -122,6 +122,8 @@ export default {
                 'startDate': joinDate.getDate(),
                 'startMonth': joinDate.getMonth() + 1,
                 'startYear': joinDate.getFullYear(),
+                'burnt': 0,
+                'showTele': true,
             })
         }
     }
