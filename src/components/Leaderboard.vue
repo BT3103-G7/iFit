@@ -2,26 +2,28 @@
   <div id="row">
     <div id="left">
       <h1>Leaderboard</h1>
-      <table>
-        <colgroup>
-          <col class="rank"/>
-          <col class="col"/>
-          <col class="col"/>
-          <col class="col"/>
-        </colgroup>
-        <tr>
-          <th>RANK</th>
-          <th>CALORIES BURNT (kcal/week)</th>
-          <th>NAME</th>
-          <th>CONNECT</th>
-        </tr>
-        <tr v-for="(mem, index) in members" :key="index">
-          <td>{{"#" + (index + 1)}}</td>
-          <td>{{mem.cal}}</td>
-          <td>{{mem.user}}</td>
-          <td>{{mem.tele}}</td>
-        </tr>
-      </table>
+      <div>
+        <table>
+          <colgroup>
+            <col class="rank" />
+            <col class="col" />
+            <col class="col" />
+            <col class="col" />
+          </colgroup>
+          <tr>
+            <th>RANK</th>
+            <th>CALORIES BURNT (kcal/week)</th>
+            <th>NAME</th>
+            <th>CONNECT</th>
+          </tr>
+          <tr v-for="(mem, index) in sortMembers()" :key="index">
+            <td>{{ "#" + (index + 1) }}</td>
+            <td>{{ mem.cal }}</td>
+            <td>{{ mem.user }}</td>
+            <td>{{ mem.tele }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <div id="right">
@@ -31,14 +33,67 @@
 </template>
 
 <script>
+import moment from "moment";
+import database from "../firebase.js";
+
 export default {
   data() {
     return {
-      members: [
-        {cal: "533", user: "Peter", tele: "@petepete" },
-        {cal: "433", user: "May", tele: "@mayyam" }
-      ]
+      members: [],
+      perPage: 3,
+      currentPage: 1,
+      fields: ["RANK", "CALORIES BURNT (kcal/week)", "NAME", "CONNECT"],
     };
+  },
+  methods: {
+    getRate: function (calories, dateData) {
+      var current = moment();
+      var weeks = current.week() - dateData.week();
+      if (weeks == 0) {
+        return calories;
+      } else {
+        console.log(calories + " " + weeks);
+        return calories / weeks;
+      }
+    },
+    fetchItems: function () {
+      database
+        .collection("user")
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            var results = doc.data();
+            console.log(doc.data());
+            var userData = {};
+            var dateData = moment(
+              results["startYear"] +
+                "-" +
+                results["startMonth"] +
+                "-" +
+                results["startDate"]
+            );
+            userData["cal"] = this.getRate(results["burnt"], dateData);
+            userData["tele"] = results["tele"];
+            userData["user"] = results["name"];
+            userData["show"] = results["showTele"];
+            console.log(
+              userData["user"] +
+                " cal is " +
+                results["burnt"] +
+                " then calc " +
+                userData["cal"]
+            );
+            this.members.push(userData);
+          });
+        });
+    },
+    sortMembers: function () {
+      var copy = JSON.parse(JSON.stringify(this.members));
+      return copy.sort((a, b) => parseFloat(b.cal) - parseFloat(a.cal));
+    },
+  },
+  created() {
+    this.fetchItems();
   },
 };
 </script>
@@ -85,7 +140,7 @@ table {
   margin-right: auto;
   border-collapse: separate;
   border-spacing: 0 0.5em;
-  table-layout: fixed;
+  height: 100%;
 }
 .rank {
   width: 10%;
