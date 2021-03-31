@@ -4,6 +4,9 @@
       <div id="top">
         <LineChart></LineChart>
         <Bmi></Bmi>
+        <div id="button-placeholder">
+          <router-link to="/inputactivity"><b-button variant="outline-primary">Input Activity</b-button></router-link>
+        </div>
       </div>
       <div id="bottom">
         <PieChart></PieChart>
@@ -59,5 +62,21 @@ export default {
   background-color: black;
   opacity: 1;
   z-index: -1;
+}
+#button-placeholder {
+  top: 60%;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+  padding-left: 50%;
+}
+#button-placeholder2 {
+  top: 60%;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+  padding-left: 70%;
 }
 </style>

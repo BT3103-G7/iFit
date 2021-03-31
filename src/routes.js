@@ -8,6 +8,7 @@ import Locations from './components/Map.vue'
 import Schedule from './components/Schedule.vue'
 import About from './components/About.vue'
 import Contact from './components/Contact.vue'
+import InputActivity from './components/InputActivity.vue'
 
 export default [
   { path: '/', component: Home },
@@ -18,5 +19,6 @@ export default [
   { path: '/locations', component: Locations },
   { path: '/schedule', component: Schedule },
   { path: '/about', component: About },
-  { path: '/contact', component: Contact }
+  { path: '/contact', component: Contact },
+  { path: '/inputactivity', component: InputActivity },
 ]
