@@ -26,18 +26,29 @@ export default {
                 },
                 responsive: true,
                 maintainAspectRatio: false
-            }
+            },
+            activityName: [],
+            activityRate: []
         }
     },
     methods: {
+        fetchActivities() {
+            database.collection('activities').get().then(querySnapShot => {
+                querySnapShot.forEach(doc => {
+                        this.activityName.push(doc.data().name);
+                        this.activityRate.push(doc.data().calspermin);
+                })
+            })
+        },
+
         fetchItems: function() {
             const today = new Date();
             var timings = [];
             database.collection('inputs').get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
-                        if(!timings.includes(doc.data().hour)) {
-                            timings.push(doc.data().hour);
+                        if(!timings.includes(doc.data().startHour)) {
+                            timings.push(doc.data().startHour);
                         }
                         timings = timings.sort((a,b) => (a > b) ? 1 : -1); //sort timings in ascending order
                     }
@@ -48,15 +59,29 @@ export default {
                     if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
                         for(let i = 0; i < timings.length; i++) {
                             this.datacollection.datasets[0].data.push(0); //initialise each activity's calorie count to 0
-                            if(doc.data().hour == timings[i]) {
-                                this.datacollection.datasets[0].data[i] += doc.data().calories;
+                            if(doc.data().startHour == timings[i]) {
+                                for(let j = 0; j < this.activityName.length; j++) {
+                                    if(doc.data().activity == this.activityName[j]) {
+                                        var totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
+                                        this.datacollection.datasets[0].data[i] += totalCal;
+                                    }
+                                }
                             }
                         }
                     }
                 })
+                //24hour timing system
                 for(let j = 0; j < timings.length; j++) {
                     if(timings[j] <= 12) {
-                        this.datacollection.labels.push(timings[j].toString() + "am");
+                        if(timings[j] == 0) {
+                            this.datacollection.labels.push(12 + "am");
+                        }
+                        else if(timings[j] == 12) {
+                            this.datacollection.labels.push(12 + "pm");
+                        }
+                        else {
+                            this.datacollection.labels.push(timings[j].toString() + "am");
+                        }
                     }
                     else {
                         var newTime = (timings[j] - 12);
@@ -71,6 +96,7 @@ export default {
     watch: {
         period: function() {
             const today = new Date();
+            var totalCal = 0;
             if(this.period == "Daily") {
                 this.datacollection.labels = []; //clears datasets and labels each time the graph changes
                 this.datacollection.datasets[0].data = [];
@@ -78,8 +104,8 @@ export default {
                 database.collection('inputs').get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
-                            if(!timings.includes(doc.data().hour)) {
-                                timings.push(doc.data().hour);
+                            if(!timings.includes(doc.data().startHour)) {
+                                timings.push(doc.data().startHour);
                             }
                             timings = timings.sort((a,b) => (a > b) ? 1 : -1); //sort timings in ascending order
                         }
@@ -90,15 +116,29 @@ export default {
                         if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
                             for(let i = 0; i < timings.length; i++) {
                                 this.datacollection.datasets[0].data.push(0); //initialise each activity's calorie count to 0
-                                if(doc.data().hour == timings[i]) {
-                                    this.datacollection.datasets[0].data[i] += doc.data().calories;
+                                if(doc.data().startHour == timings[i]) {
+                                    for(let j = 0; j < this.activityName.length; j++) {
+                                        if(doc.data().activity == this.activityName[j]) {
+                                            totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
+                                            this.datacollection.datasets[0].data[i] += totalCal;
+                                        }
+                                    }
                                 }
                             }
                         }
                     })
+                    //24hour timing system
                     for(let j = 0; j < timings.length; j++) {
                         if(timings[j] <= 12) {
-                            this.datacollection.labels.push(timings[j].toString() + "am");
+                            if(timings[j] == 0) {
+                                this.datacollection.labels.push(12 + "am");
+                            }
+                            else if(timings[j] == 12) {
+                                this.datacollection.labels.push(12 + "pm");
+                            }
+                            else {
+                                this.datacollection.labels.push(timings[j].toString() + "am");
+                            }
                         }
                         else {
                             var newTime = (timings[j] - 12);
@@ -119,10 +159,28 @@ export default {
                         for(let i = 0; i < this.datacollection.labels.length; i++) {
                             this.datacollection.datasets[0].data.push(0); //initialise each day's calorie count to 0
                         }
-                        if(doc.data().date >= (currDate - dayOfWeek) && doc.data().date <= (currDate + 6 - dayOfWeek)) {
-                            var datestring = (today.getFullYear()).toString() + "/" + (today.getMonth() + 1).toString() + "/" + (doc.data().date).toString();
-                            var date = new Date(datestring);
-                            this.datacollection.datasets[0].data[date.getDay()] += doc.data().calories;
+                        var docDate = new Date(doc.data().year, doc.data().month - 1, doc.data().date);
+                        if(doc.data().month == (today.getMonth() + 1)) { //if same month
+                            if(doc.data().date >= (currDate - dayOfWeek) && doc.data().date <= (currDate + 6 - dayOfWeek)) {
+                                for(let j = 0; j < this.activityName.length; j++) {
+                                    if(doc.data().activity == this.activityName[j]) {
+                                        totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
+                                        this.datacollection.datasets[0].data[docDate.getDay()] += totalCal;
+                                    }
+                                }
+                            }
+                        }
+                        else if(((today.getMonth() + 1) - doc.data().month) == 1) { //account for adjacent month within same week
+                            var lastOfDocMonth = new Date(doc.data().year, doc.data().month, 0);
+                            var newDate = lastOfDocMonth.getDate() + currDate;
+                            if(doc.data().date >= (newDate - dayOfWeek)) {
+                                for(let j = 0; j < this.activityName.length; j++) {
+                                    if(doc.data().activity == this.activityName[j]) {
+                                        totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
+                                        this.datacollection.datasets[0].data[docDate.getDay()] += totalCal;
+                                    }
+                                }
+                            }
                         }
                     })
                     this.renderChart(this.datacollection, this.options);
@@ -150,12 +208,17 @@ export default {
                 database.collection('inputs').get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         if(doc.data().month == (today.getMonth() + 1) && doc.data().year == today.getFullYear()) {
-                            if(doc.data().date < wk1marker) {
-                                this.datacollection.datasets[0].data[0] += doc.data().calories;
-                            }
-                            else {
-                                var weekNum = Math.floor(((doc.data().date - wk1marker)/7) + 1);
-                                this.datacollection.datasets[0].data[weekNum] += doc.data().calories;
+                            for(let j = 0; j < this.activityName.length; j++) {
+                                if(doc.data().activity == this.activityName[j]) {
+                                    totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
+                                    if(doc.data().date < wk1marker) {
+                                        this.datacollection.datasets[0].data[0] += totalCal;
+                                    }
+                                    else {
+                                        var weekNum = Math.floor(((doc.data().date - wk1marker)/7) + 1);
+                                        this.datacollection.datasets[0].data[weekNum] += totalCal;
+                                    }
+                                }
                             }
                         }
                     })
@@ -174,7 +237,12 @@ export default {
                     querySnapShot.forEach(doc => {
                         let curr_month = doc.data().month;
                         if(doc.data().year == today.getFullYear()) {
-                            this.datacollection.datasets[0].data[curr_month - 1] += (doc.data().calories);
+                            for(let j = 0; j < this.activityName.length; j++) {
+                                if(doc.data().activity == this.activityName[j]) {
+                                    totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
+                                    this.datacollection.datasets[0].data[curr_month - 1] += totalCal;
+                                }
+                            }
                         }
                     })
                     this.renderChart(this.datacollection, this.options);
@@ -185,6 +253,7 @@ export default {
     },
 
     created () {
+        this.fetchActivities();
         this.fetchItems();
     }
 }
