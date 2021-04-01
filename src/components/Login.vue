@@ -1,7 +1,7 @@
 <template>
     <div id="background">
     <b-card id="loginDiv" bg-variant="light">
-      <h1>Login</h1><br>
+      <h1><b>Login</b></h1><br>
       <form @submit.prevent="login">
         <b-form-group id="input-group-1" label="Email address:" label-for="input-1" label-cols-sm="3">
           <b-form-input id="input-1" v-model="email" type="email" placeholder="Enter your email" required></b-form-input>
@@ -59,17 +59,26 @@ export default {
 <style scoped>
 #loginDiv {
   width: 40%;
-  height: 75%;
-  margin: auto;
+  height: 60%;
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: auto;
   border: 3px solid rgb(95, 93, 93);
   border-radius: 20px;
   background-color: rgb(207, 203, 203);
 }
 #background {
-  background-image: url('https://www.marinabaysands.com/content/dam/revamp/hotel/banyan-tree-fitness-club/banyan-tree-fitness-club-masthead-m.jpg');
-  height: 660px;
+  background: url(../assets/login_testbackground.jpg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 p {
   font-size: 85%;
+}
+h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 </style>

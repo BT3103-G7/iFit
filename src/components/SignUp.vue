@@ -1,7 +1,7 @@
 <template>
     <div id ="background">
     <b-card id="form" class="mt-5" bg-variant="light">
-        <b><h1> Register </h1></b><br>
+        <h1><b> Register</b></h1><br>
     <form @submit.prevent="register" oninput='pw2.setCustomValidity(pw2.value != pw1.value ? "Passwords do not match." : "")'>
 
         <b-form-group id="input-group-1" label="Your Name:" label-for="input-1" label-cols-sm="3">
@@ -143,8 +143,6 @@ export default {
     left: 0;
     width: 100%;
     height: 120%;
-    
-    /*background-image: url('https://www.marinabaysands.com/content/dam/singapore/marinabaysands/master/main/home/hotel/amenities/banyan-tree-fitness-club/banyan-tree-fitness-club-1000x577.jpg');*/
 }
 #form {
     width: 60%;
@@ -166,6 +164,9 @@ label {
 .has_required {
     text-decoration: line-through;
     color:#689868;
+}
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 </style>
