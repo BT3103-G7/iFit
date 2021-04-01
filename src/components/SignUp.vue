@@ -1,7 +1,7 @@
 <template>
     <div id ="background">
-    <b-card id="form" bg-variant="light">
-        <b><h1> Register </h1></b><br>
+    <b-card id="form" class="mt-5" bg-variant="light">
+        <h1><b> Register</b></h1><br>
     <form @submit.prevent="register" oninput='pw2.setCustomValidity(pw2.value != pw1.value ? "Passwords do not match." : "")'>
 
         <b-form-group id="input-group-1" label="Your Name:" label-for="input-1" label-cols-sm="3">
@@ -53,7 +53,7 @@
         </b-form-group>
 
         <br><b-button type="submit" variant="warning" size=lg><b>SIGN UP</b></b-button>
-        <p>Already have an account? Log in <router-link to="/login" id="login-link"><b>here</b></router-link>.</p>
+        <br><br><p>Already have an account? Log in <router-link to="/login" id="login-link"><b>here</b></router-link>.</p>
     </form>
     </b-card>
   </div>
@@ -99,32 +99,37 @@ export default {
     },
     methods: {
         register() {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.email, this.password)
-                .then(() => {
-                    alert('Successfully registered! Please login.');
-                    this.$router.push('/login');
+            if(this.has_minimum_length && this.has_special && this.has_uppercase && this.has_lowercase && this.has_number) {
+                firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(this.email, this.password)
+                    .then(() => {
+                        alert('Successfully registered! Please login.');
+                        this.$router.push('/login');
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    });
+                var joinDate = new Date(); //access date when the user first joins iFit
+                database.collection('user').add({
+                    'name': this.name,
+                    'email': this.email,
+                    'tele': this.tele,
+                    'height': Number(this.height),
+                    'weight': Number(this.weight),
+                    'age': Number(this.age),
+                    'password': this.password,
+                    'goal': Number(this.goal),
+                    'startDate': joinDate.getDate(),
+                    'startMonth': joinDate.getMonth() + 1,
+                    'startYear': joinDate.getFullYear(),
+                    'burnt': 0,
+                    'showTele': true,
                 })
-                .catch(error => {
-                    alert(error.message);
-                });
-            var joinDate = new Date(); //access date when the user first joins iFit
-            database.collection('user').add({
-                'name': this.name,
-                'email': this.email,
-                'tele': this.tele,
-                'height': Number(this.height),
-                'weight': Number(this.weight),
-                'age': Number(this.age),
-                'password': this.password,
-                'goal': Number(this.goal),
-                'startDate': joinDate.getDate(),
-                'startMonth': joinDate.getMonth() + 1,
-                'startYear': joinDate.getFullYear(),
-                'burnt': 0,
-                'showTele': true,
-            })
+            }
+            else {
+                alert("Password does not meet minimum criteria, please try again.")
+            }
         }
     }
 }
@@ -132,11 +137,16 @@ export default {
 
 <style scoped>
 #background {
-    background-image: url('https://www.marinabaysands.com/content/dam/singapore/marinabaysands/master/main/home/hotel/amenities/banyan-tree-fitness-club/banyan-tree-fitness-club-1000x577.jpg');
+    background: url(../assets/signup_login_background.jpg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
 }
 #form {
     width: 60%;
-    height: 70%;
+    height: 95%;
     margin: auto;
     border: 3px solid rgb(95, 93, 93);
     border-radius: 20px;
@@ -154,6 +164,9 @@ label {
 .has_required {
     text-decoration: line-through;
     color:#689868;
+}
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 </style>
