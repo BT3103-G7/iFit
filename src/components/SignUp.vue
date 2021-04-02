@@ -1,6 +1,6 @@
 <template>
     <div id ="background">
-    <b-card id="form" class="mt-5" bg-variant="light">
+    <b-card id="form" bg-variant="light">
         <h1><b> Register</b></h1><br>
     <form @submit.prevent="register" oninput='pw2.setCustomValidity(pw2.value != pw1.value ? "Passwords do not match." : "")'>
 
@@ -142,12 +142,14 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120%;
+    height: 130%;
 }
 #form {
     width: 60%;
-    height: 95%;
-    margin: auto;
+    height: 90%;
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
     border: 3px solid rgb(95, 93, 93);
     border-radius: 20px;
     background-color: rgb(207, 203, 203);
