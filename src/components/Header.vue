@@ -6,7 +6,9 @@
       variant="light-transparent"
       fixed="top"
     >
-      <b-navbar-brand to="/">iFIT</b-navbar-brand>
+      <b-navbar-brand to="/">
+       <img src="../assets/iFit-logo.png" width="120" height="70" alt="">
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

@@ -107,6 +107,7 @@ export default {
         padding: 0;
     }
     #header {
+        margin-top: 5%;
         width: 100%;
         height: 20%;
         background-color: #8B0000;
