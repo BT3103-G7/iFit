@@ -9,7 +9,7 @@
         </div>
 
         <div id="button-placeholder">
-            <router-link to="/signup"><b-button id="sign-up-button" variant="warning">SIGN UP</b-button></router-link>
+            <router-link to="/signup"><b-button id="sign-up-button" variant="warning"><b>JOIN US</b></b-button></router-link>
         </div>
 
         <div id="login-placeholder">
