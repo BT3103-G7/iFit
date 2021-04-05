@@ -1,8 +1,8 @@
 <template>
 <div>
+    <div id="bg"></div>
+    <div id="overlay"></div>
     <div id="content-wrap">
-        <div id="bg"></div>
-        <div id="overlay"></div>
         <div id="text-placeholder">
             <p id="tagline">COMMIT TO BE FIT</p>
             <p id="msg">iFIT is a one-stop fitness management application. It aims to motivate customers of XYZ gym to track their fitness levels and sign up for gym visits.</p>
@@ -43,7 +43,7 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 120%;
         background-color: black;
         opacity: 0.25;
         z-index: 0;
@@ -51,9 +51,9 @@ export default {
     #text-placeholder {
         top: 35%;
         width: 100%;
-        position: absolute;
         z-index: 1;
         text-align: center;
+        position: relative;
     }
     #tagline {
         font-size: 50px;
@@ -65,18 +65,18 @@ export default {
         color: white;
         width: 50%;
         left: 25%;
-        position: absolute;
+        position: relative;
         font-size: 18px;
     }
     #button-placeholder {
         top: 55%;
-        position: absolute;
         z-index: 1;
         text-align: center;
         width: 100%;
+        position: relative;
     }
     #sign-up-button {
-        margin: auto;
+        margin: 1% 0 1% 0;
         width: 150px;
         font-family: sans-serif;
         font-size: 18px;
@@ -84,10 +84,10 @@ export default {
     }
     #login-placeholder {
         top: 63%;
-        position: absolute;
         z-index: 1;
         text-align: center;
         width: 100%;
+        position: relative;
     }
     #login-msg {
         font-size: 18px;
@@ -100,6 +100,8 @@ export default {
         text-decoration: none;
     }
     #content-wrap {
-        padding-bottom: 150px;
+        background-color: transparent;
+        position: relative;
+        margin-top: 18%;
     }
 </style>
