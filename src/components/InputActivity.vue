@@ -7,7 +7,7 @@
 
     <div id="date-activity-placeholder">
       <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
-      <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :min="minDate" locale="en" class="mb-2"></b-form-datepicker>
+      <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
       <!-- <p>Value: {{ new Date(date) }}</p> 
       <p>Type: {{ typeof date }}</p>  !-->
       <br>
@@ -23,7 +23,7 @@
               <b-form-select-option value="Running">Running</b-form-select-option>
               <b-form-select-option value="Rowing Machine">Rowing Machine</b-form-select-option>
               <b-form-select-option value="Elliptical">Elliptical</b-form-select-option>
-              <b-form-select-option value="RStairmaster">Stairmaster</b-form-select-option>
+              <b-form-select-option value="Stairmaster">Stairmaster</b-form-select-option>
           </b-form-select>
           <!-- <div class="mt-2">Value: <strong>{{ activity }}</strong></div> -->
       </div>
@@ -72,48 +72,85 @@ import database from '../firebase'
     data() {
       const now = new Date()
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-      const minDate = new Date(today)
+      const maxDate = new Date(today)
 
       return {
-        minDate: minDate,
+        maxDate: maxDate,
         activity: null,
-        calories: null,
+        //calories: null,
         date: null,
         start: null,
         end: null,
         space: ' ',
+        userid: '123432',
       }
     },
     methods: {
         input() {
-          if(this.activity != null && this.date != null && this.start != null && this.end != null) {
+          if (this.activity == null || this.date == null || this.start == null || this.end == null) {// if any field is missing
+            alert("Please input all fields!")
+          } 
+          else { //if start time is later than end time
             var fullDate = new Date(this.date)
             var year = fullDate.getFullYear()
             var month = fullDate.getMonth() + 1
             var date = fullDate.getDate()
-
             var startTime = new Date(this.date.concat(this.space).concat(this.start))
             var startHour = startTime.getHours()
             var endTime = new Date(this.date.concat(this.space).concat(this.end))
-            var endHour = endTime.getMinutes()
-
-            var difference = (endTime.getTime() - startTime.getTime())/60000 //no. of minutes of activity
-            //console.log(difference)
-
-            database.collection('input').add({
-                'activity': this.activity,
-                //'calories': difference * ,
-                'date': Number(date),
-                'month': Number(month),
-                'year': Number(year),
-                'startHour': Number(startHour),
-                'endHour': Number(endHour),
-                //'userid':
-          })
-        } else {
-          alert("Please input all fields!")
+            var endHour = endTime.getHours()
+            var time_difference = (endTime.getTime() - startTime.getTime())/60000 //no. of minutes of activity
+            console.log(time_difference)
+            if (time_difference <= 0) {
+              alert("End time should be later than start time!")
+            } else {
+              //if(this.activity != null && this.date != null && this.start != null && this.end != null) {
+              var calories = 0
+              if (this.activity == "Static Cycling") {
+                calories = time_difference * 7
+              } else if (this.activity == "Running") {
+                calories = time_difference * 11
+              } else if (this.activity == "Rowing Machine") {
+                calories = time_difference * 9
+              } else if (this.activity == "Elliptical") {
+                calories = time_difference * 6
+              } else {
+                calories = time_difference * 16
+              }
+              // database.collection("activities").get().then((snapshot) => {
+              //   snapshot.docs.forEach((doc) => {
+              //     var results = doc.data();
+              //     var calspermin = 0;
+              //     if (results["name"] == this.activity) {
+              //       /* database.collection('input').add({
+              //         'calories': time_difference * results["calspermin"]
+              //       }) */
+              //       calspermin = results["calspermin"]
+              //       console.log(calspermin)
+              //       this.calspermin = calspermin
+              //     }
+              //   })
+              // });
+              database.collection('inputs').add({
+                  'activity': this.activity,
+                  'calories': Number(calories),
+                  'date': Number(date),
+                  'month': Number(month),
+                  'year': Number(year),
+                  'startHour': Number(startHour),
+                  'endHour': Number(endHour),
+                  'userid': Number(this.userid),
+            })
+            .then(() => {
+                        alert('Your activity is recorded!');
+                        this.$router.push('/overview');
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    });
+          }
         }
-      }
+      },
     }
   }
 </script>
