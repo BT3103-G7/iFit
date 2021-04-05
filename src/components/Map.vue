@@ -6,16 +6,16 @@
             :center="{lat:1.3118078441306777, lng:103.90580352412425}"
             :zoom="13"
             map-type-id="roadmap"
-            style="width: 60%; height: 600px">
+            style="width: 60%; height: 70vh;">
             <GmapMarker
                 :key="index"
                 v-for="(m, index) in markers"
                 :position="m.position"
                 :clickable="true"
-                :draggable="true"
+                :draggable="false"
                 @click="center=m.center"
                 @mouseover="showDetails()"
-                />    
+                />
         </GmapMap>
         <div id="searchPlaceholder">
             <b-form-input id="form" placeholder="Search" v-model.lazy="searchPhrase"></b-form-input>
@@ -105,6 +105,7 @@ export default {
 <style scoped>
     #placeholder {
         padding: 0;
+        height: 100%;
     }
     #header {
         margin-top: 5%;
