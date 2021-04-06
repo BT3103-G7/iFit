@@ -13,17 +13,11 @@
       <br>
       <p class="p-3 mb-2 bg-danger text-white">Choose an activity</p>
       <div>
-          <b-form-select v-model="activity" :options="options" class="mb-3">
+          <b-form-select v-model="activity" :options="activity_options" class="mb-3">
               <!-- This slot appears above the options from 'options' prop -->
               <template #first>
                   <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
               </template>
-              <!-- These options will appear after the ones from 'options' prop -->
-              <b-form-select-option value="Static Cycling">Static Cycling</b-form-select-option>
-              <b-form-select-option value="Running">Running</b-form-select-option>
-              <b-form-select-option value="Rowing Machine">Rowing Machine</b-form-select-option>
-              <b-form-select-option value="Elliptical">Elliptical</b-form-select-option>
-              <b-form-select-option value="Stairmaster">Stairmaster</b-form-select-option>
           </b-form-select>
           <!-- <div class="mt-2">Value: <strong>{{ activity }}</strong></div> -->
       </div>
@@ -77,12 +71,13 @@ import database from '../firebase'
       return {
         maxDate: maxDate,
         activity: null,
-        //calories: null,
         date: null,
         start: null,
         end: null,
         space: ' ',
         userid: '123432',
+        activity_options: [],
+        calories_list:[]
       }
     },
     methods: {
@@ -100,37 +95,23 @@ import database from '../firebase'
             var endTime = new Date(this.date.concat(this.space).concat(this.end))
             var endHour = endTime.getHours()
             var time_difference = (endTime.getTime() - startTime.getTime())/60000 //no. of minutes of activity
-            console.log(time_difference)
+            //console.log(time_difference)
             if (time_difference <= 0) {
               alert("End time should be later than start time!")
             } else {
               //if(this.activity != null && this.date != null && this.start != null && this.end != null) {
               var calories = 0
-              if (this.activity == "Static Cycling") {
-                calories = time_difference * 7
-              } else if (this.activity == "Running") {
-                calories = time_difference * 11
-              } else if (this.activity == "Rowing Machine") {
-                calories = time_difference * 9
-              } else if (this.activity == "Elliptical") {
-                calories = time_difference * 6
-              } else {
-                calories = time_difference * 16
-              }
-              // database.collection("activities").get().then((snapshot) => {
-              //   snapshot.docs.forEach((doc) => {
-              //     var results = doc.data();
-              //     var calspermin = 0;
-              //     if (results["name"] == this.activity) {
-              //       /* database.collection('input').add({
-              //         'calories': time_difference * results["calspermin"]
-              //       }) */
-              //       calspermin = results["calspermin"]
-              //       console.log(calspermin)
-              //       this.calspermin = calspermin
-              //     }
-              //   })
-              // });
+              var activity = this.activity
+              this.calories_list.forEach(function(test) {
+                console.log(test['name'])
+                console.log(activity)
+                if (activity == test['name']) {
+                  calories = time_difference * test["calspermin"]
+                  console.log(calories)
+                } else {
+                  console.log("DIDNT CALC CALORIES")
+                }
+              });
               database.collection('inputs').add({
                   'activity': this.activity,
                   'calories': Number(calories),
@@ -151,6 +132,21 @@ import database from '../firebase'
           }
         }
       },
+      fetchItems: function() {
+      database.collection('activities').get().then(snapshot => {
+          let activityname={}
+          let calspermin ={}
+          snapshot.docs.forEach(doc => {
+              activityname = {value: doc.data()["name"], text: doc.data()["name"]}; 
+              this.activity_options.push(activityname);
+              calspermin = {'name': doc.data()["name"], 'calspermin': doc.data()["calspermin"]}; 
+              this.calories_list.push(calspermin)
+          });
+        });
+      }
+    },
+    created() {
+      this.fetchItems() 
     }
   }
 </script>

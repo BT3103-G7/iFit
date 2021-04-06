@@ -1,4 +1,5 @@
 <template>
+<div id="content-wrap">
   <div id="row">
     <div id="left">
       <h1>Leaderboard</h1>
@@ -30,6 +31,7 @@
       <div id="myimg"></div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -99,6 +101,9 @@ export default {
 </script>
 
 <style scoped>
+#content-wrap {
+    padding-bottom: 600px;
+}
 #row {
   background-color: black;
   width: 100%;

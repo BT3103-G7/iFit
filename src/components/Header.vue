@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id='main'>
     <b-navbar
       toggleable="lg"
       type="dark"
@@ -70,4 +70,12 @@ export default {
 </script>
 
 <style scoped>
+#main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 100px;
+}
 </style>

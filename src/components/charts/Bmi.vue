@@ -15,7 +15,7 @@
             </div>
         </div>
         <div id="buttons">
-            <b-button variant="info" class="button" to="inputactivity">Cals Out</b-button>
+            <b-button variant="info" class="button" to="calsout">Cals Out</b-button>
             <b-button variant="outline-info" class="button">Cals In</b-button>
         </div>
     </div>
