@@ -62,14 +62,26 @@
             v-bind:key="activity.cal"
           >
             <b-card-title class="myGymTitles">
-              {{ activity.name }}
+              {{
+                selectedDuration.includes(activity.duration)
+                  ? activity.name
+                  : ""
+              }}
             </b-card-title>
             <b-card-text class="myGymInfo">
               <h4>
-                {{ activity.start + " - " + activity.end }}
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? activity.start + " - " + activity.end
+                    : ""
+                }}
               </h4>
               <h4>
-                {{ "Calories burnt: " + activity.cal }}
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? "Calories burnt: " + activity.cal
+                    : ""
+                }}
               </h4>
             </b-card-text>
           </b-card>
@@ -77,6 +89,73 @@
       </b-row>
       <b-row v-show="showAfternoon">
         <h4>Afternoon</h4>
+      </b-row>
+      <b-row v-show="showAfternoon">
+        <b-card-group deck>
+          <b-card
+            v-for="activity in sortClasses('afternoon')"
+            v-bind:key="activity.name"
+          >
+            <b-card-title class="myGymTitles">
+              {{
+                selectedDuration.includes(activity.duration)
+                  ? activity.name
+                  : ""
+              }}
+            </b-card-title>
+            <b-card-text class="myGymInfo">
+              <h4>
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? activity.start + " - " + activity.end
+                    : ""
+                }}
+              </h4>
+              <h4>
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? "Calories burnt: " + activity.cal
+                    : ""
+                }}
+              </h4>
+            </b-card-text>
+          </b-card>
+        </b-card-group>
+      </b-row>
+      <b-row v-show="showEvening">
+        <h4>Evening</h4>
+      </b-row>
+      <b-row v-show="showEvening">
+        <b-card-group deck>
+          <b-card
+            v-for="activity in sortClasses('evening')"
+            v-bind:key="activity.name"
+          >
+            <b-card-title class="myGymTitles">
+              {{
+                selectedDuration.includes(activity.duration)
+                  ? activity.name
+                  : ""
+              }}
+            </b-card-title>
+            <b-card-text class="myGymInfo">
+              <h4>
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? activity.start + " - " + activity.end
+                    : ""
+                }}
+              </h4>
+              <h4>
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? "Calories burnt: " + activity.cal
+                    : ""
+                }}
+              </h4>
+            </b-card-text>
+          </b-card>
+        </b-card-group>
       </b-row>
     </b-container>
   </div>
@@ -97,8 +176,6 @@ export default {
       morningClasses: [],
       afternoonClasses: [],
       eveningClasses: [],
-      modalVisible: false,
-      modalData: null,
     };
   },
   methods: {
@@ -163,20 +240,6 @@ export default {
             this.eveningClasses.push(item);
           });
         });
-    },
-    filterForClassName: function (classDay, classSess) {
-      var output;
-      for (let i = 0; i < this.classes.length; i++) {
-        alert(this.classes[3]["name"]);
-        if (
-          this.classes[i]["day"] == classDay &&
-          this.classes[i]["session"] == classSess
-        ) {
-          output = this.classes[i];
-          alert(output);
-        }
-        return output["name"];
-      }
     },
     sortClasses: function (session) {
       var copy;
