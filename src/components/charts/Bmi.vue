@@ -1,13 +1,23 @@
 <template>
     <div id="placeholder">
-        <h3 id="stats">Height: {{ height }}cm <br> Weight: {{ weight }}kg <br> BMI: <span id="bmiVal">{{ bmi.toFixed(2) }}</span></h3>
-        <b-icon-caret-down-fill id="arrow" class="h1 mb-2"></b-icon-caret-down-fill>
-        <b-progress class="progressBar">
-            <b-progress-bar :value="(1/3)*100" variant="warning"></b-progress-bar>
-            <b-progress-bar :value="(1/3)*100" variant="success"></b-progress-bar>
-            <b-progress-bar :value="(1/3)*100" variant="danger"></b-progress-bar>
-        </b-progress>
-        <p class="label">Underweight Healthy Overweight</p>
+        <h5 id="stats">Height: {{ height }}cm <br> Weight: {{ weight }}kg <br> BMI: <span id="bmiVal">{{ bmi.toFixed(2) }}</span></h5>
+        <div id="chart">
+            <b-icon-caret-down-fill id="arrow" class="h4 mb-2"></b-icon-caret-down-fill>
+            <b-progress class="progressBar">
+                <b-progress-bar :value="(1/3)*100" variant="warning"></b-progress-bar>
+                <b-progress-bar :value="(1/3)*100" variant="success"></b-progress-bar>
+                <b-progress-bar :value="(1/3)*100" variant="danger"></b-progress-bar>
+            </b-progress>
+            <div id="labels">
+                <p class="label">Underweight</p>
+                <p class="label">Healthy</p>
+                <p class="label">Overweight</p>    
+            </div>
+        </div>
+        <div id="buttons">
+            <b-button variant="info" class="button" to="inputactivity">Cals Out</b-button>
+            <b-button variant="outline-info" class="button">Cals In</b-button>
+        </div>
     </div>
 </template>
 <script>
@@ -57,31 +67,47 @@ export default {
         float: right;
     }
     #stats {
-        line-height: 50px;
+        margin-top: 2%;
+        margin-bottom: 0;
+        padding: 8% 0 0 0;
         position: relative;
-        top: 15%;
         font-weight: bold;
+        height: 40%;
+    }
+    #chart {
+        width: 100%;
+        height: 30%;
     }
     #arrow {
         position: relative;
-        top: 25%;
+        top: 20%;
         z-index: 1;
     }
     .progressBar {
-        height: 8%;
+        height: 20%;
         width: 80%;
         position: relative;
-        top: 20%;
         left: 10%;
     }
-    .label {
-        width: 80%;
+    #labels {
+        width: 90%;
+        left: 5%;
         position: relative;
+    }
+    .label {
         font-weight: bold;
-        font-size: 12px;
-        top: 20%;
-        left: 10%;
-        padding: 0px;
-        word-spacing: 40px;
+        font-size: 10px;
+        width: 30%;
+        display: inline-block;
+        margin: 0 0.1% 0 0.1%;
     }    
+    #buttons {
+        width: 100%;
+        height: 20%;
+        padding: 3% 1% 3% 1%;
+    }
+    .button {
+        width: 30%;
+        margin: 0 2% 0 2%;
+    }
 </style>
