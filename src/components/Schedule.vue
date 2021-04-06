@@ -41,12 +41,6 @@
               <b-form-select-option value="[45]">45 mins</b-form-select-option>
               <b-form-select-option value="[60]">60 mins</b-form-select-option>
             </b-form-select>
-            <div class="mt-2">
-              Selected:
-              <strong>{{
-                selectedDuration.includes(45) ? "yes" : "no"
-              }}</strong>
-            </div>
           </b-col>
         </b-row>
       </b-card-body>
@@ -63,94 +57,26 @@
       </b-row>
       <b-row v-show="showMorning">
         <b-card-group deck>
-          <b-card v-for="activity in sortMorning('morning')" v-bind:key="activity.name">
+          <b-card
+            v-for="activity in sortClasses('morning')"
+            v-bind:key="activity.cal"
+          >
             <b-card-title class="myGymTitles">
-              {{ selectedDuration.includes(activity.duration) ?activity.name : ""}}
+              {{ activity.name }}
             </b-card-title>
             <b-card-text class="myGymInfo">
-              <h4>{{ selectedDuration.includes(activity.duration) ? activity.time : ""}}</h4>
               <h4>
-                {{ selectedDuration.includes(activity.duration) ? "Calories burnt: " + activity.cal : "" }}
+                {{ activity.start + " - " + activity.end }}
+              </h4>
+              <h4>
+                {{ "Calories burnt: " + activity.cal }}
               </h4>
             </b-card-text>
-            <button type="button" @click="openModal(activity)" v-if="selectedDuration.includes(activity.duration)">
-              {{"What's " + activity.name + "?"}}
-            </button>
           </b-card>
-          <modal
-            v-if="modalVisible"
-            @close="modalVisible = false"
-            :data="modalData"
-          />
         </b-card-group>
       </b-row>
       <b-row v-show="showAfternoon">
         <h4>Afternoon</h4>
-      </b-row>
-      <b-row v-show="showAfternoon">
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text>
-          </b-card>
-        </b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-      </b-row>
-      <b-row v-show="showEvening">
-        <h4>Evening</h4>
-      </b-row>
-      <b-row v-show="showEvening">
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text>
-          </b-card>
-        </b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
-        <b-col>
-          <b-card title="Card title" sub-title="Card subtitle">
-            <b-card-text> </b-card-text> </b-card
-        ></b-col>
       </b-row>
     </b-container>
   </div>
@@ -158,12 +84,8 @@
 <script>
 import moment from "moment";
 import database from "../firebase.js";
-import modal from "./Modal";
 
 export default {
-  components: {
-    modal,
-  },
   data() {
     return {
       currentWeek: [],
@@ -242,7 +164,21 @@ export default {
           });
         });
     },
-    sortMorning: function (session) {
+    filterForClassName: function (classDay, classSess) {
+      var output;
+      for (let i = 0; i < this.classes.length; i++) {
+        alert(this.classes[3]["name"]);
+        if (
+          this.classes[i]["day"] == classDay &&
+          this.classes[i]["session"] == classSess
+        ) {
+          output = this.classes[i];
+          alert(output);
+        }
+        return output["name"];
+      }
+    },
+    sortClasses: function (session) {
       var copy;
       if (session == "morning") {
         copy = JSON.parse(JSON.stringify(this.morningClasses));
@@ -253,11 +189,6 @@ export default {
       }
 
       return copy.sort((a, b) => parseFloat(a.day) - parseFloat(b.day));
-    },
-    
-    openModal: function (data) {
-      this.modalData = data;
-      this.modalVisible = true;
     },
   },
   watch: {
