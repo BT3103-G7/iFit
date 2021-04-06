@@ -104,7 +104,8 @@ export default {
                     .auth()
                     .createUserWithEmailAndPassword(this.email, this.password)
                     .then(() => {
-                        alert('Successfully registered! Please login.');
+                        this.sendVerification();
+                        //alert('Successfully registered! Please login.');
                         this.$router.push('/login');
                     })
                     .catch(error => {
@@ -130,6 +131,16 @@ export default {
             else {
                 alert("Password does not meet minimum criteria, please try again.")
             }
+        },
+        sendVerification() {
+            firebase.auth().onAuthStateChanged(firebaseUser => {
+                if (firebaseUser) {
+                    firebaseUser.sendEmailVerification().then(function() {
+                        console.log('send Verification');
+                        alert("Check your inbox for verification email!");
+                    });
+                }
+            })
         }
     }
 }
