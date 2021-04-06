@@ -41,6 +41,12 @@
               <b-form-select-option value="[45]">45 mins</b-form-select-option>
               <b-form-select-option value="[60]">60 mins</b-form-select-option>
             </b-form-select>
+            <div class="mt-2">
+              Selected:
+              <strong>{{
+                selectedDuration.includes(45) ? "yes" : "no"
+              }}</strong>
+            </div>
           </b-col>
         </b-row>
       </b-card-body>
@@ -54,6 +60,29 @@
       </b-row>
       <b-row v-show="showMorning">
         <h4>Morning</h4>
+      </b-row>
+      <b-row v-show="showMorning">
+        <b-card-group deck>
+          <b-card v-for="activity in sortMorning('morning')" v-bind:key="activity.name">
+            <b-card-title class="myGymTitles">
+              {{ selectedDuration.includes(activity.duration) ?activity.name : ""}}
+            </b-card-title>
+            <b-card-text class="myGymInfo">
+              <h4>{{ selectedDuration.includes(activity.duration) ? activity.time : ""}}</h4>
+              <h4>
+                {{ selectedDuration.includes(activity.duration) ? "Calories burnt: " + activity.cal : "" }}
+              </h4>
+            </b-card-text>
+            <button type="button" @click="openModal(activity)" v-if="selectedDuration.includes(activity.duration)">
+              {{"What's " + activity.name + "?"}}
+            </button>
+          </b-card>
+          <modal
+            v-if="modalVisible"
+            @close="modalVisible = false"
+            :data="modalData"
+          />
+        </b-card-group>
       </b-row>
       <b-row v-show="showAfternoon">
         <h4>Afternoon</h4>
@@ -143,6 +172,11 @@ export default {
       showMorning: true,
       showAfternoon: true,
       showEvening: true,
+      morningClasses: [],
+      afternoonClasses: [],
+      eveningClasses: [],
+      modalVisible: false,
+      modalData: null,
     };
   },
   methods: {
@@ -173,6 +207,58 @@ export default {
         this.currentWeek.push(myObj);
       }
     },
+    getClasses: function () {
+      database
+        .collection("class")
+        .where("session", "==", "morning")
+        .get()
+        .then((querySnapShot) => {
+          let item = {};
+          querySnapShot.forEach((doc) => {
+            item = doc.data();
+            this.morningClasses.push(item);
+          });
+        });
+      database
+        .collection("class")
+        .where("session", "==", "afternoon")
+        .get()
+        .then((querySnapShot) => {
+          let item = {};
+          querySnapShot.forEach((doc) => {
+            item = doc.data();
+            this.afternoonClasses.push(item);
+          });
+        });
+      database
+        .collection("class")
+        .where("session", "==", "evening")
+        .get()
+        .then((querySnapShot) => {
+          let item = {};
+          querySnapShot.forEach((doc) => {
+            item = doc.data();
+            this.eveningClasses.push(item);
+          });
+        });
+    },
+    sortMorning: function (session) {
+      var copy;
+      if (session == "morning") {
+        copy = JSON.parse(JSON.stringify(this.morningClasses));
+      } else if (session == "afternoon") {
+        copy = JSON.parse(JSON.stringify(this.afternoonClasses));
+      } else {
+        copy = JSON.parse(JSON.stringify(this.eveningClasses));
+      }
+
+      return copy.sort((a, b) => parseFloat(a.day) - parseFloat(b.day));
+    },
+    
+    openModal: function (data) {
+      this.modalData = data;
+      this.modalVisible = true;
+    },
   },
   watch: {
     selectedSess: function (newSelection) {
@@ -180,7 +266,11 @@ export default {
       this.showAfternoon = newSelection.includes("afternoon");
       this.showEvening = newSelection.includes("evening");
     },
-  }
+  },
+  created() {
+    this.getCurrentWeek();
+    this.getClasses();
+  },
 };
 </script>
 <style scoped>
