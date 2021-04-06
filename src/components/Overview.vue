@@ -1,5 +1,5 @@
 <template>
-    <div id="placeholder">
+    <div>
       <div id="bg"></div>
       <div id="top">
         <LineChart></LineChart>
@@ -55,14 +55,13 @@ export default {
   bottom: 0;
 }
 #bg {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: black;
   opacity: 1;
-  z-index: -1;
 }
 #button-placeholder {
   top: 65%;
