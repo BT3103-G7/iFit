@@ -84,6 +84,18 @@
                 }}
               </h4>
             </b-card-text>
+            <b-button
+              v-b-modal="'myModal' + activity.name + activity.day"
+              v-if="selectedDuration.includes(activity.duration)"
+            >
+              What's this?
+            </b-button>
+            <b-modal
+              :id="'myModal' + activity.name + activity.day"
+              :title="'Learn more about ' + activity.name"
+            >
+              {{ activity.information }}
+            </b-modal>
           </b-card>
         </b-card-group>
       </b-row>
@@ -119,6 +131,18 @@
                 }}
               </h4>
             </b-card-text>
+            <b-button
+              v-b-modal="'myModal' + activity.name + activity.day"
+              v-if="selectedDuration.includes(activity.duration)"
+            >
+              What's this?
+            </b-button>
+            <b-modal
+              :id="'myModal' + activity.name + activity.day"
+              :title="'Learn more about ' + activity.name"
+            >
+              {{ activity.information }}
+            </b-modal>
           </b-card>
         </b-card-group>
       </b-row>
@@ -154,6 +178,18 @@
                 }}
               </h4>
             </b-card-text>
+            <b-button
+              v-b-modal="'myModal' + activity.name + activity.day"
+              v-if="selectedDuration.includes(activity.duration)"
+            >
+              What's this?
+            </b-button>
+            <b-modal
+              :id="'myModal' + activity.name + activity.day"
+              :title="'Learn more about ' + activity.name"
+            >
+              {{ activity.information }}
+            </b-modal>
           </b-card>
         </b-card-group>
       </b-row>
