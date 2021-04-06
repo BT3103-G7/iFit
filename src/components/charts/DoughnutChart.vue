@@ -1,7 +1,6 @@
 <template>
   <div class="chart">
     <chart id="doughnut"></chart>
-    <b-button variant="success" id="button" to="/">+</b-button>
   </div>
 </template>
 
@@ -27,14 +26,5 @@ export default {
 }
 #doughnut {
   max-height: 100%;
-}
-#button {
-  position: absolute;
-  width: 4%;
-  top: 8%;
-  right: 13%;
-  font-size: 30px;
-  font-weight: bold;
-  padding: 0;
 }
 </style>
