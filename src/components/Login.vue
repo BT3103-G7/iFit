@@ -31,11 +31,20 @@ export default {
     };
   },
   methods: {
-    login() {
+    login() { 
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
-        alert('Successfully logged in');
-        this.$router.push('/overview');
+        firebase.auth().onAuthStateChanged(newUser => {
+          if (newUser) {
+            if (newUser.emailVerified == true) {
+              alert('Successfully logged in');
+              this.$router.push('/overview');
+            }
+            else {
+              alert('Please make sure you have verified your email address.');
+            }
+          }
+        })
       })
       .catch(error => {
         alert(error.message);
