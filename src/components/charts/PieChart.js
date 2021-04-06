@@ -37,22 +37,19 @@ export default {
     },
     methods: {
         fetchItems: function () {
-            moment.locale('en-sg', {
+            moment.updateLocale('en-sg', {
                 week: {
                     dow:1
                 }
             });
             var retrievedInputs = {};
             var currentWeek = moment().week();
-            console.log("Current week is " + currentWeek);
             database.collection('inputs').where("userid", "==", "123432").get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     var results = doc.data();
                     var dateData = results['year'] + '-' + results['month'] + '-' + results['date'];
                     var dataWeek = moment(dateData).week();
-                    console.log(dataWeek);
                     if (dataWeek == currentWeek) {
-                        // console.log(results);
                         var activity = results['activity'];
                         if (!(activity in retrievedInputs)) {
                             retrievedInputs[activity] = 0;

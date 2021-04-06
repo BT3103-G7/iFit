@@ -27,7 +27,7 @@
     </div>
 
     <div id="right">
-      <img src="../assets/lbimage.png" alt="Gym Image" />
+      <div id="myimg"></div>
     </div>
   </div>
 </template>
@@ -101,21 +101,32 @@ export default {
 <style scoped>
 #row {
   background-color: black;
-  height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
+  min-height: 100%;
 }
 #left {
   float: left;
   width: 70%;
-  height: 100%;
+  height: auto;
+  overflow-x:auto;
+  overflow-y:auto;
 }
 
 #right {
   float: left;
   width: 30%;
-  height: 100%;
+  
+}
+#myimg {
+  display:block;
+  width:30%;
+  position:absolute;
+  background-image: url('../assets/lbimage.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
 }
 /* Clear floats after the columns */
 #row:after {
@@ -127,20 +138,19 @@ h1 {
   text-align: left;
   color: gold;
   padding-left: 1em;
-  padding-top: 2em;
+  padding-top: 2.5em;
   padding-bottom: 1em;
 }
 img {
-  height: 100%;
-  width: 100%;
+  min-height: 100%;
+  width: auto;
 }
 table {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
   border-collapse: separate;
-  border-spacing: 0 0.5em;
-  height: 100%;
+  border-spacing: 0 0.4em;
 }
 .rank {
   width: 10%;
@@ -149,8 +159,9 @@ table {
   width: 25%;
 }
 th {
-  background-color: maroon;
+  background-color: #660022;
   color: white;
+  width: 15%;
 }
 td {
   background-color: white;
