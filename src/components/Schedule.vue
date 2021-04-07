@@ -11,11 +11,6 @@
       <b-card-body>
         <b-card-title id="cardtitle">SCHEDULE</b-card-title>
         <br />
-        <b-card-sub-title class="mb-2" id="mysubtitle"
-          >iFit offers a consistent customer experience across all outlets with
-          the same classes and timings</b-card-sub-title
-        >
-        <br />
         <b-row class="justify-content-md-center">
           <b-col cols="2">
             <b-form-select v-model="selectedSess" class="mb-3">
@@ -43,6 +38,10 @@
             </b-form-select>
           </b-col>
         </b-row>
+        <b-card-sub-title class="mb-2" id="mysubtitle"
+          >iFit offers a consistent customer experience across all outlets with
+          the same classes and timings</b-card-sub-title
+        >
       </b-card-body>
     </b-card>
     <b-container fluid class="bv-example-row">
@@ -304,6 +303,10 @@ export default {
 };
 </script>
 <style scoped>
+#outerdiv {
+  position: absolute;
+  top: 0;
+}
 .bv-example-row {
   color: white;
   background-color: black;
@@ -318,15 +321,15 @@ card-img {
   border-radius: 0rem;
 }
 #cardtitle {
+  margin-top: 2em;
   color: gold;
+  font-weight: bold;
 }
 
-#mydrop {
-  background-color: white;
-}
 #mysubtitle {
   color: gold !important;
   font-weight: bold;
+  margin-top: 2em;
 }
 
 #dateheader {
