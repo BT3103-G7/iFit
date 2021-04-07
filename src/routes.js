@@ -12,6 +12,7 @@ import InputActivity from './components/InputActivity.vue'
 import InputClass from './components/InputClass.vue'
 import CalsOut from './components/CalsOut.vue'
 import DenyAccess from './components/DenyAccess.vue'
+import Profile from './components/Profile.vue'
 
 export default [
   { path: '/', component: Home },
@@ -26,5 +27,6 @@ export default [
   { path: '/calsout', component: CalsOut },
   { path: '/inputactivity', component: InputActivity },
   { path: '/inputclass', component: InputClass },
-  { path: '/denyaccess', component: DenyAccess }
+  { path: '/denyaccess', component: DenyAccess },
+  { path: '/profile', component: Profile }
 ]
