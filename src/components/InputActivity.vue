@@ -61,6 +61,7 @@
 
 
 <script>
+import firebase from 'firebase'
 import database from '../firebase'
   export default {
     data() {
@@ -75,7 +76,7 @@ import database from '../firebase'
         start: null,
         end: null,
         space: ' ',
-        userid: '123432',
+        //userid: '123432',
         activity_options: [],
         calories_list:[]
       }
@@ -120,7 +121,7 @@ import database from '../firebase'
                   'year': Number(year),
                   'startHour': Number(startHour),
                   'endHour': Number(endHour),
-                  'userid': Number(this.userid),
+                  'userid': firebase.auth().currentUser.uid,
             })
             .then(() => {
                         alert('Your activity is recorded!');

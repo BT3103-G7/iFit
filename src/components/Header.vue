@@ -29,7 +29,7 @@
             <template #button-content>
               <em>User</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item href="#" to="profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#" v-on:click="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

@@ -1,5 +1,6 @@
 import { Doughnut } from 'vue-chartjs';
 import database from '../../firebase.js'
+import firebase from 'firebase'
 
 export default {
   extends: Doughnut,
@@ -21,16 +22,22 @@ export default {
             },
             responsive: true,
             maintainAspectRatio: false
+        },
+        currID : {
+          type: String,
         }
       }
     },
     methods: {
+      getUserID() {
+        this.currID = firebase.auth().currentUser.uid;
+      },
       fetchItems: function () {
         const today = new Date();
         var calories = 0
-        database.collection('inputs').where("userid", "==", "123432").get().then(querySnapShot => {
+        database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
             querySnapShot.forEach(doc => {
-                if (doc.data().date == today.getDate()) {
+                if (doc.data().date == today.getDate()&& (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) {
                     calories += doc.data().calories
                 }
             })
@@ -42,6 +49,7 @@ export default {
     }
 },
 created() {
+    this.getUserID();
     this.fetchItems();
 }
 

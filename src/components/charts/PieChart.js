@@ -1,6 +1,7 @@
 import { Pie } from 'vue-chartjs'
 import database from '../../firebase.js'
 import moment from 'moment'
+import firebase from 'firebase'
 
 
 export default {
@@ -32,10 +33,16 @@ export default {
                 responsive: true,
                 maintainAspectRatio: false,
                 
-            }
+            },
+            currID: {
+                type: String,
+            },
         }
     },
     methods: {
+        getUserID() {
+            this.currID = firebase.auth().currentUser.uid;
+        },
         fetchItems: function () {
             moment.updateLocale('en-sg', {
                 week: {
@@ -44,7 +51,7 @@ export default {
             });
             var retrievedInputs = {};
             var currentWeek = moment().week();
-            database.collection('inputs').where("userid", "==", "123432").get().then(querySnapShot => {
+            database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     var results = doc.data();
                     var dateData = results['year'] + '-' + results['month'] + '-' + results['date'];
@@ -69,6 +76,7 @@ export default {
         }
     },
     created() {
+        this.getUserID();
         this.fetchItems();
     }
 
