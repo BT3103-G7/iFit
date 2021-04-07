@@ -105,28 +105,28 @@ export default {
                     .createUserWithEmailAndPassword(this.email, this.password)
                     .then(() => {
                         this.sendVerification();
+                        var joinDate = new Date(); //access date when the user first joins iFit
+                        database.collection('user').doc(firebase.auth().currentUser.uid).set({
+                            'name': this.name,
+                            'email': this.email,
+                            'tele': this.tele,
+                            'height': Number(this.height),
+                            'weight': Number(this.weight),
+                            'age': Number(this.age),
+                            'password': this.password,
+                            'goal': Number(this.goal),
+                            'startDate': joinDate.getDate(),
+                            'startMonth': joinDate.getMonth() + 1,
+                            'startYear': joinDate.getFullYear(),
+                            'burnt': 0,
+                            'showTele': true,
+                        })
                         //alert('Successfully registered! Please login.');
                         this.$router.push('/login');
                     })
                     .catch(error => {
                         alert(error.message);
                     });
-                var joinDate = new Date(); //access date when the user first joins iFit
-                database.collection('user').add({
-                    'name': this.name,
-                    'email': this.email,
-                    'tele': this.tele,
-                    'height': Number(this.height),
-                    'weight': Number(this.weight),
-                    'age': Number(this.age),
-                    'password': this.password,
-                    'goal': Number(this.goal),
-                    'startDate': joinDate.getDate(),
-                    'startMonth': joinDate.getMonth() + 1,
-                    'startYear': joinDate.getFullYear(),
-                    'burnt': 0,
-                    'showTele': true,
-                })
             }
             else {
                 alert("Password does not meet minimum criteria, please try again.")
@@ -154,10 +154,11 @@ export default {
     left: 0;
     width: 100%;
     height: 130%;
+    background-size: cover;
 }
 #form {
     width: 60%;
-    height: 90%;
+    height: 87%;
     margin-top: 5rem;
     margin-left: auto;
     margin-right: auto;

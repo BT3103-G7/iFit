@@ -33,6 +33,7 @@
 
 <script>
 import database from '../firebase'
+import firebase from 'firebase'
   export default {
     data() {
       const now = new Date()
@@ -47,7 +48,7 @@ import database from '../firebase'
         //end: null,
         space: ' ',
         add_seconds: ':00',
-        userid: '123432',
+        //userid: '123432',
         class_options: [],
         calories_list:[]
       }
@@ -86,7 +87,7 @@ import database from '../firebase'
               'year': Number(year),
               'startHour': Number(startHour),
               'endHour': Number(endHour),
-              'userid': Number(this.userid),
+              'userid': firebase.auth().currentUser.uid,
             })
             .then(() => {
                         alert('Your class is recorded!');

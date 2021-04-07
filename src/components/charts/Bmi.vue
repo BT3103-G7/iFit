@@ -20,19 +20,33 @@
         </div>
     </div>
 </template>
+
 <script>
+import firebase from 'firebase'
+import database from '../../firebase.js'
 
 export default {
     data() {
         return {
-            weight: 80,
-            height: 180,
+            weight: 0,
+            height: 0,
             bmi: 0,
+            currID: {
+                type: String,
+            }
         }
     },
     methods: {
+        getUserID() {
+            this.currID = firebase.auth().currentUser.uid;
+            console.log(this.currID);
+        },
         getBmi: function() {
-            this.bmi = (this.weight) / Math.pow(this.height/100, 2);
+            database.collection('user').doc(this.currID).get().then((querySnapShot) => {
+                this.weight = querySnapShot.data().weight;
+                this.height = querySnapShot.data().height;
+                this.bmi = (this.weight) / Math.pow(this.height/100, 2);
+            });
         },
         adjustUi: function() {
             if (this.bmi < 18.5) {
@@ -48,7 +62,8 @@ export default {
             console.log(document.getElementById("arrow"));
         }
     },
-    mounted() {
+    created() {
+        this.getUserID();
         this.getBmi();
         this.adjustUi();
     }

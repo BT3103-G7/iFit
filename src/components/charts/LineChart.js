@@ -1,5 +1,6 @@
 import { Line } from 'vue-chartjs'
 import database from '../../firebase.js'
+import firebase from 'firebase'
 
 export default {
     extends: Line,
@@ -27,24 +28,19 @@ export default {
                 responsive: true,
                 maintainAspectRatio: false
             },
-            activityName: [],
-            activityRate: []
+            currID: {
+                type: String,
+            },
         }
     },
     methods: {
-        fetchActivities() {
-            database.collection('activities').get().then(querySnapShot => {
-                querySnapShot.forEach(doc => {
-                        this.activityName.push(doc.data().name);
-                        this.activityRate.push(doc.data().calspermin);
-                })
-            })
+        getUserID() {
+            this.currID = firebase.auth().currentUser.uid;
         },
-
         fetchItems: function() {
             const today = new Date();
             var timings = [];
-            database.collection('inputs').get().then(querySnapShot => {
+            database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
                         if(!timings.includes(doc.data().startHour)) {
@@ -54,18 +50,13 @@ export default {
                     }
                 })
             });
-            database.collection('inputs').get().then(querySnapShot => {
+            database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
                         for(let i = 0; i < timings.length; i++) {
                             this.datacollection.datasets[0].data.push(0); //initialise each activity's calorie count to 0
                             if(doc.data().startHour == timings[i]) {
-                                for(let j = 0; j < this.activityName.length; j++) {
-                                    if(doc.data().activity == this.activityName[j]) {
-                                        var totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
-                                        this.datacollection.datasets[0].data[i] += totalCal;
-                                    }
-                                }
+                                this.datacollection.datasets[0].data[i] += doc.data().calories;
                             }
                         }
                     }
@@ -96,12 +87,11 @@ export default {
     watch: {
         period: function() {
             const today = new Date();
-            var totalCal = 0;
             if(this.period == "Daily") {
                 this.datacollection.labels = []; //clears datasets and labels each time the graph changes
                 this.datacollection.datasets[0].data = [];
                 var timings = [];
-                database.collection('inputs').get().then(querySnapShot => {
+                database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
                             if(!timings.includes(doc.data().startHour)) {
@@ -111,18 +101,13 @@ export default {
                         }
                     })
                 });
-                database.collection('inputs').get().then(querySnapShot => {
+                database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
                             for(let i = 0; i < timings.length; i++) {
                                 this.datacollection.datasets[0].data.push(0); //initialise each activity's calorie count to 0
                                 if(doc.data().startHour == timings[i]) {
-                                    for(let j = 0; j < this.activityName.length; j++) {
-                                        if(doc.data().activity == this.activityName[j]) {
-                                            totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
-                                            this.datacollection.datasets[0].data[i] += totalCal;
-                                        }
-                                    }
+                                    this.datacollection.datasets[0].data[i] += doc.data().calories;
                                 }
                             }
                         }
@@ -154,7 +139,7 @@ export default {
                 this.datacollection.labels = ["Sun", "Mon", "Tues", "Weds", "Thurs", "Fri", "Sat"];
                 var dayOfWeek = today.getDay();
                 var currDate = today.getDate();
-                database.collection('inputs').get().then(querySnapShot => {
+                database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         for(let i = 0; i < this.datacollection.labels.length; i++) {
                             this.datacollection.datasets[0].data.push(0); //initialise each day's calorie count to 0
@@ -162,30 +147,20 @@ export default {
                         var docDate = new Date(doc.data().year, doc.data().month - 1, doc.data().date);
                         if(doc.data().month == (today.getMonth() + 1)) { //if same month
                             if(doc.data().date >= (currDate - dayOfWeek) && doc.data().date <= (currDate + 6 - dayOfWeek)) {
-                                for(let j = 0; j < this.activityName.length; j++) {
-                                    if(doc.data().activity == this.activityName[j]) {
-                                        totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
-                                        this.datacollection.datasets[0].data[docDate.getDay()] += totalCal;
-                                    }
-                                }
+                                this.datacollection.datasets[0].data[docDate.getDay()] += doc.data().calories;
                             }
                         }
                         else if(((today.getMonth() + 1) - doc.data().month) == 1) { //account for adjacent month within same week
                             var lastOfDocMonth = new Date(doc.data().year, doc.data().month, 0);
                             var newDate = lastOfDocMonth.getDate() + currDate;
                             if(doc.data().date >= (newDate - dayOfWeek)) {
-                                for(let j = 0; j < this.activityName.length; j++) {
-                                    if(doc.data().activity == this.activityName[j]) {
-                                        totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
-                                        this.datacollection.datasets[0].data[docDate.getDay()] += totalCal;
-                                    }
-                                }
+                                this.datacollection.datasets[0].data[docDate.getDay()] += doc.data().calories;
                             }
                         }
                     })
                     this.renderChart(this.datacollection, this.options);
                 })
-            } 
+            }
             else if(this.period == "Monthly") {
                 this.datacollection.labels = [];
                 this.datacollection.datasets[0].data = [];
@@ -205,20 +180,15 @@ export default {
                     this.datacollection.datasets[0].data.push(0); //initialise each week's calorie count to 0
                     this.datacollection.labels.push("Week " + i.toString());
                 }
-                database.collection('inputs').get().then(querySnapShot => {
+                database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         if(doc.data().month == (today.getMonth() + 1) && doc.data().year == today.getFullYear()) {
-                            for(let j = 0; j < this.activityName.length; j++) {
-                                if(doc.data().activity == this.activityName[j]) {
-                                    totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
-                                    if(doc.data().date < wk1marker) {
-                                        this.datacollection.datasets[0].data[0] += totalCal;
-                                    }
-                                    else {
-                                        var weekNum = Math.floor(((doc.data().date - wk1marker)/7) + 1);
-                                        this.datacollection.datasets[0].data[weekNum] += totalCal;
-                                    }
-                                }
+                            if(doc.data().date < wk1marker) {
+                                this.datacollection.datasets[0].data[0] += doc.data().calories;
+                            }
+                            else {
+                                var weekNum = Math.floor(((doc.data().date - wk1marker)/7) + 1);
+                                this.datacollection.datasets[0].data[weekNum] += doc.data().calories;
                             }
                         }
                     })
@@ -233,16 +203,11 @@ export default {
                 for(let i = 0; i < month_label.length; i++) {
                     this.datacollection.datasets[0].data.push(0); //initialise each month's calorie count to 0
                 }
-                database.collection('inputs').get().then(querySnapShot => {
+                database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                     querySnapShot.forEach(doc => {
                         let curr_month = doc.data().month;
                         if(doc.data().year == today.getFullYear()) {
-                            for(let j = 0; j < this.activityName.length; j++) {
-                                if(doc.data().activity == this.activityName[j]) {
-                                    totalCal = (doc.data().endHour - doc.data().startHour) * 60 * this.activityRate[j];
-                                    this.datacollection.datasets[0].data[curr_month - 1] += totalCal;
-                                }
-                            }
+                            this.datacollection.datasets[0].data[curr_month - 1] += doc.data().calories;
                         }
                     })
                     this.renderChart(this.datacollection, this.options);
@@ -253,7 +218,7 @@ export default {
     },
 
     created () {
-        this.fetchActivities();
+        this.getUserID();
         this.fetchItems();
     }
 }
