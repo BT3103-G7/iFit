@@ -11,11 +11,11 @@ export default {
                 datasets: [
                     {
                         label: "Calories In",
-                        backgroundColor: "#90A4AE",
+                        backgroundColor: "#EF5350",
                         data: [],
                     }, {
                         label: "Calories Out",
-                        backgroundColor: "#FFC400",
+                        backgroundColor: "#4DB6AC",
                         data: [],
                     }
                 ]
@@ -83,7 +83,6 @@ export default {
                 })
                 this.renderChart(this.datacollection, this.options);
             })
-            this.renderChart(this.datacollection, this.options);
         }
     },
     created() {

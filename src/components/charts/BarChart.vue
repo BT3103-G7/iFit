@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <chart></chart>
+    <div class="chart">
+        <chart id="bar"></chart>
     </div>
 </template>
 
@@ -15,5 +15,16 @@ export default {
 </script>
 
 <style scoped>
-
+.chart {
+    background-color: white;
+    padding: 1%;
+    border-radius: 10px;
+    width: 30%;
+    margin: 1% 0 0 0%;
+    height: 90%;
+    float: right;
+}
+#bar {
+  max-height: 100%;
+}
 </style>

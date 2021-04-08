@@ -18,7 +18,7 @@ export default {
 .chart {
   background-color: white;
   border-radius: 10px;
-  width: 37%;
+  width: 23%;
   padding: 1%;
   margin: 1% 0 1% 12%;
   height: 90%;

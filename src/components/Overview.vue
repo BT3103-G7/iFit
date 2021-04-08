@@ -5,11 +5,11 @@
         <LineChart></LineChart>
         <Bmi></Bmi>
       </div>
-      <div id="bottom">
+      <div id="bottomleft">
         <PieChart></PieChart>
         <DoughnutChart></DoughnutChart>
       </div>
-      <div>
+      <div id="bottomright">
         <BarChart></BarChart>
       </div>
     </div>
@@ -48,12 +48,20 @@ export default {
   height: 45%;
   top: 5%;
 }
-#bottom {
+#bottomleft {
   position: fixed;
   left: 0;
   right: 0;
   height: 50%;
   bottom: 0;
+}
+#bottomright {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50%;
+  bottom: 0;
+  margin-right: 12%;
 }
 #bg {
   position: fixed;
@@ -64,4 +72,5 @@ export default {
   background-color: black;
   opacity: 1;
 }
+
 </style>
