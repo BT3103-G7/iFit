@@ -9,6 +9,9 @@
         <PieChart></PieChart>
         <DoughnutChart></DoughnutChart>
       </div>
+      <div>
+        <BarChart></BarChart>
+      </div>
     </div>
 </template>
 
@@ -17,13 +20,15 @@ import LineChart from './charts/LineChart.vue'
 import Bmi from './charts/Bmi.vue'
 import PieChart from './charts/PieChart.vue'
 import DoughnutChart from './charts/DoughnutChart.vue'
+import BarChart from './charts/BarChart.vue'
 
 export default {
     components: {
       LineChart,
       Bmi,
       PieChart,
-      DoughnutChart
+      DoughnutChart,
+      BarChart,
     },
     data() {
       return {
