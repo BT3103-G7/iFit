@@ -23,7 +23,8 @@ export default {
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: 'Total Calories Burnt '
+                    text: 'Total Calories Burnt ',
+                    fontSize: 14
                 },
                 responsive: true,
                 maintainAspectRatio: false
