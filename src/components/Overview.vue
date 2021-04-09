@@ -64,13 +64,15 @@ export default {
   margin-right: 12%;
 }
 #bg {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: black;
-  opacity: 1;
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: url(../assets/overview_background.jpg);
+  opacity: 90%;
 }
 
 </style>
