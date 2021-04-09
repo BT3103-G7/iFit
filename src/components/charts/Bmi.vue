@@ -15,8 +15,8 @@
             </div>
         </div>
         <div id="buttons">
-            <b-button variant="info" class="button" to="calsout">Cals Out</b-button>
-            <b-button variant="outline-info" class="button">Cals In</b-button>
+            <b-button class="button" to="calsout"><b>Cals Out</b></b-button>
+            <b-button class="button"><b>Cals In</b></b-button>
         </div>
     </div>
 </template>
@@ -124,5 +124,10 @@ export default {
     .button {
         width: 30%;
         margin: 0 2% 0 2%;
+        color:rgb(245, 244, 247);
+        background-color:lightslategrey;
+    }
+    .button:hover {
+        background-color: black;
     }
 </style>
