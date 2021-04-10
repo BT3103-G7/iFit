@@ -5,7 +5,7 @@
     <div id="content-wrap">
         <div id="text-placeholder">
             <p id="tagline">COMMIT TO BE FIT</p>
-            <p id="msg">iFIT is a one-stop fitness management application. It aims to motivate customers of XYZ gym to track their fitness levels and sign up for gym visits.</p>
+            <p id="msg">iFIT is a one-stop fitness management application. It aims to motivate customers of iFit gym to track their fitness levels and sign up for gym visits.</p>
         </div>
 
         <div id="button-placeholder">
@@ -25,6 +25,7 @@ export default {
     components: {
     }
 }
+
 </script>
 
 <style scoped>

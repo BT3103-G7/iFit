@@ -37,7 +37,7 @@ export default {
         firebase.auth().onAuthStateChanged(newUser => {
           if (newUser) {
             if (newUser.emailVerified == true) {
-              alert('Successfully logged in');
+              //alert('Successfully logged in');
               this.$router.push('/overview');
             }
             else {
