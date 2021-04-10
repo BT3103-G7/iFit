@@ -6,10 +6,10 @@
     <br><br>
 
     <div id="date-activity-placeholder">
-      <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
+      <p class="p-3 mb-2 bg-info text-white">Choose a date </p>
       <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
       <br>
-      <p class="p-3 mb-2 bg-danger text-white">Choose a class</p>
+      <p class="p-3 mb-2 bg-info text-white">Choose a class</p>
       <div>
           <b-form-select v-model="class_chosen" :options="class_options" class="mb-3">
               <!-- This slot appears above the options from 'options' prop -->

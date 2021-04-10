@@ -18,11 +18,11 @@ export default {
 .chart {
   background-color: white;
   border-radius: 10px;
-  width: 37%;
+  width: 23%;
   padding: 1%;
-  margin: 1% 12% 1% 0;
+  margin: 1% 12% 1% 2%;
   height: 90%;
-  float: right;
+  float: left;
 }
 #doughnut {
   max-height: 100%;
