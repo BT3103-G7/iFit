@@ -7,7 +7,7 @@
             <p> Use our personalized gym tracker to log more than 600 activities like cycling, 
                 walking, gym workouts, cross training, yoga, and many others! Monitor your fitness levels 
                 & check out your gains to stay motivated. </p><br>
-            <p> Find your nearest gym <router-link to="location">here</router-link>! </p>
+            <p> Find your nearest gym <router-link to="/locations" class="routerlink">here</router-link>! </p>
         </div>
     </div>
 </template>
@@ -45,5 +45,7 @@ p {
     color: white; 
     font-size: 18px;
 }
-
+.routerlink {
+  color: gold;
+}
 </style>

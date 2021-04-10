@@ -47,21 +47,23 @@ import firebase from 'firebase'
         //start: null,
         //end: null,
         space: ' ',
-        add_seconds: ':00',
-        //userid: '123432',
+        //add_seconds: ':00',
         class_options: [],
-        calories_list:[]
+        class_list:[]
       }
     },
     methods: {
         input() {
           if (this.class_chosen == null || this.date == null) {// if any field is missing
             alert("Please input all fields!")
+          //} else if () { //if day_selected != day of class_selected
+          // then alert('There is no such class on this day! Please check available classes on our schedule page!')
           } else { 
             var fullDate = new Date(this.date)
             var year = fullDate.getFullYear()
             var month = fullDate.getMonth() + 1
             var date = fullDate.getDate()
+            var day = fullDate.getDay()
 
             var calories = 0
             var startHour = 0
@@ -72,7 +74,7 @@ import firebase from 'firebase'
             this.calories_list.forEach(function(test) {
               //console.log(test['name'])
               //console.log(class_chosen)
-              if (class_chosen == test['name']) {
+              if (class_chosen == test['name'] && day == test['day']) { 
                 calories = test["cal"]
                 startHour = test["start"].slice(0,2)
                 endHour = test["end"].slice(0,2)
@@ -90,24 +92,26 @@ import firebase from 'firebase'
               'userid': firebase.auth().currentUser.uid,
             })
             .then(() => {
-                        alert('Your class is recorded!');
-                        this.$router.push('/overview');
-                    })
-                    .catch(error => {
-                        alert(error.message);
-                    });
-
+              alert('Your class is recorded!');
+              this.$router.push('/overview');
+            })
+            .catch(error => {
+              alert(error.message);
+            });
         }
       },
       fetchItems: function() {
       database.collection('class').get().then(snapshot => {
-          let classname={}
-          let calspermin ={}
+          let class_options={}
+          let class_list ={}
           snapshot.docs.forEach(doc => {
-              classname = {value: doc.data()["name"], text: doc.data()["name"]}; 
-              this.class_options.push(classname);
-              calspermin = {'name': doc.data()["name"], 'cal': doc.data()["cal"], 'start': doc.data()["start"], 'end': doc.data()["end"]}; 
-              this.calories_list.push(calspermin)
+              class_options = {value: doc.data()["name"], text: doc.data()["name"]};
+              //if (classname not in this.class_options) {
+                //push classname into class options
+              //}
+              this.class_options.push(class_options);
+              class_list = {'name': doc.data()["name"], 'cal': doc.data()["cal"], 'start': doc.data()["start"], 'end': doc.data()["end"]}; 
+              this.class_list.push(class_list)
           });
         });
       }
@@ -125,7 +129,7 @@ import firebase from 'firebase'
     top: 0;
     left: 0;
     width: 100%;
-    height: 120%;
+    height: 100%;
     opacity: 1;
     z-index: -1;
 } 
