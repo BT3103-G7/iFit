@@ -1,61 +1,65 @@
 <template>
 <div>
-<form @submit.prevent="input">
-  <div id="content-wrap">
-    <div id="background"></div>
-    <br><br>
-
-    <div id="date-activity-placeholder">
-      <p class="p-3 mb-2 bg-info text-white">Choose a date </p>
-      <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
-      <!-- <p>Value: {{ new Date(date) }}</p> 
-      <p>Type: {{ typeof date }}</p>  !-->
-      <br>
-      <p class="p-3 mb-2 bg-info text-white">Choose an activity</p>
-      <div>
-          <b-form-select v-model="activity" :options="activity_options" class="mb-3">
-              <!-- This slot appears above the options from 'options' prop -->
-              <template #first>
-                  <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-              </template>
-          </b-form-select>
-          <!-- <div class="mt-2">Value: <strong>{{ activity }}</strong></div> -->
-      </div>
-    </div>
-    <br><br><br>
-
-    <div id="time-placeholder">
-        <div style='width:20%; height:100%; float:left'><br></div>
-        <div style='width:20%; height:100%; float:left'>
-            <p class="p-3 mb-2 bg-info text-white">Start time</p>
-            <!-- <div> -->
-                <!-- <b-form-timepicker v-model="start" locale="en"></b-form-timepicker> -->
-                <!-- <div class="mt-2">Value: {{ start }}</div> -->
-                <!-- <p>Type: {{ Timestamp.valueof(start) }}</p> -->
-            <!-- </div> --> 
-              <b-form-timepicker v-model="start" locale="en"></b-form-timepicker>
-            <br>
-        </div>
-        <div style='width:20%; height:100%; float:left'><br></div>
-          
-        <div style='width:20%; height:100%; float:left'>
-            <p class="p-3 mb-2 bg-info text-white">End time</p>
-            <div>
-                <b-form-timepicker v-model="end" locale="en"></b-form-timepicker>
-                <!-- <div class="mt-2">Value: {{ end }}</div> -->
-            </div>
-            <br>
-        </div>
-        <div style='width:20%; height:100%; float:left'><br></div> 
-    </div>
-
-    <div id="button-placeholder">
-        <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
-        <br><b-button type="submit" variant="warning" size=lg><b>SUBMIT</b></b-button>
-    </div> 
-    
+  <div id="backbutton-placeholder">  
+      <router-link to="/calsout"><img src="../assets/back_button.png" height=50px width=50px></router-link>
   </div>
-</form>
+
+  <form @submit.prevent="input">
+    <div id="content-wrap">
+      <div id="background"></div>
+      <br><br>
+
+      <div id="date-activity-placeholder">
+        <p class="p-3 mb-2 bg-info text-white">Choose a date </p>
+        <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
+        <!-- <p>Value: {{ new Date(date) }}</p> 
+        <p>Type: {{ typeof date }}</p>  !-->
+        <br>
+        <p class="p-3 mb-2 bg-info text-white">Choose an activity</p>
+        <div>
+            <b-form-select v-model="activity" :options="activity_options" class="mb-3">
+                <!-- This slot appears above the options from 'options' prop -->
+                <template #first>
+                    <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+            </b-form-select>
+            <!-- <div class="mt-2">Value: <strong>{{ activity }}</strong></div> -->
+        </div>
+      </div>
+      <br><br><br>
+
+      <div id="time-placeholder">
+          <div style='width:20%; height:100%; float:left'><br></div>
+          <div style='width:20%; height:100%; float:left'>
+              <p class="p-3 mb-2 bg-info text-white">Start time</p>
+              <!-- <div> -->
+                  <!-- <b-form-timepicker v-model="start" locale="en"></b-form-timepicker> -->
+                  <!-- <div class="mt-2">Value: {{ start }}</div> -->
+                  <!-- <p>Type: {{ Timestamp.valueof(start) }}</p> -->
+              <!-- </div> --> 
+                <b-form-timepicker v-model="start" locale="en"></b-form-timepicker>
+              <br>
+          </div>
+          <div style='width:20%; height:100%; float:left'><br></div>
+            
+          <div style='width:20%; height:100%; float:left'>
+              <p class="p-3 mb-2 bg-info text-white">End time</p>
+              <div>
+                  <b-form-timepicker v-model="end" locale="en"></b-form-timepicker>
+                  <!-- <div class="mt-2">Value: {{ end }}</div> -->
+              </div>
+              <br>
+          </div>
+          <div style='width:20%; height:100%; float:left'><br></div> 
+      </div>
+
+      <div id="button-placeholder">
+          <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
+          <br><b-button type="submit" variant="warning" size=lg><b>SUBMIT</b></b-button>
+      </div> 
+      
+    </div>
+  </form>
 </div>
 </template>
 
@@ -187,6 +191,14 @@ import database from '../firebase'
     position: center;
     z-index: 1;
     text-align: center;
+}
+#backbutton-placeholder {
+    top: 13%;
+    left: -33%;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
 }
 
 </style>
