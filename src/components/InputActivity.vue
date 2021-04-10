@@ -6,12 +6,12 @@
     <br><br>
 
     <div id="date-activity-placeholder">
-      <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
+      <p class="p-3 mb-2 bg-info text-white">Choose a date </p>
       <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
       <!-- <p>Value: {{ new Date(date) }}</p> 
       <p>Type: {{ typeof date }}</p>  !-->
       <br>
-      <p class="p-3 mb-2 bg-danger text-white">Choose an activity</p>
+      <p class="p-3 mb-2 bg-info text-white">Choose an activity</p>
       <div>
           <b-form-select v-model="activity" :options="activity_options" class="mb-3">
               <!-- This slot appears above the options from 'options' prop -->
@@ -27,7 +27,7 @@
     <div id="time-placeholder">
         <div style='width:20%; height:100%; float:left'><br></div>
         <div style='width:20%; height:100%; float:left'>
-            <p class="p-3 mb-2 bg-danger text-white">Start time</p>
+            <p class="p-3 mb-2 bg-info text-white">Start time</p>
             <!-- <div> -->
                 <!-- <b-form-timepicker v-model="start" locale="en"></b-form-timepicker> -->
                 <!-- <div class="mt-2">Value: {{ start }}</div> -->
@@ -39,7 +39,7 @@
         <div style='width:20%; height:100%; float:left'><br></div>
           
         <div style='width:20%; height:100%; float:left'>
-            <p class="p-3 mb-2 bg-danger text-white">End time</p>
+            <p class="p-3 mb-2 bg-info text-white">End time</p>
             <div>
                 <b-form-timepicker v-model="end" locale="en"></b-form-timepicker>
                 <!-- <div class="mt-2">Value: {{ end }}</div> -->
@@ -124,12 +124,12 @@ import database from '../firebase'
                   'userid': firebase.auth().currentUser.uid,
             })
             .then(() => {
-                        alert('Your activity is recorded!');
-                        this.$router.push('/overview');
-                    })
-                    .catch(error => {
-                        alert(error.message);
-                    });
+              alert('Your activity is recorded!');
+              this.$router.push('/overview');
+              })
+            .catch(error => {
+              alert(error.message);
+              });
           }
         }
       },
@@ -159,7 +159,7 @@ import database from '../firebase'
     top: 0;
     left: 0;
     width: 100%;
-    height: 120%;
+    height: 100%;
     opacity: 1;
     z-index: -1;
 } 

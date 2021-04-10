@@ -15,8 +15,10 @@
             </div>
         </div>
         <div id="buttons">
+            <!-- <b-button type="button" class="btn btn-danger" style="margin: 0 2% 0 2%" to="inputcalories"><b>Cals In</b></b-button>
+            <b-button type="button" class="btn btn-info" style="margin: 0 2% 0 2%" to="calsout"><b>Cals Out</b></b-button> -->
+            <b-button class="button2" to="inputcalories"><b>Cals In</b></b-button>
             <b-button class="button" to="calsout"><b>Cals Out</b></b-button>
-            <b-button class="button"><b>Cals In</b></b-button>
         </div>
     </div>
 </template>
@@ -122,10 +124,16 @@ export default {
         padding: 3% 1% 3% 1%;
     }
     .button {
-        width: 30%;
+        width: 35%;
         margin: 0 2% 0 2%;
         color:rgb(245, 244, 247);
         background-color:lightslategrey;
+    }
+    .button2 {
+        width: 35%;
+        margin: 0 2% 0 2%;
+        color:rgb(245, 244, 247);
+        background-color:#8D6E63;
     }
     .button:hover {
         background-color: black;
