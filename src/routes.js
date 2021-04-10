@@ -13,6 +13,7 @@ import InputClass from './components/InputClass.vue'
 import CalsOut from './components/CalsOut.vue'
 import DenyAccess from './components/DenyAccess.vue'
 import Profile from './components/Profile.vue'
+import InputCalories from './components/InputCalories.vue'
 import VerifyAccount from './components/VerifyAccount.vue'
 
 export default [
@@ -108,5 +109,6 @@ export default [
       title: 'Verify Account',
       header: 2
     }
-  }
+  },
+  { path: '/inputcalories', component: InputCalories }
 ]

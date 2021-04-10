@@ -11,6 +11,7 @@
         <label for="message" class="required">Your message:</label><br>
         <textarea id="message" required v-model='message' name='message' rows="6"></textarea><br><br>
         <p style='color:gold'>Note: Responses may take up to 3 working days.</p>
+        <p style='color:gold'>Alternatively, you can reach us at +65 6392 2994</p>
         <input type="submit" variant="warning" value="Submit" onclick="return confirm('Submit form?')">
       </form>
     </div>
@@ -90,9 +91,12 @@ input[type="submit"]:hover {
     height: 120%;
     opacity: 1;
     z-index: -1;
+    background-size: cover;
+    min-height: 100%;
+    background-repeat: no-repeat;
 } 
 #content-wrap {
-    padding-bottom: 150px;
+    overflow-x: hidden
 }
 #form-placeholder {
     top: 10%;
