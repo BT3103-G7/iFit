@@ -4,6 +4,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import Routes from './routes.js'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import SmartTable from 'vuejs-smart-table'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -19,6 +20,8 @@ Vue.use(VueGoogleMaps, {
     key: 'AIzaSyAbaQ2Ya7eBkf9xdrM99HcttmICGsxwtgs'
   }});
 
+  Vue.use(SmartTable)
+  
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
