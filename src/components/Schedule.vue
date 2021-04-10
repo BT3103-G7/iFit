@@ -47,148 +47,166 @@
     <b-container fluid class="bv-example-row">
       <b-row id="dateheader">
         <b-col v-for="day in currentWeek" :key="day.name">
-          <h3>{{ day.date }}</h3>
-          <h3>{{ day.name }}</h3>
+          <h4>{{ day.date }}</h4>
+          <h4>{{ day.name }}</h4>
         </b-col>
       </b-row>
       <b-row v-show="showMorning">
         <h4>Morning</h4>
       </b-row>
-      <b-row v-show="showMorning">
-        <b-card-group deck>
+      <b-row v-show="showMorning" class="myrow">
+        <b-card-group deck class="mydeck">
           <b-card
             v-for="activity in sortClasses('morning')"
             v-bind:key="activity.cal"
           >
-            <b-card-title class="myGymTitles">
+            <b-card-text class="myGymTitles">
+              <h6>
               {{
                 selectedDuration.includes(activity.duration)
                   ? activity.name
                   : ""
               }}
-            </b-card-title>
+              </h6>
+            </b-card-text>
             <b-card-text class="myGymInfo">
-              <h4>
+              <h6>
                 {{
                   selectedDuration.includes(activity.duration)
                     ? activity.start + " - " + activity.end
                     : ""
                 }}
-              </h4>
-              <h4>
+              </h6>
+              <h6>
                 {{
                   selectedDuration.includes(activity.duration)
                     ? "Calories burnt: " + activity.cal
-                    : ""
+                    : "                   "
                 }}
-              </h4>
+              </h6>
             </b-card-text>
-            <b-button
-              v-b-modal="'myModal' + activity.name + activity.day"
-              v-if="selectedDuration.includes(activity.duration)"
-            >
-              What's this?
-            </b-button>
-            <b-modal
-              :id="'myModal' + activity.name + activity.day"
-              :title="'Learn more about ' + activity.name"
-            >
-              {{ activity.information }}
-            </b-modal>
+            <template #footer v-if="selectedDuration.includes(activity.duration)">
+              <b-button
+                v-b-modal="'myModal' + activity.name + activity.day"
+                v-if="selectedDuration.includes(activity.duration)"
+              >
+                What's this?
+              </b-button>
+              <b-modal 
+                :id="'myModal' + activity.name + activity.day"
+                :title="'Learn more about ' + activity.name"
+                hide-footer
+                :no-close-on-backdrop=true
+              >
+                {{ activity.information }}
+              </b-modal>
+            </template>
           </b-card>
         </b-card-group>
       </b-row>
       <b-row v-show="showAfternoon">
         <h4>Afternoon</h4>
       </b-row>
-      <b-row v-show="showAfternoon">
-        <b-card-group deck>
+      <b-row v-show="showAfternoon" class="myrow">
+        <b-card-group deck class="mydeck">
           <b-card
             v-for="activity in sortClasses('afternoon')"
             v-bind:key="activity.name"
           >
-            <b-card-title class="myGymTitles">
+            <b-card-text class="myGymTitles">
+              <h6>
               {{
                 selectedDuration.includes(activity.duration)
                   ? activity.name
                   : ""
               }}
-            </b-card-title>
+              </h6>
+            </b-card-text>
             <b-card-text class="myGymInfo">
-              <h4>
+              <h6>
                 {{
                   selectedDuration.includes(activity.duration)
                     ? activity.start + " - " + activity.end
                     : ""
                 }}
-              </h4>
-              <h4>
+              </h6>
+              <h6>
                 {{
                   selectedDuration.includes(activity.duration)
                     ? "Calories burnt: " + activity.cal
-                    : ""
+                    : "                   "
                 }}
-              </h4>
+              </h6>
             </b-card-text>
-            <b-button
-              v-b-modal="'myModal' + activity.name + activity.day"
-              v-if="selectedDuration.includes(activity.duration)"
-            >
-              What's this?
-            </b-button>
-            <b-modal
-              :id="'myModal' + activity.name + activity.day"
-              :title="'Learn more about ' + activity.name"
-            >
-              {{ activity.information }}
-            </b-modal>
+            <template #footer v-if="selectedDuration.includes(activity.duration)">
+              <b-button
+                v-b-modal="'myModal' + activity.name + activity.day"
+                v-if="selectedDuration.includes(activity.duration)"
+              >
+                What's this?
+              </b-button>
+              <b-modal 
+                :id="'myModal' + activity.name + activity.day"
+                :title="'Learn more about ' + activity.name"
+                hide-footer
+                :no-close-on-backdrop=true
+              >
+                {{ activity.information }}
+              </b-modal>
+            </template>
           </b-card>
         </b-card-group>
       </b-row>
       <b-row v-show="showEvening">
         <h4>Evening</h4>
       </b-row>
-      <b-row v-show="showEvening">
-        <b-card-group deck>
+      <b-row v-show="showEvening" class="myrow">
+        <b-card-group deck class="mydeck">
           <b-card
             v-for="activity in sortClasses('evening')"
             v-bind:key="activity.name"
           >
-            <b-card-title class="myGymTitles">
+            <b-card-text class="myGymTitles">
+              <h6>
               {{
                 selectedDuration.includes(activity.duration)
                   ? activity.name
                   : ""
               }}
-            </b-card-title>
+              </h6>
+            </b-card-text>
             <b-card-text class="myGymInfo">
-              <h4>
+              <h6>
                 {{
                   selectedDuration.includes(activity.duration)
                     ? activity.start + " - " + activity.end
                     : ""
                 }}
-              </h4>
-              <h4>
+              </h6>
+              <h6>
                 {{
                   selectedDuration.includes(activity.duration)
                     ? "Calories burnt: " + activity.cal
-                    : ""
+                    : "                   "
                 }}
-              </h4>
+              </h6>
             </b-card-text>
-            <b-button
-              v-b-modal="'myModal' + activity.name + activity.day"
-              v-if="selectedDuration.includes(activity.duration)"
-            >
-              What's this?
-            </b-button>
-            <b-modal
-              :id="'myModal' + activity.name + activity.day"
-              :title="'Learn more about ' + activity.name"
-            >
-              {{ activity.information }}
-            </b-modal>
+            <template #footer v-if="selectedDuration.includes(activity.duration)">
+              <b-button
+                v-b-modal="'myModal' + activity.name + activity.day"
+                v-if="selectedDuration.includes(activity.duration)"
+              >
+                What's this?
+              </b-button>
+              <b-modal 
+                :id="'myModal' + activity.name + activity.day"
+                :title="'Learn more about ' + activity.name"
+                hide-footer
+                :no-close-on-backdrop=true
+              >
+                {{ activity.information }}
+              </b-modal>
+            </template>
           </b-card>
         </b-card-group>
       </b-row>
@@ -306,6 +324,9 @@ export default {
 #outerdiv {
   position: absolute;
   top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
 }
 .bv-example-row {
   color: white;
@@ -340,5 +361,12 @@ card-img {
 }
 .myGymInfo {
   color: black;
+}
+.mydeck {
+  width: 100%;
+}
+.myrow {
+  display: flex;
+  justify-content: center;
 }
 </style>
