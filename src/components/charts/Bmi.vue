@@ -15,6 +15,8 @@
             </div>
         </div>
         <div id="buttons">
+            <!-- <b-button type="button" class="btn btn-danger" style="margin: 0 2% 0 2%" to="inputcalories"><b>Cals In</b></b-button>
+            <b-button type="button" class="btn btn-info" style="margin: 0 2% 0 2%" to="calsout"><b>Cals Out</b></b-button> -->
             <b-button class="button2" to="inputcalories"><b>Cals In</b></b-button>
             <b-button class="button" to="calsout"><b>Cals Out</b></b-button>
         </div>
