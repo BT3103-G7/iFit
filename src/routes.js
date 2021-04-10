@@ -15,18 +15,77 @@ import DenyAccess from './components/DenyAccess.vue'
 import Profile from './components/Profile.vue'
 
 export default [
-  { path: '/', component: Home },
-  { path: '/login', component: Login },
-  { path: '/signup', component: SignUp },
-  { path: '/overview', component: Overview, meta: { authRequired: true } },
-  { path: '/members', component: Leaderboard, meta: { authRequired: true } },
-  { path: '/locations', component: Locations },
-  { path: '/schedule', component: Schedule },
-  { path: '/about', component: About },
-  { path: '/contact', component: Contact },
-  { path: '/calsout', component: CalsOut },
-  { path: '/inputactivity', component: InputActivity },
-  { path: '/inputclass', component: InputClass },
-  { path: '/denyaccess', component: DenyAccess },
-  { path: '/profile', component: Profile }
+  {
+    path: '/', component: Home, meta: {
+      title: 'Home'
+    }
+  },
+  {
+    path: '/login', component: Login, meta: {
+      title: 'Login'
+    }
+  },
+  {
+    path: '/signup', component: SignUp, meta: {
+      title: 'Sign Up'
+    }
+  },
+  {
+    path: '/overview', component: Overview, meta: {
+      authRequired: true,
+      title: 'Overview'
+    }
+  },
+  {
+    path: '/members', component: Leaderboard, meta: {
+      authRequired: true,
+      title: 'Members'
+    }
+  },
+  {
+    path: '/locations', component: Locations, meta: {
+      title: 'Locations'
+    }
+  },
+  {
+    path: '/schedule', component: Schedule, meta: {
+      title: 'Schedule'
+    }
+  },
+  {
+    path: '/about', component: About, meta: {
+      title: 'About Us'
+    }
+  },
+  {
+    path: '/contact', component: Contact, meta: {
+      title: 'Contact Us'
+    }
+  },
+  {
+    path: '/calsout', component: CalsOut, meta: {
+      title: 'Input Food'
+    }
+  },
+  {
+    path: '/inputactivity', component: InputActivity, meta: {
+      title: 'Input Activity'
+    }
+  },
+  {
+    path: '/inputclass', component: InputClass,
+    meta: {
+      title: 'Input Class'
+    }
+  },
+  {
+    path: '/denyaccess', component: DenyAccess, meta: {
+      title: 'Denied Access'
+    }
+  },
+  {
+    path: '/profile', component: Profile, meta: {
+      title: 'My Profile'
+    }
+  }
 ]
