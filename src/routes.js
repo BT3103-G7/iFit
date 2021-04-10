@@ -14,21 +14,105 @@ import CalsOut from './components/CalsOut.vue'
 import DenyAccess from './components/DenyAccess.vue'
 import Profile from './components/Profile.vue'
 import InputCalories from './components/InputCalories.vue'
+import VerifyAccount from './components/VerifyAccount.vue'
 
 export default [
-  { path: '/', component: Home },
-  { path: '/login', component: Login },
-  { path: '/signup', component: SignUp },
-  { path: '/overview', component: Overview, meta: { authRequired: true } },
-  { path: '/members', component: Leaderboard, meta: { authRequired: true } },
-  { path: '/locations', component: Locations },
-  { path: '/schedule', component: Schedule },
-  { path: '/about', component: About },
-  { path: '/contact', component: Contact },
-  { path: '/calsout', component: CalsOut },
-  { path: '/inputactivity', component: InputActivity },
-  { path: '/inputclass', component: InputClass },
-  { path: '/denyaccess', component: DenyAccess },
-  { path: '/profile', component: Profile },
-  { path: '/inputcalories', component: InputCalories }
+  {
+    path: '/', component: Home, meta: {
+      title: 'Home',
+      header: 1
+    }
+  },
+  {
+    path: '/login', component: Login, meta: {
+      title: 'Login',
+      header: 1
+    }
+  },
+  {
+    path: '/signup', component: SignUp, meta: {
+      title: 'Sign Up',
+      header: 1
+    }
+  },
+  {
+    path: '/overview', component: Overview, meta: {
+      authRequired: true,
+      title: 'Overview',
+      header: 1
+    }
+  },
+  {
+    path: '/members', component: Leaderboard, meta: {
+      authRequired: true,
+      title: 'Members',
+      header: 1
+    }
+  },
+  {
+    path: '/locations', component: Locations, meta: {
+      title: 'Locations',
+      header: 1
+    }
+  },
+  {
+    path: '/schedule', component: Schedule, meta: {
+      title: 'Schedule',
+      header: 1
+    }
+  },
+  {
+    path: '/about', component: About, meta: {
+      title: 'About Us',
+      header: 1
+    }
+  },
+  {
+    path: '/contact', component: Contact, meta: {
+      title: 'Contact Us',
+      header: 1
+    }
+  },
+  {
+    path: '/calsout', component: CalsOut, meta: {
+      title: 'Input Food',
+      header: 1
+    }
+  },
+  {
+    path: '/inputactivity', component: InputActivity, meta: {
+      title: 'Input Activity',
+      header: 1
+    }
+  },
+  {
+    path: '/inputclass', component: InputClass,
+    meta: {
+      title: 'Input Class',
+      header: 1
+    }
+  },
+  {
+    path: '/denyaccess', component: DenyAccess, meta: {
+      title: 'Denied Access',
+      header: 1
+    }
+  },
+  {
+    path: '/profile', component: Profile, meta: {
+      title: 'My Profile',
+      header: 1
+    }
+  },
+  {
+    path: '/verify', component: VerifyAccount, meta: {
+      title: 'Verify Account',
+      header: 2
+    }
+  },
+  { path: '/inputcalories', component: InputCalories, meta: {
+    title: 'Input Calories',
+    header: 1
+  }
+  }
 ]

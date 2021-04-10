@@ -53,15 +53,14 @@ import firebase from 'firebase'
         space: ' ',
         //add_seconds: ':00',
         class_options: [],
-        class_list:[]
+        class_list:[],
+        unique_classes: [],
       }
     },
     methods: {
         input() {
           if (this.class_chosen == null || this.date == null) {// if any field is missing
             alert("Please input all fields!")
-          //} else if () { //if day_selected != day of class_selected
-          // then alert('There is no such class on this day! Please check available classes on our schedule page!')
           } else { 
             var fullDate = new Date(this.date)
             var year = fullDate.getFullYear()
@@ -75,17 +74,18 @@ import firebase from 'firebase'
             
             var class_chosen = this.class_chosen
         
-            this.calories_list.forEach(function(test) {
-              //console.log(test['name'])
-              //console.log(class_chosen)
+            this.class_list.forEach(function(test) {
               if (class_chosen == test['name'] && day == test['day']) { 
                 calories = test["cal"]
                 startHour = test["start"].slice(0,2)
                 endHour = test["end"].slice(0,2)
-                //console.log(calories)
               } 
             });
-            database.collection('inputs').add({
+
+            if (calories==0) {
+              alert('There is no such class on this day! Please check available classes on our schedule page!')
+            } else {
+            database.collection('inputs(TEST)').add({
               'activity': this.class_chosen,
               'calories': Number(calories),
               'date': Number(date),
@@ -102,19 +102,20 @@ import firebase from 'firebase'
             .catch(error => {
               alert(error.message);
             });
+          }
         }
       },
       fetchItems: function() {
       database.collection('class').get().then(snapshot => {
-          let class_options={}
+          let each_class_option={}
           let class_list ={}
           snapshot.docs.forEach(doc => {
-              class_options = {value: doc.data()["name"], text: doc.data()["name"]};
-              //if (classname not in this.class_options) {
-                //push classname into class options
-              //}
-              this.class_options.push(class_options);
-              class_list = {'name': doc.data()["name"], 'cal': doc.data()["cal"], 'start': doc.data()["start"], 'end': doc.data()["end"]}; 
+              if (this.unique_classes.includes(doc.data()["name"]) == false) {
+                each_class_option = {value: doc.data()["name"], text: doc.data()["name"]};
+                this.unique_classes.push(doc.data()["name"])
+                this.class_options.push(each_class_option);
+              }
+              class_list = {'name': doc.data()["name"], 'cal': doc.data()["cal"], 'start': doc.data()["start"], 'end': doc.data()["end"], 'day': doc.data()["day"]}; 
               this.class_list.push(class_list)
           });
         });

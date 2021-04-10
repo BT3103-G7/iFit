@@ -1,29 +1,41 @@
 <template>
-<div id="content-wrap">
   <div id="row">
     <div id="left">
       <h1>Leaderboard</h1>
       <div>
-        <table>
+        <v-table
+          :data="sortMembers()"
+          :currentPage.sync="currentPage"
+          :pageSize="15"
+          @totalPagesChanged="totalPages = $event"
+          :hideSinglePage="true"
+        >
           <colgroup>
             <col class="rank" />
             <col class="col" />
             <col class="col" />
             <col class="col" />
           </colgroup>
-          <tr>
+          <thead slot="head">
             <th>RANK</th>
             <th>CALORIES BURNT (kcal/week)</th>
             <th>NAME</th>
             <th>CONNECT</th>
-          </tr>
-          <tr v-for="(mem, index) in sortMembers()" :key="index">
-            <td>{{ "#" + (index + 1) }}</td>
-            <td>{{ mem.cal }}</td>
-            <td>{{ mem.user }}</td>
-            <td>{{ mem.tele }}</td>
-          </tr>
-        </table>
+          </thead>
+          <tbody slot="body" slot-scope="{ displayData }">
+            <tr v-for="(mem, index) in displayData" :key="index">
+              <td>{{ "#" + (currentPage * 5 - 5 + index + 1) }}</td>
+              <td>{{ mem.cal }}</td>
+              <td>{{ mem.user }}</td>
+              <td>{{ mem.tele }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+        <smart-pagination
+          :currentPage.sync="currentPage"
+          :totalPages="totalPages"
+          id="mypagination"
+        />
       </div>
     </div>
 
@@ -31,7 +43,6 @@
       <div id="myimg"></div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -42,9 +53,8 @@ export default {
   data() {
     return {
       members: [],
-      perPage: 3,
       currentPage: 1,
-      fields: ["RANK", "CALORIES BURNT (kcal/week)", "NAME", "CONNECT"],
+      totalPages: 0,
     };
   },
   methods: {
@@ -54,7 +64,6 @@ export default {
       if (weeks == 0) {
         return calories;
       } else {
-        console.log(calories + " " + weeks);
         return calories / weeks;
       }
     },
@@ -65,27 +74,21 @@ export default {
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
             var results = doc.data();
-            console.log(doc.data());
-            var userData = {};
-            var dateData = moment(
-              results["startYear"] +
-                "-" +
-                results["startMonth"] +
-                "-" +
-                results["startDate"]
-            );
-            userData["cal"] = this.getRate(results["burnt"], dateData);
-            userData["tele"] = results["tele"];
-            userData["user"] = results["name"];
-            userData["show"] = results["showTele"];
-            console.log(
-              userData["user"] +
-                " cal is " +
-                results["burnt"] +
-                " then calc " +
-                userData["cal"]
-            );
-            this.members.push(userData);
+            if (results["valid"]) {
+              var userData = {};
+              var dateData = moment(
+                results["startYear"] +
+                  "-" +
+                  results["startMonth"] +
+                  "-" +
+                  results["startDate"]
+              );
+              userData["cal"] = this.getRate(results["burnt"], dateData);
+              userData["tele"] = results["tele"];
+              userData["user"] = results["name"];
+              userData["show"] = results["showTele"];
+              this.members.push(userData);
+            }
           });
         });
     },
@@ -101,9 +104,6 @@ export default {
 </script>
 
 <style scoped>
-#content-wrap {
-    padding-bottom: 600px;
-}
 #row {
   background-color: black;
   width: 100%;
@@ -115,20 +115,19 @@ export default {
   float: left;
   width: 70%;
   height: auto;
-  overflow-x:auto;
-  overflow-y:auto;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 #right {
   float: left;
   width: 30%;
-  
 }
 #myimg {
-  display:block;
-  width:30%;
-  position:absolute;
-  background-image: url('../assets/lbimage.png');
+  display: block;
+  width: 30%;
+  position: absolute;
+  background-image: url("../assets/lbimage.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100%;
@@ -143,7 +142,7 @@ h1 {
   text-align: left;
   color: gold;
   padding-left: 1em;
-  padding-top: 2.5em;
+  padding-top: 2em;
   padding-bottom: 1em;
 }
 img {
@@ -170,5 +169,9 @@ th {
 }
 td {
   background-color: white;
+}
+#mypagination {
+  margin: auto;
+  width: 20%;
 }
 </style>

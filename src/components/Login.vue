@@ -1,67 +1,105 @@
 <template>
-    <div id="background">
+  <div id="background">
     <b-card id="loginDiv" bg-variant="light">
-      <h1><b>Login</b></h1><br>
+      <h1><b>Login</b></h1>
+      <br />
       <form @submit.prevent="login">
-        <b-form-group id="input-group-1" label="Email address:" label-for="input-1" label-cols-sm="3">
-          <b-form-input id="input-1" v-model="email" type="email" placeholder="Enter your email" required></b-form-input>
+        <b-form-group
+          id="input-group-1"
+          label="Email address:"
+          label-for="input-1"
+          label-cols-sm="3"
+        >
+          <b-form-input
+            id="input-1"
+            v-model="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="Password:" label-for="text-password" label-cols-sm="3">
-          <b-form-input type="password" id="text-password" v-model="password" placeholder="Enter your password" required></b-form-input>
+        <b-form-group
+          id="input-group-2"
+          label="Password:"
+          label-for="text-password"
+          label-cols-sm="3"
+        >
+          <b-form-input
+            type="password"
+            id="text-password"
+            v-model="password"
+            placeholder="Enter your password"
+            required
+          ></b-form-input>
         </b-form-group>
-        <br><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
+        <br /><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
       </form>
-      <br><br><span><b>Forgot your password? </b></span>
-      <p><i>*key in your email address above, then click the button below.</i></p>
+      <br /><br /><span><b>Forgot your password? </b></span>
+      <p>
+        <i>*key in your email address above, then click the button below.</i>
+      </p>
 
       <b-button type="button" v-on:click="reset">Reset my password</b-button>
     </b-card>
-    </div>
+  </div>
 </template>
 
 <script>
-import firebase from "firebase"
+import firebase from "firebase";
+import database from "../firebase.js";
 
 export default {
   data() {
     return {
-        email: "",
-        password: "",
+      email: "",
+      password: "",
     };
   },
   methods: {
-    login() { 
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      .then(() => {
-        firebase.auth().onAuthStateChanged(newUser => {
-          if (newUser) {
-            if (newUser.emailVerified == true) {
-              alert('Successfully logged in');
-              this.$router.push('/overview');
+    login() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          firebase.auth().onAuthStateChanged((newUser) => {
+            if (newUser) {
+              if (newUser.emailVerified == true) {
+                database
+                  .collection("user")
+                  .doc(firebase.auth().currentUser.uid)
+                  .update({
+                    valid: true,
+                  })
+                  .then(() => {
+                    this.$router.push("/overview");
+                  });
+                //alert('Successfully logged in');
+              } else {
+                alert("Please make sure you have verified your email address.");
+              }
             }
-            else {
-              alert('Please make sure you have verified your email address.');
-            }
-          }
+          });
         })
-      })
-      .catch(error => {
-        alert(error.message);
-      });
+        .catch((error) => {
+          alert(error.message);
+        });
     },
-    
+
     reset() {
       var auth = firebase.auth();
-      auth.sendPasswordResetEmail(this.email).then(() => {
-        alert('Password reset link has been sent to your email.');
-      // Email sent.
-      }).catch(error => {
-            alert(error.message);
-      // An error happened.
-      });
-    }
-  }
+      auth
+        .sendPasswordResetEmail(this.email)
+        .then(() => {
+          alert("Password reset link has been sent to your email.");
+          // Email sent.
+        })
+        .catch((error) => {
+          alert(error.message);
+          // An error happened.
+        });
+    },
+  },
 };
 </script>
 
@@ -88,6 +126,6 @@ p {
   font-size: 85%;
 }
 h1 {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 </style>

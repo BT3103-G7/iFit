@@ -3,12 +3,11 @@
     <div id="backbutton-placeholder">  
         <router-link to="/Overview"><img src="../assets/back_button.png" height=50px width=50px></router-link>
     </div>
-    
+
     <form @submit.prevent="input">
     <div id="content-wrap">
         <div id="background"></div>
         <br><br>
-
         <div id="date-activity-placeholder">
         <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
         <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
@@ -38,7 +37,7 @@
             
             <div style='width:20%; height:100%; float:left'>
                 <p class="p-3 mb-2 bg-danger text-white">Enter Calories of food</p>
-                <b-form-input type="number" v-model="calories" placeholder="Enter Calories"></b-form-input>
+                <b-form-input type="number" min=0 v-model="calories" placeholder="Enter Calories"></b-form-input>
                 <br>
             </div>
             <div style='width:20%; height:100%; float:left'><br></div> 
