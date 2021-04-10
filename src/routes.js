@@ -13,79 +13,100 @@ import InputClass from './components/InputClass.vue'
 import CalsOut from './components/CalsOut.vue'
 import DenyAccess from './components/DenyAccess.vue'
 import Profile from './components/Profile.vue'
+import VerifyAccount from './components/VerifyAccount.vue'
 
 export default [
   {
     path: '/', component: Home, meta: {
-      title: 'Home'
+      title: 'Home',
+      header: 1
     }
   },
   {
     path: '/login', component: Login, meta: {
-      title: 'Login'
+      title: 'Login',
+      header: 1
     }
   },
   {
     path: '/signup', component: SignUp, meta: {
-      title: 'Sign Up'
+      title: 'Sign Up',
+      header: 1
     }
   },
   {
     path: '/overview', component: Overview, meta: {
       authRequired: true,
-      title: 'Overview'
+      title: 'Overview',
+      header: 1
     }
   },
   {
     path: '/members', component: Leaderboard, meta: {
       authRequired: true,
-      title: 'Members'
+      title: 'Members',
+      header: 1
     }
   },
   {
     path: '/locations', component: Locations, meta: {
-      title: 'Locations'
+      title: 'Locations',
+      header: 1
     }
   },
   {
     path: '/schedule', component: Schedule, meta: {
-      title: 'Schedule'
+      title: 'Schedule',
+      header: 1
     }
   },
   {
     path: '/about', component: About, meta: {
-      title: 'About Us'
+      title: 'About Us',
+      header: 1
     }
   },
   {
     path: '/contact', component: Contact, meta: {
-      title: 'Contact Us'
+      title: 'Contact Us',
+      header: 1
     }
   },
   {
     path: '/calsout', component: CalsOut, meta: {
-      title: 'Input Food'
+      title: 'Input Food',
+      header: 1
     }
   },
   {
     path: '/inputactivity', component: InputActivity, meta: {
-      title: 'Input Activity'
+      title: 'Input Activity',
+      header: 1
     }
   },
   {
     path: '/inputclass', component: InputClass,
     meta: {
-      title: 'Input Class'
+      title: 'Input Class',
+      header: 1
     }
   },
   {
     path: '/denyaccess', component: DenyAccess, meta: {
-      title: 'Denied Access'
+      title: 'Denied Access',
+      header: 1
     }
   },
   {
     path: '/profile', component: Profile, meta: {
-      title: 'My Profile'
+      title: 'My Profile',
+      header: 1
+    }
+  },
+  {
+    path: '/verify', component: VerifyAccount, meta: {
+      title: 'Verify Account',
+      header: 2
     }
   }
 ]
