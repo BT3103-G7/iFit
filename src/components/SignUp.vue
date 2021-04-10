@@ -119,7 +119,7 @@
             type="password"
             name="pw1"
             v-model="password"
-            state="valid"
+            :state="valid"
             placeholder="Enter a password"
             required
           ></b-form-input>
