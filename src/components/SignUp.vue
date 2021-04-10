@@ -250,6 +250,7 @@ export default {
                 startYear: joinDate.getFullYear(),
                 burnt: 0,
                 showTele: true,
+                valid: false
               });
             //alert('Successfully registered! Please login.');
             this.$router.push("/verify");

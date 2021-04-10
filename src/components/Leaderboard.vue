@@ -74,19 +74,21 @@ export default {
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
             var results = doc.data();
-            var userData = {};
-            var dateData = moment(
-              results["startYear"] +
-                "-" +
-                results["startMonth"] +
-                "-" +
-                results["startDate"]
-            );
-            userData["cal"] = this.getRate(results["burnt"], dateData);
-            userData["tele"] = results["tele"];
-            userData["user"] = results["name"];
-            userData["show"] = results["showTele"];
-            this.members.push(userData);
+            if (results["valid"]) {
+              var userData = {};
+              var dateData = moment(
+                results["startYear"] +
+                  "-" +
+                  results["startMonth"] +
+                  "-" +
+                  results["startDate"]
+              );
+              userData["cal"] = this.getRate(results["burnt"], dateData);
+              userData["tele"] = results["tele"];
+              userData["user"] = results["name"];
+              userData["show"] = results["showTele"];
+              this.members.push(userData);
+            }
           });
         });
     },
