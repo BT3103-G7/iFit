@@ -46,7 +46,7 @@ export default {
         fetchItems: function () {
             moment.updateLocale('en-sg', {
                 week: {
-                    dow:1
+                    dow: 0
                 }
             });
             var retrievedInputs = {};
@@ -54,8 +54,21 @@ export default {
             database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     var results = doc.data();
-                    var dateData = results['year'] + '-' + results['month'] + '-' + results['date'];
-                    var dataWeek = moment(dateData).week();
+                    var dateMonth;
+                    if (results['month'] < 10) {
+                        dateMonth = '0' + results['month']; 
+                    } else {
+                        dateMonth = results['month'];
+                    }
+                    var dateDay;
+                    if (results['date'] < 10) {
+                        dateDay= '0' + results['date']; 
+                    } else {
+                        dateDay = results['date'];
+                    }
+                    var dateData = results['year'] + '-' + dateMonth + '-' + dateDay;
+                    var dataWeek = moment(dateData, "YYYY-MM-DD").week();
+                    //console.log(dateData + " " + dataWeek);
                     if (dataWeek == currentWeek) {
                         var activity = results['activity'];
                         if (!(activity in retrievedInputs)) {
