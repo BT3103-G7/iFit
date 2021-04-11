@@ -64,7 +64,7 @@ export default {
             console.log(document.getElementById("arrow"));
         }
     },
-    created() {
+    mounted() {
         this.getUserID();
         this.getBmi();
         this.adjustUi();

@@ -19,10 +19,10 @@ export default {
     background-color: white;
     padding: 1%;
     border-radius: 10px;
-    width: 30%;
-    margin: 1% 0 0 0%;
+    width: 28%;
+    margin: 1% 0% 1% 1%;
     height: 90%;
-    float: right;
+    float: left;
 }
 #bar {
   max-height: 100%;
