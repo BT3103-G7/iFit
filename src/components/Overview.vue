@@ -8,10 +8,11 @@
       <div id="bottomleft">
         <PieChart></PieChart>
         <DoughnutChart></DoughnutChart>
-      </div>
-      <div id="bottomright">
         <BarChart></BarChart>
       </div>
+      <!--<div id="bottomright">
+        <BarChart></BarChart>
+      </div>-->
     </div>
 </template>
 
@@ -55,14 +56,14 @@ export default {
   height: 50%;
   bottom: 0;
 }
-#bottomright {
+/*#bottomright {
   position: fixed;
   left: 0;
   right: 0;
   height: 50%;
   bottom: 0;
   margin-right: 12%;
-}
+}*/
 #bg {
   position: absolute;
   top: 0;

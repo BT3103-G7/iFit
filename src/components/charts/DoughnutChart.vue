@@ -20,7 +20,7 @@ export default {
   border-radius: 10px;
   width: 23%;
   padding: 1%;
-  margin: 1% 12% 1% 2%;
+  margin: 1% 0% 1% 1%;
   height: 90%;
   float: left;
 }
