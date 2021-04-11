@@ -110,5 +110,9 @@ export default [
       header: 2
     }
   },
-  { path: '/inputcalories', component: InputCalories }
+  { path: '/inputcalories', component: InputCalories, meta: {
+    title: 'Input Calories',
+    header: 1
+  }
+  }
 ]
