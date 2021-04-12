@@ -75,6 +75,8 @@ import firebase from 'firebase'
             var class_chosen = this.class_chosen
         
             this.class_list.forEach(function(test) {
+              console.log(day)
+              console.log(test['day'])
               if (class_chosen == test['name'] && day == test['day']) { 
                 calories = test["cal"]
                 startHour = test["start"].slice(0,2)
