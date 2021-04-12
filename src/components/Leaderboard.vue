@@ -1,7 +1,7 @@
 <template>
   <div id="row">
     <div id="left">
-      <h1>Leaderboard</h1>
+      <h1 id = "pagetitle">LEADERBOARD</h1>
       <div>
         <v-table
           :data="sortMembers()"
@@ -17,10 +17,10 @@
             <col class="col" />
           </colgroup>
           <thead slot="head">
-            <th>RANK</th>
-            <th>CALORIES BURNT (kcal/week)</th>
-            <th>NAME</th>
-            <th>CONNECT</th>
+            <th><h3> RANK </h3></th>
+            <th><h3>CALORIES BURNT (kcal/week)</h3></th>
+            <th><h3>NAME</h3></th>
+            <th><h3>CONNECT</h3></th>
           </thead>
           <tbody slot="body" slot-scope="{ displayData }">
             <tr v-for="(mem, index) in displayData" :key="index">
@@ -138,12 +138,13 @@ export default {
   display: table;
   clear: both;
 }
-h1 {
+#pagetitle {
   text-align: left;
   color: gold;
   padding-left: 1em;
-  padding-top: 2em;
-  padding-bottom: 1em;
+  padding-top: 2.7em;
+  padding-bottom: 0.5em;
+  font-family: 'Fjalla One', sans-serif;
 }
 img {
   min-height: 100%;
@@ -163,12 +164,18 @@ table {
   width: 25%;
 }
 th {
-  background-color: #660022;
+  background-color:maroon;
   color: white;
-  width: 15%;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  font-family: 'Fjalla One', sans-serif;
 }
 td {
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
   background-color: white;
+  font-family: 'Rubik', sans-serif;
+  color: black;
 }
 #mypagination {
   margin: auto;

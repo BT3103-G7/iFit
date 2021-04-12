@@ -2,7 +2,7 @@
   <div id="content-wrap">
     <div id="background"></div>
     <div id="form-placeholder">
-      <h1>How can we help?</h1>
+      <h1 style="font-family:'Fjalla One'">HOW CAN WE HELP?</h1>
       <form class="form" @submit.prevent="sendEmail">
         <label for="name" class="required">Full Name:</label><br>
         <input id="name" required v-model="name" name='name' type="text"/><br><br>
@@ -12,7 +12,8 @@
         <textarea id="message" required v-model='message' name='message' rows="6"></textarea><br><br>
         <p style='color:gold'>Note: Responses may take up to 3 working days.</p>
         <p style='color:gold'>Alternatively, you can reach us at +65 6392 2994</p>
-        <input type="submit" variant="warning" value="Submit" onclick="return confirm('Submit form?')">
+        <!-- <input type="submit" variant="warning" value="Submit" onclick="return confirm('Submit form?')"> -->
+        <b-button type="submit" variant="warning" size=lg style="font-family:'Fjalla One'" onclick="return confirm('Submit form?')"><b>SUBMIT</b></b-button>
       </form>
     </div>
   </div>
@@ -53,10 +54,6 @@ export default {
 #app * {
   box-sizing: border-box;
 }
-/* #app {
-  margin: 20px auto;
-  max-width: 500px;
-}  */
 label {
   width: 35%;
   text-align: left;
@@ -99,18 +96,18 @@ input[type="submit"]:hover {
     overflow-x: hidden
 }
 #form-placeholder {
-    top: 10%;
     width: 100%;
     left: 10%;
     position: relative;
     z-index: 1;
     text-align: left;
+    margin-top: -3%;
 }
 h1 {
   text-align: left;
   color: gold;
   padding-left: 0em;
   padding-top: 2em;
-  padding-bottom: 1em;
+  padding-bottom: 0.3em;
 }
 </style>

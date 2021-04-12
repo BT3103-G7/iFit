@@ -47,7 +47,7 @@
 
         <div id="button-placeholder">
             <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
-            <br><b-button type="submit" variant="warning" size=lg><b>SUBMIT</b></b-button>
+            <br><b-button type="submit" variant="warning" size=lg style="font-family:'Fjalla One'"><b>SUBMIT</b></b-button>
         </div> 
         
     </div>
