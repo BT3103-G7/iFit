@@ -9,7 +9,7 @@
       id="mycard"
     >
       <b-card-body>
-        <b-card-title id="cardtitle">SCHEDULE</b-card-title>
+        <b-card-title id="cardtitle"> <h1>SCHEDULE</h1> </b-card-title>
         <br />
         <b-row class="justify-content-md-center">
           <b-col cols="2">
@@ -47,12 +47,12 @@
     <b-container fluid class="bv-example-row">
       <b-row id="dateheader">
         <b-col v-for="day in currentWeek" :key="day.name">
-          <h4>{{ day.date }}</h4>
-          <h4>{{ day.name }}</h4>
+          <h3>{{ day.date }}</h3>
+          <h3>{{ day.name }}</h3>
         </b-col>
       </b-row>
       <b-row v-show="showMorning">
-        <h4>Morning</h4>
+        <h4 class="sessiontitle">Morning</h4>
       </b-row>
       <b-row v-show="showMorning" class="myrow">
         <b-card-group deck class="mydeck">
@@ -62,11 +62,11 @@
           >
             <b-card-text class="myGymTitles">
               <h6>
-              {{
-                selectedDuration.includes(activity.duration)
-                  ? activity.name
-                  : ""
-              }}
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? activity.name
+                    : ""
+                }}
               </h6>
             </b-card-text>
             <b-card-text class="myGymInfo">
@@ -85,18 +85,23 @@
                 }}
               </h6>
             </b-card-text>
-            <template #footer v-if="selectedDuration.includes(activity.duration)">
+            <template
+              #footer
+              v-if="selectedDuration.includes(activity.duration)"
+            >
               <b-button
                 v-b-modal="'myModal' + activity.name + activity.day"
                 v-if="selectedDuration.includes(activity.duration)"
+                class="mybutton"
               >
                 What's this?
               </b-button>
-              <b-modal 
+              <b-modal
                 :id="'myModal' + activity.name + activity.day"
                 :title="'Learn more about ' + activity.name"
                 hide-footer
-                :no-close-on-backdrop=true
+                :no-close-on-backdrop="true"
+                class="modalinfo"
               >
                 {{ activity.information }}
               </b-modal>
@@ -105,7 +110,7 @@
         </b-card-group>
       </b-row>
       <b-row v-show="showAfternoon">
-        <h4>Afternoon</h4>
+        <h4 class="sessiontitle">Afternoon</h4>
       </b-row>
       <b-row v-show="showAfternoon" class="myrow">
         <b-card-group deck class="mydeck">
@@ -115,11 +120,11 @@
           >
             <b-card-text class="myGymTitles">
               <h6>
-              {{
-                selectedDuration.includes(activity.duration)
-                  ? activity.name
-                  : ""
-              }}
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? activity.name
+                    : ""
+                }}
               </h6>
             </b-card-text>
             <b-card-text class="myGymInfo">
@@ -138,18 +143,23 @@
                 }}
               </h6>
             </b-card-text>
-            <template #footer v-if="selectedDuration.includes(activity.duration)">
+            <template
+              #footer
+              v-if="selectedDuration.includes(activity.duration)"
+            >
               <b-button
                 v-b-modal="'myModal' + activity.name + activity.day"
                 v-if="selectedDuration.includes(activity.duration)"
+                class="mybutton"
               >
                 What's this?
               </b-button>
-              <b-modal 
+              <b-modal
                 :id="'myModal' + activity.name + activity.day"
                 :title="'Learn more about ' + activity.name"
                 hide-footer
-                :no-close-on-backdrop=true
+                :no-close-on-backdrop="true"
+                class="modalinfo"
               >
                 {{ activity.information }}
               </b-modal>
@@ -158,7 +168,7 @@
         </b-card-group>
       </b-row>
       <b-row v-show="showEvening">
-        <h4>Evening</h4>
+        <h4 class="sessiontitle">Evening</h4>
       </b-row>
       <b-row v-show="showEvening" class="myrow">
         <b-card-group deck class="mydeck">
@@ -168,11 +178,11 @@
           >
             <b-card-text class="myGymTitles">
               <h6>
-              {{
-                selectedDuration.includes(activity.duration)
-                  ? activity.name
-                  : ""
-              }}
+                {{
+                  selectedDuration.includes(activity.duration)
+                    ? activity.name
+                    : ""
+                }}
               </h6>
             </b-card-text>
             <b-card-text class="myGymInfo">
@@ -191,18 +201,23 @@
                 }}
               </h6>
             </b-card-text>
-            <template #footer v-if="selectedDuration.includes(activity.duration)">
+            <template
+              #footer
+              v-if="selectedDuration.includes(activity.duration)"
+            >
               <b-button
                 v-b-modal="'myModal' + activity.name + activity.day"
                 v-if="selectedDuration.includes(activity.duration)"
+                class="mybutton"
               >
                 What's this?
               </b-button>
-              <b-modal 
+              <b-modal
                 :id="'myModal' + activity.name + activity.day"
                 :title="'Learn more about ' + activity.name"
                 hide-footer
-                :no-close-on-backdrop=true
+                :no-close-on-backdrop="true"
+                class="modalinfo"
               >
                 {{ activity.information }}
               </b-modal>
@@ -252,7 +267,7 @@ export default {
         let myObj = {};
         myObj["name"] = names[i - 1];
         let first = curr.startOf("week").date() + i;
-        let day = moment(curr.date(first));
+        let day = moment(curr.date(first), "YYYY-MM-DD");
         let day_raw = day.toISOString().slice(5, 10);
         let day_format = day_raw.slice(3, 5) + "/" + day_raw.slice(0, 2);
         myObj["date"] = day_format;
@@ -342,26 +357,49 @@ card-img {
   border-radius: 0rem;
 }
 #cardtitle {
-  margin-top: 2em;
+  margin-top: 1.5em;
   color: gold;
-  font-weight: bold;
+  margin-bottom: 0.5em;
+  font-family: "Fjalla One", sans-serif;
 }
 
 #mysubtitle {
   color: gold !important;
-  font-weight: bold;
-  margin-top: 2em;
+  margin-top: 2.5em;
+  font-family: "Fjalla One", sans-serif;
 }
 
 #dateheader {
   background-color: maroon;
+  font-family: "Fjalla One", sans-serif;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
+
+.sessiontitle {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
 .myGymTitles {
   color: black;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
 }
+
 .myGymInfo {
   color: black;
+  font-family: "Rubik", sans-serif;
 }
+
+.mybutton {
+  font-family: "Rubik", sans-serif;
+}
+
+.modalinfo {
+  font-family: "Rubik", sans-serif;
+}
+
 .mydeck {
   width: 100%;
 }
