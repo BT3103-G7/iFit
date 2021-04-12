@@ -42,7 +42,7 @@
         <br /><br /><br />
 
         <div id="button-placeholder">
-          <br /><b-button type="submit" variant="warning" size="lg"
+          <br /><b-button type="submit" variant="warning" size="lg" style="font-family:'Fjalla One'"
             ><b>SUBMIT</b></b-button
           >
         </div>
@@ -106,7 +106,7 @@ export default {
           );
         } else {
           database
-            .collection("inputs(TEST)")
+            .collection("inputs")
             .add({
               activity: this.class_chosen,
               calories: Number(calories),

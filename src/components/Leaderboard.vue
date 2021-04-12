@@ -164,7 +164,7 @@ table {
   width: 25%;
 }
 th {
-  background-color: #660022;
+  background-color:maroon;
   color: white;
   padding-top: 1em;
   padding-bottom: 0.5em;
