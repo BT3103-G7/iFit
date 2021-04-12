@@ -234,17 +234,17 @@ export default {
   methods: {
     getCurrentWeek: function () {
       var names = [
+        "SUNDAY",
         "MONDAY",
         "TUESDAY",
         "WEDNESDAY",
         "THURSDAY",
         "FRIDAY",
         "SATURDAY",
-        "SUNDAY",
       ];
       moment.updateLocale("en-sg", {
         week: {
-          dow: 1,
+          dow: 0,
         },
       });
       let curr = moment();
