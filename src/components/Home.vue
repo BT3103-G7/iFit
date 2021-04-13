@@ -9,20 +9,38 @@
         </div>
 
         <div id="button-placeholder">
-            <router-link to="/signup"><b-button id="sign-up-button" variant="warning"><b>JOIN US</b></b-button></router-link>
+            <router-link to="/signup"><b-button id="sign-up-button" variant="warning" v-if="!user"><b>JOIN US</b></b-button></router-link>
         </div>
 
         <div id="login-placeholder">
-            <h5 id="login-msg">Already have an account? Log in <router-link to="/login" id="login-link">here</router-link>.</h5>
+            <h5 id="login-msg" v-if="!user">Already have an account? Log in <router-link to="/login" id="login-link">here</router-link>.</h5>
+        </div>
+        <div>
+            <p id="welcomeMsg" v-if="user">Welcome Back !</p>
         </div>
     </div>
 </div>
 </template>
     
 <script>
-
+import firebase from 'firebase'
 export default {
     components: {
+    },
+    data() {
+        return {
+            user: false
+        }
+    },
+    created: function () {
+        var vm = this;
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                vm.user = user;
+            } else {
+                vm.user = null;
+            }
+        });
     }
 }
 
@@ -68,6 +86,7 @@ export default {
         left: 25%;
         position: relative;
         font-size: 18px;
+        font-family: 'Rubik', sans-serif;
     }
     #button-placeholder {
         top: 55%;
@@ -78,9 +97,9 @@ export default {
     }
     #sign-up-button {
         margin: 1% 0 1% 0;
-        width: 150px;
-        font-family: sans-serif;
-        font-size: 18px;
+        width: 140px;
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 22px;
         font-weight: bold;
     }
     #login-placeholder {
@@ -93,6 +112,7 @@ export default {
     #login-msg {
         font-size: 18px;
         color: white;
+        font-family: 'Rubik', sans-serif;
     }
     #login-link {
         color: gold;
@@ -104,5 +124,11 @@ export default {
         background-color: transparent;
         position: relative;
         margin-top: 18%;
+    }
+    #welcomeMsg {
+        color: rgb(255, 208, 0);
+        font-size: 30px;
+        font-weight: bold;
+        font-family: 'Fjalla One', sans-serif;
     }
 </style>

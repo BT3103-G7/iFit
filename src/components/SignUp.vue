@@ -8,6 +8,7 @@
         oninput='pw2.setCustomValidity(pw2.value != pw1.value ? "Passwords do not match." : "")'
       >
         <b-form-group
+          class="attribute"
           id="input-group-1"
           label="Your Name:"
           label-for="input-1"
@@ -22,6 +23,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-2"
           label="Email address:"
           label-for="input-2"
@@ -38,6 +40,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-3"
           label="Telegram:"
           label-for="input-3"
@@ -52,6 +55,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-4"
           label="Height:"
           label-for="input-4"
@@ -66,6 +70,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-5"
           label="Weight:"
           label-for="input-5"
@@ -80,6 +85,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-6"
           label="Your Age:"
           label-for="input-6"
@@ -94,6 +100,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-7"
           label="Your desired calories burnt target:"
           label-for="input-7"
@@ -109,6 +116,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-8"
           label="Password:"
           label-for="pswd"
@@ -146,6 +154,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attribute"
           id="input-group-9"
           label="Confirm Password:"
           label-for="pswd2"
@@ -160,11 +169,11 @@
           ></b-form-input>
         </b-form-group>
 
-        <br /><b-button type="submit" variant="warning" size="lg"
+        <br /><b-button class="submitBut" type="submit" variant="warning" size="lg"
           ><b>SIGN UP</b></b-button
         >
         <br /><br />
-        <p>
+        <p class="loginQues">
           Already have an account? Log in
           <router-link to="/login" id="login-link"><b>here</b></router-link
           >.
@@ -318,12 +327,22 @@ label {
 }
 #login-link {
   color: rgb(255, 208, 0);
+  font-family: 'Rubik', sans-serif;
 }
 .has_required {
   text-decoration: line-through;
   color: #689868;
 }
 h1 {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Fjalla One', sans-serif;
+}
+.attribute {
+  font-family: 'Rubik', sans-serif;
+}
+.loginQues {
+  font-family: 'Rubik', sans-serif;
+}
+.submitBut {
+  font-family: 'Fjalla One', sans-serif;
 }
 </style>
