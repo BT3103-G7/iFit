@@ -9,20 +9,39 @@
         </div>
 
         <div id="button-placeholder">
-            <router-link to="/signup"><b-button id="sign-up-button" variant="warning"><b>JOIN US</b></b-button></router-link>
+            <router-link to="/signup"><b-button id="sign-up-button" variant="warning" v-if="user"><b>JOIN US</b></b-button></router-link>
         </div>
 
         <div id="login-placeholder">
-            <h5 id="login-msg">Already have an account? Log in <router-link to="/login" id="login-link">here</router-link>.</h5>
+            <h5 id="login-msg" v-if="user">Already have an account? Log in <router-link to="/login" id="login-link">here</router-link>.</h5>
+        </div>
+        <div>
+            <p id="welcomeMsg">Welcome Back!</p>
         </div>
     </div>
 </div>
 </template>
     
 <script>
-
+import firebase from 'firebase'
 export default {
     components: {
+    },
+    data() {
+        return {
+            user: null
+        }
+    },
+    watch: {
+        user () {
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    this.user = user;
+                } else {
+                    this.user = null;
+                }
+            });
+        }
     }
 }
 
@@ -104,5 +123,11 @@ export default {
         background-color: transparent;
         position: relative;
         margin-top: 18%;
+    }
+    #welcomeMsg {
+        color: rgb(255, 208, 0);
+        font-size: 30px;
+        font-weight: bold;
+        font-family: 'Fjalla One', sans-serif;
     }
 </style>
