@@ -29,19 +29,18 @@ export default {
     },
     data() {
         return {
-            user: null
+            user: false
         }
     },
-    watch: {
-        user () {
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    this.user = user;
-                } else {
-                    this.user = null;
-                }
-            });
-        }
+    created: function () {
+        var vm = this;
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                vm.user = user;
+            } else {
+                vm.user = null;
+            }
+        });
     }
 }
 
