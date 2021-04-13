@@ -2,7 +2,7 @@
   <div id="content-wrap">
     <div id="background"></div>
     <div id="form-placeholder">
-      <h1 style="font-family:'Fjalla One'">HOW CAN WE HELP?</h1>
+      <h1>HOW CAN WE HELP?</h1>
       <form class="form" @submit.prevent="sendEmail">
         <label for="name" class="required">Full Name:</label><br>
         <input id="name" required v-model="name" name='name' type="text"/><br><br>
@@ -13,7 +13,7 @@
         <p style='color:gold'>Note: Responses may take up to 3 working days.</p>
         <p style='color:gold'>Alternatively, you can reach us at +65 6392 2994</p>
         <!-- <input type="submit" variant="warning" value="Submit" onclick="return confirm('Submit form?')"> -->
-        <b-button type="submit" variant="warning" size=lg style="font-family:'Fjalla One'" onclick="return confirm('Submit form?')"><b>SUBMIT</b></b-button>
+        <b-button class="mybutton" type="submit" variant="warning" size=lg onclick="return confirm('Submit form?')"><b>SUBMIT</b></b-button>
       </form>
     </div>
   </div>
@@ -109,5 +109,9 @@ h1 {
   padding-left: 0em;
   padding-top: 2em;
   padding-bottom: 0.3em;
+  font-family: 'Fjalla One', sans-serif;
+}
+.mybutton {
+  font-family: 'Fjalla One', sans-serif;
 }
 </style>

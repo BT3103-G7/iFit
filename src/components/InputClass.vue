@@ -42,9 +42,7 @@
         <br /><br /><br />
 
         <div id="button-placeholder">
-          <br /><b-button type="submit" variant="warning" size="lg" style="font-family:'Fjalla One'"
-            ><b>SUBMIT</b></b-button
-          >
+          <br /><b-button type="submit" variant="warning" size="lg" class="mybutton"><b>SUBMIT</b></b-button>
         </div>
       </div>
     </form>
@@ -183,7 +181,7 @@ export default {
   z-index: -1;
 }
 #button-placeholder {
-  top: 80%;
+  top: 60%;
   position: absolute;
   z-index: 1;
   text-align: center;
@@ -214,5 +212,8 @@ export default {
   z-index: 1;
   text-align: center;
   width: 100%;
+}
+.mybutton {
+  font-family: 'Fjalla One', sans-serif;
 }
 </style>

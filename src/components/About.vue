@@ -2,7 +2,7 @@
     <div>
         <div id="background"></div>
         <div id="right">
-            <h1 style="font-family:'Fjalla One'">ABOUT US</h1>
+            <h1>ABOUT US</h1>
             <p> iFit strives to provide the highest quality fitness experience to all members. </p><br>
             <p> Use our personalized gym tracker to log more than 600 activities like cycling, 
                 walking, gym workouts, cross training, yoga, and many others! Monitor your fitness levels 
@@ -41,6 +41,7 @@ h1 {
   padding-left: 0em;
   padding-top: 4em;
   padding-bottom: 1em;
+  font-family: 'Fjalla One', sans-serif;
 }
 p {
     text-align: left;
