@@ -27,5 +27,6 @@ h3 {
   color: white;
   text-align: left;
   margin-top: 5%;
+  font-family: 'Fjalla One', sans-serif;
 }
 </style>
