@@ -5,6 +5,7 @@
       <br />
       <form @submit.prevent="login">
         <b-form-group
+          class="attributes"
           id="input-group-1"
           label="Email address:"
           label-for="input-1"
@@ -20,6 +21,7 @@
         </b-form-group>
 
         <b-form-group
+          class="attributes"
           id="input-group-2"
           label="Password:"
           label-for="text-password"
@@ -33,14 +35,14 @@
             required
           ></b-form-input>
         </b-form-group>
-        <br /><b-button type="submit" variant="warning"><b>LOG IN</b></b-button>
+        <br /><b-button class="loginBut" type="submit" variant="warning" size="lg"><b>LOG IN</b></b-button>
       </form>
       <br /><br /><span><b>Forgot your password? </b></span>
       <p>
         <i>*key in your email address above, then click the button below.</i>
       </p>
 
-      <b-button type="button" v-on:click="reset">Reset my password</b-button>
+      <b-button class="attributes" type="button" v-on:click="reset">Reset my password</b-button>
     </b-card>
   </div>
 </template>
@@ -122,10 +124,20 @@ export default {
   width: 100%;
   height: 100%;
 }
+span {
+  font-family: 'Rubik', sans-serif;
+}
 p {
   font-size: 85%;
+  font-family: 'Rubik', sans-serif;
 }
 h1 {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Fjalla One', sans-serif;
+}
+.attributes {
+  font-family: 'Rubik', sans-serif;
+}
+.loginBut {
+  font-family: 'Fjalla One', sans-serif;
 }
 </style>
