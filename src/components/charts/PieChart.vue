@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <chart id="pie"></chart>
+    <chart id="pie" v-bind:user="user"></chart>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ import Chart from "./PieChart.js";
 export default {
   components: {
     Chart
-  }
+  },
+  props: ['user'],
 };
 </script>
 

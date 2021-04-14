@@ -1,11 +1,15 @@
 import { Pie } from 'vue-chartjs'
 import database from '../../firebase.js'
 import moment from 'moment'
-import firebase from 'firebase'
 
 
 export default {
     extends: Pie,
+    props: {
+        user: {
+            type: String
+        }
+    },
     data: function () {
         return {
             datacollection: {
@@ -25,24 +29,18 @@ export default {
                 },
                 tooltips: {
                     callbacks: {
-                      label: function(tooltipItem, chartData) {
-                        return chartData.labels[tooltipItem.index] + ': ' + chartData.datasets[0].data[tooltipItem.index] + ' kcal';
-                      }
+                        label: function (tooltipItem, chartData) {
+                            return chartData.labels[tooltipItem.index] + ': ' + chartData.datasets[0].data[tooltipItem.index] + ' kcal';
+                        }
                     }
-                  },
+                },
                 responsive: true,
                 maintainAspectRatio: false,
-                
-            },
-            currID: {
-                type: String,
+
             },
         }
     },
     methods: {
-        getUserID() {
-            this.currID = firebase.auth().currentUser.uid;
-        },
         fetchItems: function () {
             moment.updateLocale('en-sg', {
                 week: {
@@ -51,18 +49,18 @@ export default {
             });
             var retrievedInputs = {};
             var currentWeek = moment().week();
-            database.collection('inputs').where("userid", "==", this.currID).get().then(querySnapShot => {
+            database.collection('inputs').where("userid", "==", this.user).get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
                     var results = doc.data();
                     var dateMonth;
                     if (results['month'] < 10) {
-                        dateMonth = '0' + results['month']; 
+                        dateMonth = '0' + results['month'];
                     } else {
                         dateMonth = results['month'];
                     }
                     var dateDay;
                     if (results['date'] < 10) {
-                        dateDay= '0' + results['date']; 
+                        dateDay = '0' + results['date'];
                     } else {
                         dateDay = results['date'];
                     }
@@ -74,23 +72,26 @@ export default {
                         if (!(activity in retrievedInputs)) {
                             retrievedInputs[activity] = 0;
                         }
-                        retrievedInputs[activity] =  retrievedInputs[activity] + results['calories'];
-                    } 
+                        retrievedInputs[activity] = retrievedInputs[activity] + results['calories'];
+                    }
                 })
                 var key2;
                 for (key2 in retrievedInputs) {
                     this.datacollection.labels.push(key2);
                     this.datacollection.datasets[0].data.push(retrievedInputs[key2]);
-                    var randColor = "#" +  Math.floor(Math.random()*16777215).toString(16);
+                    var randColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
                     this.datacollection.datasets[0].backgroundColor.push(randColor);
                 }
                 this.renderChart(this.datacollection, this.options);
             });
         }
     },
+    watch: {
+        user: function () {
+            this.fetchItems();
+        }
+    },
     created() {
-        this.getUserID();
         this.fetchItems();
     }
-
 }
