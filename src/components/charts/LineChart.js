@@ -36,52 +36,37 @@ export default {
     methods: {
         fetchItems: function() {
             const today = new Date();
-            var timings = [];
+            this.datacollection.labels = ["Sun", "Mon", "Tues", "Weds", "Thurs", "Fri", "Sat"];
+            var dayOfWeek = today.getDay();
+            var currDate = today.getDate();
             database.collection('inputs').where("userid", "==", this.user).get().then(querySnapShot => {
                 querySnapShot.forEach(doc => {
-                    if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
-                        if(!timings.includes(doc.data().startHour)) {
-                            timings.push(doc.data().startHour);
+                    for(let i = 0; i < this.datacollection.labels.length; i++) {
+                        this.datacollection.datasets[0].data.push(0); //initialise each day's calorie count to 0
+                    }
+                    var docDate = new Date(doc.data().year, doc.data().month - 1, doc.data().date);
+                    if(doc.data().month == (today.getMonth() + 1)) { //if same month
+                        if(doc.data().date >= (currDate - dayOfWeek) && doc.data().date <= (currDate + 6 - dayOfWeek)) {
+                            this.datacollection.datasets[0].data[docDate.getDay()] += doc.data().calories;
                         }
-                        timings = timings.sort((a,b) => (a > b) ? 1 : -1); //sort timings in ascending order
+                    }
+                    else if(((today.getMonth() + 1) - doc.data().month) == 1) { //account for adjacent month within same week
+                        var lastOfDocMonth = new Date(doc.data().year, doc.data().month, 0);
+                        var newDate = lastOfDocMonth.getDate() + currDate;
+                        if(doc.data().date >= (newDate - dayOfWeek)) {
+                            this.datacollection.datasets[0].data[docDate.getDay()] += doc.data().calories;
+                        }
                     }
                 })
-            });
-            database.collection('inputs').where("userid", "==", this.user).get().then(querySnapShot => {
-                querySnapShot.forEach(doc => {
-                    if(doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) { //check if same day
-                        for(let i = 0; i < timings.length; i++) {
-                            this.datacollection.datasets[0].data.push(0); //initialise each activity's calorie count to 0
-                            if(doc.data().startHour == timings[i]) {
-                                this.datacollection.datasets[0].data[i] += doc.data().calories;
-                            }
-                        }
-                    }
-                })
-                //24hour timing system
-                for(let j = 0; j < timings.length; j++) {
-                    if(timings[j] <= 12) {
-                        if(timings[j] == 0) {
-                            this.datacollection.labels.push(12 + "am");
-                        }
-                        else if(timings[j] == 12) {
-                            this.datacollection.labels.push(12 + "pm");
-                        }
-                        else {
-                            this.datacollection.labels.push(timings[j].toString() + "am");
-                        }
-                    }
-                    else {
-                        var newTime = (timings[j] - 12);
-                        this.datacollection.labels.push(newTime.toString() + "pm");
-                    }
-                }
                 this.renderChart(this.datacollection, this.options);
             })
         }
     },
 
     watch: {
+        user: function () {
+            this.fetchItems();
+        },
         period: function() {
             const today = new Date();
             if(this.period == "Daily") {
@@ -213,7 +198,6 @@ export default {
             }
         }
     },
-
     created () {
         this.fetchItems();
     }

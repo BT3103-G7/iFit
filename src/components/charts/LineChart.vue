@@ -16,7 +16,7 @@ export default {
     },
     data() {
         return {
-            selected: "Daily", //default value is daily
+            selected: "Weekly", //default value is weekly
             options: [
                 {value: "Daily", text: "Daily"},
                 {value: "Weekly", text: "Weekly"},
