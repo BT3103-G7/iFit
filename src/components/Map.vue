@@ -5,6 +5,7 @@
         <GmapMap id="map" ref="mapRef"
             :center="{lat:1.3619235244187997, lng:103.80524984383372}"
             :zoom="11.5"
+            @click="closeWindow()"
             map-type-id="roadmap"
             style="width: 60%; height: 68vh;">
             <GmapMarker
@@ -13,17 +14,27 @@
                 :position="m.position"
                 :clickable="true"
                 :draggable="false"
-                @click="center=m.center"
-                @mouseover="showDetails()"
-                />
+                @click="openWindow(m)"
+            />
+            <gmap-info-window 
+                @closeclick="closeWindow()" 
+                :opened="window_open" 
+                :position="infoWindow"
+            >
+                Address: {{ infoContent.address }}, <br>
+                (S) {{ infoContent.postalCode }} <br>
+                Contact: {{ infoContent.contact }} <br>
+                Opening Hours: {{ infoContent.openingHours }}
+            </gmap-info-window> 
         </GmapMap>
         <div id="searchPlaceholder">
             <b-form-input id="form" placeholder="Search" v-model.lazy="searchPhrase"></b-form-input>
             <ul v-if="match && !isEmpty(this.searchPhrase)">
                 <li v-for="match in this.matches" :key="match.key" v-on:click="zoomToPoint(match)" class="points">
-                    Address: {{ match.address }},
+                    Address: {{ match.address }}, <br>
                     (S) {{ match.postalCode }} <br>
-                    Contact: {{ match.contact }}
+                    Contact: {{ match.contact }} <br>
+                    Opening Hours: {{ match.openingHours }}
                 </li>
             </ul>
             <ul v-if="!match">
@@ -50,12 +61,13 @@ export default {
             match: true,
             matches: [],
             markers: [],
+            info_marker: null,
+            infoWindow: {lat: 1.3619235244187997, lng: 103.80524984383372},
+            window_open: false,
+            infoContent: {address: "", postalCode: "", contact: "", openingHours: ""}
         }
     },
     methods: {
-        showDetails: function() {
-            // show details of gym on mouse hover
-        },
         zoomToPoint: function(point) {
             this.$refs.mapRef.$mapPromise.then((map) => {
                 map.panTo({lat: point.position.lat, lng: point.position.lng});
@@ -81,6 +93,24 @@ export default {
                     position = {};
                 });
             });
+        },
+        openWindow: function(marker) {
+            this.infoWindow.lat = marker.position.lat;
+            this.infoWindow.lng = marker.position.lng;
+
+            for (let i = 0; i < this.markers.length; i++) {
+                if (this.markers[i].position.lat == this.infoWindow.lat 
+                    && this.markers[i].position.lat == this.infoWindow.lat) {
+                    this.infoContent.address = this.markers[i].address;
+                    this.infoContent.postalCode = this.markers[i].postalCode;
+                    this.infoContent.contact = this.markers[i].contact;
+                    this.infoContent.openingHours = this.markers[i].openingHours;
+                }
+            }
+            this.window_open = true;          
+        },
+        closeWindow: function() {
+            this.window_open = false;
         }
         
     },
