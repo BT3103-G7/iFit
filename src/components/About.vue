@@ -9,11 +9,16 @@
                 & check out your gains to stay motivated. </p><br>
             <p> Find your nearest gym <router-link to="/locations" class="routerlink">here</router-link>! </p>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 <script>
+import Footer from './Footer.vue'
+
 export default {
-    
+  components: {
+    Footer
+  }
 }
 </script>
 <style scoped>
@@ -50,5 +55,10 @@ p {
 }
 .routerlink {
   color: gold;
+}
+Footer {
+  position: absolute;
+  top: 120%;
+  width: 100%;
 }
 </style>

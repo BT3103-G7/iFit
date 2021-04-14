@@ -226,13 +226,18 @@
         </b-card-group>
       </b-row>
     </b-container>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import moment from "moment";
 import database from "../firebase.js";
+import Footer from './Footer.vue'
 
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       currentWeek: [],
@@ -406,5 +411,10 @@ card-img {
 .myrow {
   display: flex;
   justify-content: center;
+}
+Footer {
+  position: absolute;
+  top: 155%;
+  width: 100%;
 }
 </style>

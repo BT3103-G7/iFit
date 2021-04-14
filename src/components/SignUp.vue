@@ -180,14 +180,19 @@
         </p>
       </form>
     </b-card>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
 import database from "../firebase";
+import Footer from './Footer.vue'
 
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       email: "",
@@ -259,6 +264,9 @@ export default {
                 startYear: joinDate.getFullYear(),
                 burnt: 0,
                 showTele: true,
+                showPromo: false,
+                showMilestones: false,
+                showClassAvail: false,
                 valid: false
               });
             //alert('Successfully registered! Please login.');
@@ -344,5 +352,8 @@ h1 {
 }
 .submitBut {
   font-family: 'Fjalla One', sans-serif;
+}
+footer {
+  margin-top: 2%;
 }
 </style>

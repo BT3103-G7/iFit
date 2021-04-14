@@ -1,12 +1,12 @@
 <template>
     <div id="placeholder">
         <div id="bg"></div>
-        <h2 id="header">You are one step closer to making healthy happen. <br> Find a local gym now!</h2>
+        <h2 id="header">YOU ARE ONE STEP CLOSER TO MAKING HEALTHY HAPPEN. <br> FIND A LOCAL GYM NOW!</h2>
         <GmapMap id="map" ref="mapRef"
-            :center="{lat:1.3118078441306777, lng:103.90580352412425}"
-            :zoom="13"
+            :center="{lat:1.3619235244187997, lng:103.80524984383372}"
+            :zoom="11.5"
             map-type-id="roadmap"
-            style="width: 60%; height: 70vh;">
+            style="width: 60%; height: 68vh;">
             <GmapMarker
                 :key="index"
                 v-for="(m, index) in markers"
@@ -29,43 +29,27 @@
             <ul v-if="!match">
                 <li>No results</li>
             </ul>
+            <ul v-if="isEmpty(this.searchPhrase)">
+                <li>Enter a search phrase to find a gym near you! <br> Click search results to zoom in on the map.</li>
+            </ul>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 <script>
-const marineParade = {lat: 1.3016662544132742, lng: 103.90687848469861};
-const tanjongKatong = {lat: 1.3150365901083318, lng: 103.8946531102904};
-const kembangan = {lat: 1.3195513184006602, lng: 103.91163927259117};
+import database from '../firebase'
+import Footer from './Footer.vue'
 
 export default {
+    components: {
+        Footer
+    },
     data() {
         return {
             searchPhrase: "",
             match: true,
             matches: [],
-            markers: [
-                {
-                    position: marineParade,
-                    address: "Blk 86, Marine Parade Central GF",
-                    postalCode: "440086",
-                    openingHours: "6am - 12am",
-                    contact: "61234567"
-                },
-                {
-                    position: tanjongKatong,
-                    address: "11 Tanjong Katong Rd, 2F OneKM Mall",
-                    postalCode: "437157",
-                    openingHours: "6am - 12am",
-                    contact: "61234568"
-                },
-                {
-                    position: kembangan,
-                    address: "398 Changi Rd, #01-03",
-                    postalCode: "419845",
-                    openingHours: "6am - 12am",
-                    contact: "61234569"
-                },
-            ],
+            markers: [],
         }
     },
     methods: {
@@ -81,6 +65,23 @@ export default {
         isEmpty: function(str) {
             return str.length === 0;
         },
+        fetchLocations: function() {
+            database.collection("locations").get().then((querySnapShot) => {
+                let marker = {};
+                let position = {};
+                querySnapShot.forEach((doc) => {
+                    position.lat = doc.data().lat;
+                    position.lng = doc.data().lng;
+                    marker = doc.data();
+                    marker.position = position;
+                    delete marker['lat'];
+                    delete marker['lng'];
+                    this.markers.push(marker);
+                    marker = {};
+                    position = {};
+                });
+            });
+        }
         
     },
     watch: {
@@ -99,6 +100,9 @@ export default {
                 this.match = false;
             }
         }
+    },
+    created() {
+        this.fetchLocations();
     }
 }
 </script>
@@ -108,13 +112,12 @@ export default {
         height: 100%;
     }
     #header {
-        margin-top: 5%;
         width: 100%;
         height: 20%;
         background-color: #8B0000;
         color: white;
         font-weight: bold;
-        font-family: 'Lucida Sans';
+        font-family: 'Fjalla One', 'Lucida Sans';
         padding: 1%;
     }
     #map {
@@ -131,7 +134,9 @@ export default {
         color: white;
         list-style: none;
         padding: 0;
-        max-height: 500px;
+        max-height: 50vh;
+        overflow-y: scroll;
+        font-family: 'Rubik', 'sans-serif';
     }
     li {
         margin-left: 0;
@@ -153,5 +158,30 @@ export default {
         background-color: black;
         opacity: 1;
         z-index: -1;
+    }
+    /*scrollbar style from https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp*/
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    }
+    Footer {
+        position: absolute;
+        top: 100%;
+        width: 100%;
     }
 </style>
