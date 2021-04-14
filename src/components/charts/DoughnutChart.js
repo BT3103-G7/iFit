@@ -33,6 +33,10 @@ export default {
     fetchItems: function () {
       const today = new Date();
       var calories = 0
+      var goal = 0;
+      database.collection('user').doc(this.user).get().then((querySnapShot) => {
+        goal = querySnapShot.data().goal
+      })
       database.collection('inputs').where("userid", "==", this.user).get().then(querySnapShot => {
         querySnapShot.forEach(doc => {
           if (doc.data().date == today.getDate() && (doc.data().month - 1) == today.getMonth() && doc.data().year == today.getFullYear()) {
@@ -40,7 +44,7 @@ export default {
           }
         })
         this.datacollection.datasets[0].data.push(calories)
-        this.datacollection.datasets[0].data.push(3000 - calories)
+        this.datacollection.datasets[0].data.push(goal - calories)
         //console.log(this.datacollection.datasets[0].data)          
         this.renderChart(this.datacollection, this.options);
       });
