@@ -3,7 +3,7 @@
     <div id="dropdown">
     <b-form-select v-model="selected" :options="options"></b-form-select>
     </div>
-    <chart id="chart" v-bind:period="selected"></chart>
+    <chart id="chart" v-bind:period="selected" v-bind:user="user"></chart>
 </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
             ]
         }
     },
+    props: ['user'],
 }
 </script>
 

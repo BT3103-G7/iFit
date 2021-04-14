@@ -1,6 +1,6 @@
 <template>
     <div class="chart">
-        <chart id="bar"></chart>
+        <chart id="bar" v-bind:user="user"></chart>
     </div>
 </template>
 
@@ -11,6 +11,7 @@ export default {
     components: {
         Chart,
     },
+    props: ['user'],
 }
 </script>
 

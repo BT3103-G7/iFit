@@ -58,7 +58,7 @@ export default {
           .signOut()
           .then(() => {
             alert('Successfully logged out');
-            this.$router.go();
+            this.$router.push('/');
           })
           .catch(error => {
             alert(error.message);

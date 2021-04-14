@@ -2,13 +2,13 @@
     <div>
       <div id="bg"></div>
       <div id="top">
-        <LineChart></LineChart>
+        <LineChart v-bind:user="user"></LineChart>
         <Bmi></Bmi>
       </div>
       <div id="bottomleft">
-        <PieChart></PieChart>
-        <DoughnutChart></DoughnutChart>
-        <BarChart></BarChart>
+        <PieChart v-bind:user="user"></PieChart>
+        <DoughnutChart v-bind:user="user"></DoughnutChart>
+        <BarChart v-bind:user="user"></BarChart>
       </div>
       <Footer></Footer>
       <!--<div id="bottomright">
@@ -24,6 +24,7 @@ import PieChart from './charts/PieChart.vue'
 import DoughnutChart from './charts/DoughnutChart.vue'
 import BarChart from './charts/BarChart.vue'
 import Footer from './Footer.vue'
+import firebase from 'firebase';
 
 export default {
     components: {
@@ -35,11 +36,19 @@ export default {
       Footer
     },
     data() {
-      return {
-
+        return {
+            user: null
         }
     },
-    methods: {
+    created: function () {
+        var vm = this;
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                vm.user = user.uid;
+            } else {
+                vm.user = null;
+            }
+        });
     }
 }
 </script>
