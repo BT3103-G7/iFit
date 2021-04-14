@@ -13,6 +13,11 @@ npm install
 npm run serve
 ```
 
+### Insert Google Maps API Key
+```
+main.js line 20
+```
+
 ### Compiles and minifies for production
 ```
 npm run build

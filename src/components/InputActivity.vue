@@ -76,6 +76,7 @@
         </div>
       </div>
     </form>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -83,7 +84,12 @@
 <script>
 import firebase from "firebase";
 import database from "../firebase";
+import Footer from './Footer.vue'
+
 export default {
+  components: {
+    Footer
+  },
   data() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -247,5 +253,10 @@ export default {
 }
 .mybutton {
   font-family: 'Fjalla One', sans-serif;
+}
+Footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
 </style>

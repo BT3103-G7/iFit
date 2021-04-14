@@ -412,9 +412,4 @@ card-img {
   display: flex;
   justify-content: center;
 }
-Footer {
-  position: absolute;
-  top: 155%;
-  width: 100%;
-}
 </style>

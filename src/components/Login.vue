@@ -146,6 +146,8 @@ h1 {
   font-family: 'Fjalla One', sans-serif;
 }
 Footer {
-  margin-top: 13%;
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
 </style>
