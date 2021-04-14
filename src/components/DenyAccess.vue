@@ -23,7 +23,7 @@
   display: block;
   width: 100%;
   position: absolute;
-  background-image: url("../assets/deniedbg.jpg");
+  background-image: url("/static/deniedbg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;

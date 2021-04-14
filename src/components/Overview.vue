@@ -72,7 +72,7 @@ export default {
   min-height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  background: url(../assets/overview_background.jpg);
+  background: url(/static/overview_background.jpg);
   opacity: 90%;
 }
 

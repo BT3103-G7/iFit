@@ -3,7 +3,7 @@
     <b-card
       overlay
       fluid
-      img-src="static/schedulebg.jpeg"
+      img-src="/static/schedulebg.jpeg"
       img-alt="Card Image"
       bg-variant="dark"
       id="mycard"

@@ -127,7 +127,7 @@ export default {
   display: block;
   width: 30%;
   position: absolute;
-  background-image: url("../assets/lbimage.png");
+  background-image: url("/static/lbimage.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100%;

@@ -1,7 +1,7 @@
 <template>
 <div>
     <div id="backbutton-placeholder">  
-        <router-link to="/Overview"><img src="../assets/back_button.png" height=50px width=50px></router-link>
+        <router-link to="/Overview"><img src="/static/back_button.png" height=50px width=50px></router-link>
     </div>
 
     <form @submit.prevent="input">
@@ -116,7 +116,7 @@ import database from '../firebase'
 <style scoped>
 #background {
     position: absolute;
-    background: url(../assets/inputactivity_background.png);
+    background: url(/static/inputactivity_background.png);
     top: 0;
     left: 0;
     width: 100%;

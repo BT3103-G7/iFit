@@ -301,7 +301,7 @@ export default {
 
 <style scoped>
 #background {
-  background: url(../assets/signup_login_background.jpg);
+  background: url(/static/signup_login_background.jpg);
   position: absolute;
   top: 0;
   left: 0;
