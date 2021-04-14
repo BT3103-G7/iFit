@@ -353,7 +353,9 @@ h1 {
 .submitBut {
   font-family: 'Fjalla One', sans-serif;
 }
-footer {
-  margin-top: 2%;
+Footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
 </style>

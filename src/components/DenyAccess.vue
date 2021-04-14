@@ -13,9 +13,17 @@
       >Sign Up</b-button
     >
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import Footer from './Footer.vue'
+
+export default {
+  components: {
+    Footer
+  }
+}
 </script>
 
 <style scoped>
@@ -43,5 +51,10 @@ h3 {
 
 .mybutton {
   font-family: 'Fjalla One', sans-serif;
+}
+Footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
 </style>
