@@ -14,11 +14,19 @@
         <b-button variant="info" class="button" to="inputClass">Input your class!</b-button> <br><br>
         <img src="/static/class.jpg" class="rounded" width="350px">
     </div>
+    <Footer></Footer>
 </div>
 </template>
 
 
 <script>
+import Footer from './Footer.vue'
+
+export default {
+    components: {
+        Footer
+    }
+}
 </script>
 
 <style scoped>
@@ -50,6 +58,11 @@
     position: absolute;
     z-index: 1;
     text-align: center;
+    width: 100%;
+}
+Footer {
+    position: absolute;
+    top: 100%;
     width: 100%;
 }
 
