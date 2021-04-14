@@ -44,14 +44,19 @@
 
       <b-button class="attributes" type="button" v-on:click="reset">Reset my password</b-button>
     </b-card>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
 import database from "../firebase.js";
+import Footer from './Footer.vue'
 
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       email: "",
@@ -139,5 +144,8 @@ h1 {
 }
 .loginBut {
   font-family: 'Fjalla One', sans-serif;
+}
+Footer {
+  margin-top: 13%;
 }
 </style>

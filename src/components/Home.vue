@@ -19,13 +19,17 @@
             <p id="welcomeMsg" v-if="user">Welcome Back !</p>
         </div>
     </div>
+    <Footer></Footer>
 </div>
 </template>
     
 <script>
 import firebase from 'firebase'
+import Footer from './Footer.vue'
+
 export default {
     components: {
+        Footer
     },
     data() {
         return {
@@ -123,12 +127,18 @@ export default {
     #content-wrap {
         background-color: transparent;
         position: relative;
-        margin-top: 18%;
+        margin-top: 10%;
     }
     #welcomeMsg {
         color: rgb(255, 208, 0);
         font-size: 30px;
         font-weight: bold;
         font-family: 'Fjalla One', sans-serif;
+        margin-top: 4.5%;
+    }
+    Footer {
+        position: absolute;
+        top: 120%;
+        width: 100%;
     }
 </style>

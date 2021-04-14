@@ -10,6 +10,7 @@
         <DoughnutChart></DoughnutChart>
         <BarChart></BarChart>
       </div>
+      <Footer></Footer>
       <!--<div id="bottomright">
         <BarChart></BarChart>
       </div>-->
@@ -22,6 +23,7 @@ import Bmi from './charts/Bmi.vue'
 import PieChart from './charts/PieChart.vue'
 import DoughnutChart from './charts/DoughnutChart.vue'
 import BarChart from './charts/BarChart.vue'
+import Footer from './Footer.vue'
 
 export default {
     components: {
@@ -30,6 +32,7 @@ export default {
       PieChart,
       DoughnutChart,
       BarChart,
+      Footer
     },
     data() {
       return {
@@ -43,18 +46,18 @@ export default {
 
 <style scoped>
 #top {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   height: 45%;
-  top: 5%;
+  top: 10%;
 }
 #bottomleft {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   height: 50%;
-  bottom: 0;
+  bottom: -5%;
 }
 /*#bottomright {
   position: fixed;
@@ -69,11 +72,15 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100%;
+  min-height: 110%;
   background-repeat: no-repeat;
   background-size: cover;
   background: url(/static/overview_background.jpg);
   opacity: 90%;
 }
-
+Footer {
+  position: absolute;
+  top: 110%;
+  width: 100%;
+}
 </style>

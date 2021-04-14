@@ -16,12 +16,18 @@
         <b-button class="mybutton" type="submit" variant="warning" size=lg onclick="return confirm('Submit form?')"><b>SUBMIT</b></b-button>
       </form>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import emailjs from 'emailjs-com';
+import Footer from './Footer.vue'
+
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       name: '',
@@ -113,5 +119,10 @@ h1 {
 }
 .mybutton {
   font-family: 'Fjalla One', sans-serif;
+}
+Footer {
+  position: absolute;
+  top: 120%;
+  width: 100%;
 }
 </style>

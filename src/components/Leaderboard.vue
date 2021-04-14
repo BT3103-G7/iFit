@@ -42,14 +42,19 @@
     <div id="right">
       <div id="myimg"></div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import moment from "moment";
 import database from "../firebase.js";
+import Footer from './Footer.vue'
 
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       members: [],
@@ -180,5 +185,10 @@ td {
 #mypagination {
   margin: auto;
   width: 20%;
+}
+Footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
 </style>
