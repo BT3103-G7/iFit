@@ -14,7 +14,7 @@
   display: block;
   width: 100%;
   position: absolute;
-  background-image: url("../assets/verifybg.jpg");
+  background-image: url("/static/verifybg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;

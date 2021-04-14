@@ -3,16 +3,16 @@
     <div id="background"></div>
     
     <div id="backbutton-placeholder">  
-        <router-link to="/Overview"><img src="../assets/back_button.png" height=50px width=50px></router-link>
+        <router-link to="/Overview"><img src="/static/back_button.png" height=50px width=50px></router-link>
     </div><br><br><br>
     
     <div style='width:60%; height:100%; float:left'>
         <b-button variant="info" class="button" to="inputActivity">Input your activity!</b-button> <br><br>
-        <img src="../assets/activity.jpg" class="rounded" width="350px">
+        <img src="/static/activity.jpg" class="rounded" width="350px">
     </div>
     <div style='width:25%; height:100%; float:left'>
         <b-button variant="info" class="button" to="inputClass">Input your class!</b-button> <br><br>
-        <img src="../assets/class.jpg" class="rounded" width="350px">
+        <img src="/static/class.jpg" class="rounded" width="350px">
     </div>
 </div>
 </template>
@@ -24,7 +24,7 @@
 <style scoped>
 #background {
     position: absolute;
-    background: url(../assets/inputactivity_background.png);
+    background: url(/static/inputactivity_background.png);
     top: 0;
     left: 0;
     width: 100%;

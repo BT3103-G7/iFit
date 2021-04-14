@@ -117,7 +117,7 @@ export default {
   background-color: rgb(207, 203, 203);
 }
 #background {
-  background: url(../assets/login_testbackground.jpg);
+  background: url(/static/login_testbackground.jpg);
   position: absolute;
   top: 0;
   left: 0;

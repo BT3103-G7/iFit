@@ -2,7 +2,7 @@
   <div>
     <div id="backbutton-placeholder">
       <router-link to="/calsout"
-        ><img src="../assets/back_button.png" height="50px" width="50px"
+        ><img src="/static/back_button.png" height="50px" width="50px"
       /></router-link>
     </div>
 
@@ -172,7 +172,7 @@ export default {
 <style scoped>
 #background {
   position: absolute;
-  background: url(../assets/inputactivity_background.png);
+  background: url(/static/inputactivity_background.png);
   top: 0;
   left: 0;
   width: 100%;

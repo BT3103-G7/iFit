@@ -10,7 +10,7 @@
       class="mynav"
     >
       <b-navbar-brand to="/">
-       <img src="../assets/iFit-logo.png" width="120" height="70" alt="">
+       <img src="/static/iFit-logo.png" width="120" height="70" alt="">
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

@@ -81,7 +81,7 @@ input[type="submit"]:hover {
 }
 #background {
     position: absolute;
-    background: url(../assets/contact_background.jpg);
+    background: url(/static/contact_background.jpg);
     top: 0;
     left: 0;
     width: 100%;

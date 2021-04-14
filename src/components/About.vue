@@ -19,7 +19,7 @@ export default {
 <style scoped>
 #background {
     position: absolute;
-    background: url(../assets/about.jpg);
+    background: url(/static/about.jpg);
     top: 0;
     left: 0;
     width: 100%;

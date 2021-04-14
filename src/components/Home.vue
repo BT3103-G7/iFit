@@ -53,7 +53,7 @@ export default {
         left: 0;
         width: 100%;
         height: 120%;
-        background: url(../assets/training-pic.jpg);
+        background: url(/static/training-pic.jpg);
         opacity: 1;
         z-index: -1;
     }
