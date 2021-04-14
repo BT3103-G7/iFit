@@ -48,15 +48,17 @@ export default {
                 this.weight = querySnapShot.data().weight;
                 this.height = querySnapShot.data().height;
                 this.bmi = (this.weight) / Math.pow(this.height/100, 2);
+                this.adjustUi();
             });
         },
         adjustUi: function() {
-            if (this.bmi < 18.5) {
-                document.getElementById("arrow").style.right = '100px';
-                document.getElementById("bmiVal").style.color = '#f0ad4e';
-            } else if (this.bmi > 25) {
-                document.getElementById("arrow").style.right = '-100px';
+            console.log(this.bmi)
+            if (this.bmi > 25) {
+                document.getElementById("arrow").style.right = '-26%';
                 document.getElementById("bmiVal").style.color = '#d9534f';
+            } else if (this.bmi < 18.5) {
+                document.getElementById("arrow").style.right = '26%';
+                document.getElementById("bmiVal").style.color = '#f0ad4e';
             } else {
                 document.getElementById("arrow").style.right = '0';
                 document.getElementById("bmiVal").style.color = '#5cb85c';
@@ -67,7 +69,7 @@ export default {
     mounted() {
         this.getUserID();
         this.getBmi();
-        this.adjustUi();
+        
     }
 }
 </script>
