@@ -27,7 +27,7 @@
               <td>{{ "#" + (currentPage * 5 - 5 + index + 1) }}</td>
               <td>{{ mem.cal }}</td>
               <td>{{ mem.user }}</td>
-              <td>{{ mem.tele }}</td>
+              <td>{{ (mem.show) ? mem.tele : "-" }}</td>
             </tr>
           </tbody>
         </v-table>
