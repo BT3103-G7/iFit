@@ -187,7 +187,7 @@ export default {
   z-index: -1;
 }
 #button-placeholder {
-  top: 60%;
+  top: 80%;
   position: absolute;
   z-index: 1;
   text-align: center;
