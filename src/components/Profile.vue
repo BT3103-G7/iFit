@@ -4,7 +4,7 @@
         <div id="left">
             <div id="profileCard">
                 <b-avatar rounded="sm" size="22vh"></b-avatar>
-                <p id="name">{{ this.userInfo.name.toUpperCase() }}</p>
+                <p id="name">{{ this.userInfo.name }}</p>
                 <b-button v-if="!this.editMode" variant="info" class="button" v-on:click="editClick()">Edit</b-button>
                 <b-button v-if="this.editMode" variant="info" class="button" v-on:click="applyClick()">Apply</b-button>
             </div>
@@ -187,7 +187,6 @@ export default {
           id: {type: String},
           userInfo: {},
           updatedInfo: {},
-          notifSettings: [true, false, true, false],
           editMode: false
         }
     },
@@ -199,9 +198,12 @@ export default {
             this.editMode = false;
             for (let key in this.updatedInfo) {
                 if (this.updatedInfo[key] == "") {
-                    delete this.updatedInfo[key];
+                    if (key != "showTele" && key != "showClassAvail" && key != "showMilestones" && key != "showPromo") {
+                        delete this.updatedInfo[key];
+                    } 
                 }
             }
+            console.log("showTele: " + this.updatedInfo.showTele);
             if(Object.keys(this.updatedInfo).lenth != 0) {
                 database.collection("user").doc(this.id).update(this.updatedInfo).then(() => {
                     console.log("Document successfully updated");
@@ -222,6 +224,7 @@ export default {
             });
         },
         fetchUserInfo: function() {
+            var docRef;
             database.collection("user").get().then((querySnapShot) => {
                 querySnapShot.forEach((doc) => {
                     if(doc.data().email != null && doc.data().email.toString().toLowerCase() == this.email.toLowerCase()) {
@@ -229,10 +232,8 @@ export default {
                         console.log("id: " + this.id);
                     }
                 });
-            });
-            // Cant reference id
-            var docRef = database.collection("user").doc("QAOCTRdRlNcexhZNim7vmxMhCzL2");
-            docRef.get().then((doc) => {
+                docRef = database.collection("user").doc(this.id);
+                docRef.get().then((doc) => {
                 if (doc.exists) {
                     console.log("Document data:", doc.data());
                     this.userInfo = doc.data();
@@ -241,9 +242,11 @@ export default {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
                 }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });    
             });
+            
         }
     },
     created() {
