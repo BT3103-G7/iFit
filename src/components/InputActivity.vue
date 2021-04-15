@@ -7,6 +7,11 @@
     </div>
 
     <form @submit.prevent="input">
+      <div id="button-placeholder">
+          <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
+          <br />
+          <b-button type="submit" variant="warning" size="lg" class="mybutton"><b>SUBMIT</b></b-button>
+      </div>
       <div id="content-wrap">
         <div id="background"></div>
         <br /><br />
@@ -67,12 +72,6 @@
             <br />
           </div>
           <div style="width: 20%; height: 100%; float: left"><br /></div>
-        </div>
-
-        <div id="button-placeholder">
-          <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
-          <br />
-          <b-button type="submit" variant="warning" size="lg" class="mybutton"><b>SUBMIT</b></b-button>
         </div>
       </div>
     </form>

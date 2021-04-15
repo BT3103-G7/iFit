@@ -5,8 +5,11 @@
         ><img src="/static/back_button.png" height="50px" width="50px"
       /></router-link>
     </div>
-
+    
     <form @submit.prevent="input">
+      <div id="button-placeholder">
+        <br /><b-button type="submit" variant="warning" size="lg" class="mybutton"><b>SUBMIT</b></b-button>
+      </div>
       <div id="content-wrap">
         <div id="background"></div>
         <br /><br />
@@ -14,7 +17,7 @@
         <div id="date-activity-placeholder">
           <p class="p-3 mb-2 bg-info text-white">Choose a date</p>
           <b-form-datepicker
-            id="datepicker-full-width"
+            id="datepicker"
             menu-class="w-100"
             calendar-width="100%"
             v-model="date"
@@ -41,9 +44,7 @@
         </div>
         <br /><br /><br />
 
-        <div id="button-placeholder">
-          <br /><b-button type="submit" variant="warning" size="lg" class="mybutton"><b>SUBMIT</b></b-button>
-        </div>
+        
       </div>
     </form>
     <Footer></Footer>
@@ -187,7 +188,7 @@ export default {
   z-index: -1;
 }
 #button-placeholder {
-  top: 80%;
+  top: 60%;
   position: absolute;
   z-index: 1;
   text-align: center;

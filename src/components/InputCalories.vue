@@ -5,6 +5,10 @@
     </div>
 
     <form @submit.prevent="input">
+    <div id="button-placeholder">
+        <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
+        <br><b-button type="submit" variant="warning" size=lg style="font-family:'Fjalla One'"><b>SUBMIT</b></b-button>
+    </div> 
     <div id="content-wrap">
         <div id="background"></div>
         <br><br>
@@ -44,12 +48,6 @@
         </div>
 
         <br><br>
-
-        <div id="button-placeholder">
-            <!-- <b-button type="submit" variant="warning" size=lg v-on:click="onSubmit()">SUBMIT</b-button> -->
-            <br><b-button type="submit" variant="warning" size=lg style="font-family:'Fjalla One'"><b>SUBMIT</b></b-button>
-        </div> 
-        
     </div>
     </form>
     <Footer></Footer>
