@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="background"></div>
-        <div id="right">
+        <div id="right" class="mytext">
             <h1>ABOUT US</h1>
             <p> iFit strives to provide the highest quality fitness experience to all members. </p><br>
             <p> Use our personalized gym tracker to log more than 600 activities like cycling, 
@@ -60,5 +60,8 @@ Footer {
   position: absolute;
   top: 120%;
   width: 100%;
+}
+.mytext {
+  font-family: 'Rubik', sans-serif;
 }
 </style>

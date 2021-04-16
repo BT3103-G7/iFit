@@ -3,7 +3,7 @@
     <div id="background"></div>
     <div id="form-placeholder">
       <h1>HOW CAN WE HELP?</h1>
-      <form class="form" @submit.prevent="sendEmail">
+      <form class="form mytext" @submit.prevent="sendEmail">
         <label for="name" class="required">Full Name:</label><br>
         <input id="name" required v-model="name" name='name' type="text"/><br><br>
         <label for="email" class="required">Email:</label><br>
@@ -124,5 +124,8 @@ Footer {
   position: absolute;
   top: 120%;
   width: 100%;
+}
+.mytext {
+  font-family: 'Rubik', sans-serif;
 }
 </style>
