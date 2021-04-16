@@ -47,11 +47,6 @@ export default {
       });
     }
   },
-  watch: {
-    user: function () {
-      this.fetchItems();
-    },
-  },
   created: function () {
     var vm = this;
     firebase.auth().onAuthStateChanged(function (user) {
@@ -62,7 +57,7 @@ export default {
         vm.user = null;
       }
     });
-  },
+  }
 }
 //       fetchItems: function() {
 //         database.collection('user').get().then(querySnapShot => { //add .doc(this.id) to identify specific user in the future

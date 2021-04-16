@@ -137,13 +137,13 @@ export default {
           var calories = 0;
           var activity = this.activity;
           this.calories_list.forEach(function (test) {
-            console.log(test["name"]);
-            console.log(activity);
+            //console.log(test["name"]);
+            //console.log(activity);
             if (activity == test["name"]) {
               calories = time_difference * test["calspermin"];
-              console.log(calories);
+              //console.log(calories);
             } else {
-              console.log("DIDNT CALC CALORIES");
+              //console.log("DIDNT CALC CALORIES");
             }
           });
           database
