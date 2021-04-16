@@ -3,9 +3,12 @@
         <div id="bg"></div>
         <div id="left">
             <div id="profileCard">
-                <b-avatar rounded="sm" size="22vh"></b-avatar>
-                <p id="name">{{ this.userInfo.name }}</p>
-                <b-button v-if="!this.editMode" variant="info" class="button" v-on:click="editClick()">Edit</b-button>
+                <p id="name">{{ this.userInfo.name }}</p><br>
+                <b-avatar size="100px">
+                    <img :src="this.userInfo.profilePic" width="110">
+                </b-avatar><br><br>
+                <b-button class="avatarBut" v-on:click="setAvatar()">Switch avatar</b-button>
+                <b-button v-if="!this.editMode" variant="info" class="button" v-on:click="editClick()">Edit Profile</b-button>
                 <b-button v-if="this.editMode" variant="info" class="button" v-on:click="applyClick()">Apply</b-button>
             </div>
         </div>
@@ -17,7 +20,7 @@
                         id="input-email"
                         class="input"
                         :placeholder = "userInfo.email"
-                        disabled=true
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>
                 <b-form inline>
@@ -26,7 +29,7 @@
                         id="input-password"
                         class="input"
                         placeholder="********"
-                        disabled=true
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>    
                 <b-form inline>
@@ -79,7 +82,7 @@
                         id="input-email"
                         class="input"
                         :placeholder = "userInfo.email"
-                        disabled="true"
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>
                 <b-form inline>
@@ -88,7 +91,7 @@
                         id="input-password"
                         class="input"
                         placeholder="********"
-                        disabled="true"
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>    
                 <b-form inline>
@@ -97,7 +100,7 @@
                         id="input-telegram"
                         class="input"
                         :placeholder= "userInfo.tele"
-                        disabled="true"
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>
                 <b-form inline>
@@ -106,7 +109,7 @@
                         id="input-age"
                         class="input"
                         :placeholder= "userInfo.age"
-                        disabled="true"
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>
                 <b-form inline>
@@ -115,7 +118,7 @@
                         id="input-height"
                         class="input"
                         :placeholder= "[[userInfo.height]] + 'cm'"
-                        disabled="true"
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>
                 <b-form inline>
@@ -124,7 +127,7 @@
                         id="input-weight"
                         class="input"
                         :placeholder= "[[userInfo.weight]] + 'kg'"
-                        disabled="true"
+                        :disabled="true"
                     ></b-form-input>
                 </b-form>
             </div>
@@ -151,19 +154,19 @@
                 <p id="notifHeader">Customize Your Notifications</p>
                 <b-form inline>
                     <label class="labelNotif" for="inline-form-custom-select-pref">New Gym Promotions</label>
-                    <b-form-checkbox switch class="switch" disabled="true" v-model="userInfo.showPromo"></b-form-checkbox>
+                    <b-form-checkbox switch class="switch" :disabled="true" v-model="userInfo.showPromo"></b-form-checkbox>
                 </b-form>
                 <b-form inline>
                     <label class="labelNotif" for="inline-form-custom-select-pref">Fitness Milestones</label>
-                    <b-form-checkbox switch class="switch" disabled="true" v-model="userInfo.showMilestones"></b-form-checkbox>
+                    <b-form-checkbox switch class="switch" :disabled="true" v-model="userInfo.showMilestones"></b-form-checkbox>
                 </b-form>
                 <b-form inline>
                     <label class="labelNotif" for="inline-form-custom-select-pref">Class Availability</label>
-                    <b-form-checkbox switch class="switch" disabled="true" v-model="userInfo.showClassAvail"></b-form-checkbox>
+                    <b-form-checkbox switch class="switch" :disabled="true" v-model="userInfo.showClassAvail"></b-form-checkbox>
                 </b-form>
                 <b-form inline>
                     <label class="labelNotif" for="inline-form-custom-select-pref">Show Telegram Handle</label>
-                    <b-form-checkbox switch class="switch" disabled="true" v-model="userInfo.showTele"></b-form-checkbox>
+                    <b-form-checkbox switch class="switch" :disabled="true" v-model="userInfo.showTele"></b-form-checkbox>
                 </b-form>
             </div>
             
@@ -187,10 +190,32 @@ export default {
           id: {type: String},
           userInfo: {},
           updatedInfo: {},
-          editMode: false
+          editMode: false,
+          change: false,
+          original: 'https://image.freepik.com/free-vector/cute-smiling-happy-strong-avocado-with-jumping-rope-flat-cartoon-character-illustration-icon-isolated-white-avocado-gym-lifestyle-sport-jump-rope-health-fitness-nutrition_92289-524.jpg',
+          changed: 'https://image.freepik.com/free-vector/cute-funny-avocado-make-gym-with-dumbbells_92289-2296.jpg'
         }
     },
     methods: {
+        setAvatar: function() {
+            this.change= !this.change;
+            var doc = database.collection('user').doc(this.id);
+            if(this.change) {
+                doc.update({
+                    profilePic: this.changed
+                }).then(() => {
+                    console.log('successfully updated profile pic')
+                })
+                this.userInfo.profilePic = this.changed;
+            } else {
+                doc.update({
+                    profilePic: this.original
+                }).then(() => {
+                    console.log('successfully updated profile pic')
+                })
+                this.userInfo.profilePic = this.original;
+            }
+        },
         editClick: function() {
             this.editMode = true;
         },
@@ -262,6 +287,12 @@ export default {
 </script>
 
 <style scoped>
+.button, .avatarBut, .labelNotif, .input {
+    font-family: 'Rubik', sans-serif;
+}
+.button {
+    margin-left: 3%;
+}
 #body {
     font-family: 'Lucida Sans';
 }
@@ -275,9 +306,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
   opacity: 1;
   z-index: -1;
+  background: url(/static/overview_background.jpg);
 }
 #left {
     min-height: 90vh;
@@ -301,8 +332,17 @@ export default {
     border-radius: 10px;
 }
 #name {
-    margin-top: 2%;
+    margin-top: 0.5%;
     font-weight: bolder;
+    font-size: 1.5rem;
+    font-family: 'Fjalla One', sans-serif;
+    color:gold;
+    background-color: rgb(46, 43, 43);
+    width: 50%;
+    margin-left:25%;
+    border-radius: 10px;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 #memDetails {
     font-weight: bolder;
@@ -328,6 +368,7 @@ export default {
 }
 .label {
     margin: 1% auto 1% 15%;
+    font-family: 'Rubik', sans-serif;
 }
 .input {
     height: 4%;
@@ -344,6 +385,7 @@ export default {
     color: #8B0000;
     font-weight: bolder;
     font-size: 18px;
+    font-family: 'Fjalla One', sans-serif;
 }
 Footer {
   position: absolute;

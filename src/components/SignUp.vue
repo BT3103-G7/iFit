@@ -267,7 +267,8 @@ export default {
                 showPromo: false,
                 showMilestones: false,
                 showClassAvail: false,
-                valid: false
+                valid: false,
+                profilePic: 'https://image.freepik.com/free-vector/cute-smiling-happy-strong-avocado-with-jumping-rope-flat-cartoon-character-illustration-icon-isolated-white-avocado-gym-lifestyle-sport-jump-rope-health-fitness-nutrition_92289-524.jpg'
               });
             //alert('Successfully registered! Please login.');
             this.$router.push("/verify");
