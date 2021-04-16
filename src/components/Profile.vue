@@ -204,14 +204,14 @@ export default {
                 doc.update({
                     profilePic: this.changed
                 }).then(() => {
-                    console.log('successfully updated profile pic')
+                    //console.log('successfully updated profile pic')
                 })
                 this.userInfo.profilePic = this.changed;
             } else {
                 doc.update({
                     profilePic: this.original
                 }).then(() => {
-                    console.log('successfully updated profile pic')
+                    //console.log('successfully updated profile pic')
                 })
                 this.userInfo.profilePic = this.original;
             }
@@ -228,10 +228,10 @@ export default {
                     } 
                 }
             }
-            console.log("showTele: " + this.updatedInfo.showTele);
+            //console.log("showTele: " + this.updatedInfo.showTele);
             if(Object.keys(this.updatedInfo).lenth != 0) {
                 database.collection("user").doc(this.id).update(this.updatedInfo).then(() => {
-                    console.log("Document successfully updated");
+                    //console.log("Document successfully updated");
                     this.$router.go();
                 });
             } 
@@ -240,9 +240,9 @@ export default {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     // User logged in already or has just logged in.
-                    console.log(user.uid);
+                    //console.log(user.uid);
                     this.email = user.email;
-                    console.log("email: " + this.email);
+                    //console.log("email: " + this.email);
                 } else {
                     // User not logged in or has just logged out.
                 }
@@ -254,13 +254,13 @@ export default {
                 querySnapShot.forEach((doc) => {
                     if(doc.data().email != null && doc.data().email.toString().toLowerCase() == this.email.toLowerCase()) {
                         this.id = doc.id;
-                        console.log("id: " + this.id);
+                        //console.log("id: " + this.id);
                     }
                 });
                 docRef = database.collection("user").doc(this.id);
                 docRef.get().then((doc) => {
                 if (doc.exists) {
-                    console.log("Document data:", doc.data());
+                    //console.log("Document data:", doc.data());
                     this.userInfo = doc.data();
                     this.updatedInfo = doc.data();
                 } else {
@@ -280,7 +280,7 @@ export default {
     },
     watch: {
         updatedInfo: function() {
-            console.log(this.updatedInfo);
+            //console.log(this.updatedInfo);
         }
     }
 }
