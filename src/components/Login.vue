@@ -35,14 +35,22 @@
             required
           ></b-form-input>
         </b-form-group>
-        <br /><b-button class="loginBut" type="submit" variant="warning" size="lg"><b>LOG IN</b></b-button>
+        <br /><b-button
+          class="loginBut"
+          type="submit"
+          variant="warning"
+          size="lg"
+          ><b>LOG IN</b></b-button
+        >
       </form>
       <br /><br /><span><b>Forgot your password? </b></span>
       <p>
         <i>*key in your email address above, then click the button below.</i>
       </p>
 
-      <b-button class="attributes" type="button" v-on:click="reset">Reset my password</b-button>
+      <b-button class="attributes" type="button" v-on:click="reset"
+        >Reset my password</b-button
+      >
     </b-card>
     <Footer></Footer>
   </div>
@@ -51,11 +59,11 @@
 <script>
 import firebase from "firebase";
 import database from "../firebase.js";
-import Footer from './Footer.vue'
+import Footer from "./Footer.vue";
 
 export default {
   components: {
-    Footer
+    Footer,
   },
   data() {
     return {
@@ -84,6 +92,8 @@ export default {
                 //alert('Successfully logged in');
               } else {
                 alert("Please make sure you have verified your email address.");
+                this.sendVerification();
+                this.$router.push("/verify");
               }
             }
           });
@@ -92,7 +102,30 @@ export default {
           alert(error.message);
         });
     },
-
+    sendVerification() {
+      var actionCodeSettings = {
+        // to change when deployed using firebase
+        url: "http://localhost:8080/login",
+        handleCodeInApp: true,
+      };
+      firebase.auth().onAuthStateChanged((firebaseUser) => {
+        if (firebaseUser) {
+          firebaseUser
+            .sendEmailVerification(actionCodeSettings)
+            .then(function () {
+              firebase
+                .auth()
+                .signOut()
+                .then(() => {
+                  // Sign-out successful.
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            });
+        }
+      });
+    },
     reset() {
       var auth = firebase.auth();
       auth
@@ -130,20 +163,20 @@ export default {
   height: 100%;
 }
 span {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 p {
   font-size: 85%;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 h1 {
-  font-family: 'Fjalla One', sans-serif;
+  font-family: "Fjalla One", sans-serif;
 }
 .attributes {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 .loginBut {
-  font-family: 'Fjalla One', sans-serif;
+  font-family: "Fjalla One", sans-serif;
 }
 Footer {
   position: absolute;
