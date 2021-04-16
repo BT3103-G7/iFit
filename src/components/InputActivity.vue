@@ -17,7 +17,7 @@
         <br /><br />
 
         <div id="date-activity-placeholder">
-          <p class="p-3 mb-2 bg-info text-white">Choose a date</p>
+          <p class="p-3 mb-2 bg-info text-white mytext">Choose a date</p>
           <b-form-datepicker
             id="datepicker-full-width"
             menu-class="w-100"
@@ -25,21 +25,21 @@
             v-model="date"
             :max="maxDate"
             locale="en"
-            class="mb-2"
+            class="mb-2 mytext"
           ></b-form-datepicker>
           <!-- <p>Value: {{ new Date(date) }}</p> 
         <p>Type: {{ typeof date }}</p>  !-->
           <br />
-          <p class="p-3 mb-2 bg-info text-white">Choose an activity</p>
+          <p class="p-3 mb-2 bg-info text-white mytext">Choose an activity</p>
           <div>
             <b-form-select
               v-model="activity"
               :options="activity_options"
-              class="mb-3"
+              class="mb-3 mytext"
             >
               <!-- This slot appears above the options from 'options' prop -->
               <template #first>
-                <b-form-select-option :value="null" disabled
+                <b-form-select-option :value="null" disabled class="mytext"
                   >-- Please select an option --</b-form-select-option
                 >
               </template>
@@ -52,21 +52,21 @@
         <div id="time-placeholder">
           <div style="width: 20%; height: 100%; float: left"><br /></div>
           <div style="width: 20%; height: 100%; float: left">
-            <p class="p-3 mb-2 bg-info text-white">Start time</p>
+            <p class="p-3 mb-2 bg-info text-white mytext">Start time</p>
             <!-- <div> -->
             <!-- <b-form-timepicker v-model="start" locale="en"></b-form-timepicker> -->
             <!-- <div class="mt-2">Value: {{ start }}</div> -->
             <!-- <p>Type: {{ Timestamp.valueof(start) }}</p> -->
             <!-- </div> -->
-            <b-form-timepicker v-model="start" locale="en"></b-form-timepicker>
+            <b-form-timepicker v-model="start" locale="en" class="mytext"></b-form-timepicker>
             <br />
           </div>
           <div style="width: 20%; height: 100%; float: left"><br /></div>
 
           <div style="width: 20%; height: 100%; float: left">
-            <p class="p-3 mb-2 bg-info text-white">End time</p>
+            <p class="p-3 mb-2 bg-info text-white mytext">End time</p>
             <div>
-              <b-form-timepicker v-model="end" locale="en"></b-form-timepicker>
+              <b-form-timepicker v-model="end" locale="en" class="mytext"></b-form-timepicker>
               <!-- <div class="mt-2">Value: {{ end }}</div> -->
             </div>
             <br />
@@ -257,5 +257,8 @@ Footer {
   position: absolute;
   top: 100%;
   width: 100%;
+}
+.mytext {
+  font-family: 'Rubik', sans-serif;
 }
 </style>

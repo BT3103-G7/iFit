@@ -66,4 +66,7 @@ Footer {
     width: 100%;
 }
 
+.button {
+    font-family: 'Rubik', sans-serif;
+}
 </style>

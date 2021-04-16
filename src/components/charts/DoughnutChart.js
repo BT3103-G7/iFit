@@ -1,13 +1,9 @@
 import { Doughnut } from 'vue-chartjs';
 import database from '../../firebase.js'
+import firebase from "firebase";
 
 export default {
   extends: Doughnut,
-  props: {
-    user: {
-      type: String
-    }
-  },
   data: function () {
     return {
       datacollection: {
@@ -27,6 +23,7 @@ export default {
         responsive: true,
         maintainAspectRatio: false
       },
+      user: null
     }
   },
   methods: {
@@ -53,11 +50,19 @@ export default {
   watch: {
     user: function () {
       this.fetchItems();
-    }
+    },
   },
-  created() {
-    this.fetchItems();
-  }
+  created: function () {
+    var vm = this;
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        vm.user = user.uid;
+        vm.fetchItems();
+      } else {
+        vm.user = null;
+      }
+    });
+  },
 }
 //       fetchItems: function() {
 //         database.collection('user').get().then(querySnapShot => { //add .doc(this.id) to identify specific user in the future

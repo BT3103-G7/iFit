@@ -79,7 +79,10 @@ export default {
                 for (key2 in retrievedInputs) {
                     this.datacollection.labels.push(key2);
                     this.datacollection.datasets[0].data.push(retrievedInputs[key2]);
-                    var randColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                    var randColor = 'rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
+                    while (this.datacollection.datasets[0].backgroundColor.includes(randColor)) {
+                        randColor = 'rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
+                    }
                     this.datacollection.datasets[0].backgroundColor.push(randColor);
                 }
                 this.renderChart(this.datacollection, this.options);

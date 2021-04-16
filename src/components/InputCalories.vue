@@ -13,14 +13,14 @@
         <div id="background"></div>
         <br><br>
         <div id="date-activity-placeholder">
-        <p class="p-3 mb-2 bg-danger text-white">Choose a date </p>
-        <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2"></b-form-datepicker>
+        <p class="p-3 mb-2 bg-danger text-white mytext">Choose a date </p>
+        <b-form-datepicker id="datepicker-full-width" menu-class="w-100" calendar-width="100%" v-model="date" :max="maxDate" locale="en" class="mb-2 mytext"></b-form-datepicker>
         <!-- <p>Value: {{ new Date(date) }}</p> 
         <p>Type: {{ typeof date }}</p>  !-->
         <br>
-        <p class="p-3 mb-2 bg-danger text-white">Choose a meal category</p>
+        <p class="p-3 mb-2 bg-danger text-white mytext">Choose a meal category</p>
         <div>
-            <b-form-select v-model="mealCat" :options="mealCat_options" class="mb-3">
+            <b-form-select v-model="mealCat" :options="mealCat_options" class="mb-3 mytext">
                 <!-- This slot appears above the options from 'options' prop -->
                 <template #first>
                     <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
@@ -33,15 +33,15 @@
         <div id="name-cal-placeholder">
             <div style='width:20%; height:100%; float:left'><br></div>
             <div style='width:20%; height:100%; float:left'>
-                <p class="p-3 mb-2 bg-danger text-white">Enter Name of food</p>
-                <b-form-input v-model="name" placeholder="Enter Name"></b-form-input>
+                <p class="p-3 mb-2 bg-danger text-white mytext">Enter Name of food</p>
+                <b-form-input v-model="name" placeholder="Enter Name" class="mytext"></b-form-input>
                 <br>
             </div>
             <div style='width:20%; height:100%; float:left'><br></div>
             
             <div style='width:20%; height:100%; float:left'>
-                <p class="p-3 mb-2 bg-danger text-white">Enter Calories of food</p>
-                <b-form-input type="number" min=0 v-model="calories" placeholder="Enter Calories"></b-form-input>
+                <p class="p-3 mb-2 bg-danger text-white mytext">Enter Calories of food</p>
+                <b-form-input type="number" min=0 v-model="calories" placeholder="Enter Calories" class="mytext"></b-form-input>
                 <br>
             </div>
             <div style='width:20%; height:100%; float:left'><br></div> 
@@ -165,5 +165,8 @@ Footer {
   position: absolute;
   top: 100%;
   width: 100%;
+}
+.mytext {
+  font-family: 'Rubik', sans-serif;
 }
 </style>

@@ -15,7 +15,7 @@
         <br /><br />
 
         <div id="date-activity-placeholder">
-          <p class="p-3 mb-2 bg-info text-white">Choose a date</p>
+          <p class="p-3 mb-2 bg-info text-white mytext">Choose a date</p>
           <b-form-datepicker
             id="datepicker"
             menu-class="w-100"
@@ -23,15 +23,15 @@
             v-model="date"
             :max="maxDate"
             locale="en"
-            class="mb-2"
+            class="mb-2 mytext"
           ></b-form-datepicker>
           <br />
-          <p class="p-3 mb-2 bg-info text-white">Choose a class</p>
+          <p class="p-3 mb-2 bg-info text-white mytext">Choose a class</p>
           <div>
             <b-form-select
               v-model="class_chosen"
               :options="class_options"
-              class="mb-3"
+              class="mb-3 mytext"
             >
               <!-- This slot appears above the options from 'options' prop -->
               <template #first>
@@ -227,5 +227,8 @@ Footer {
   position: absolute;
   top: 100%;
   width: 100%;
+}
+.mytext {
+  font-family: 'Rubik', sans-serif;
 }
 </style>
