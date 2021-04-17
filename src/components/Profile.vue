@@ -3,7 +3,14 @@
     <div id="bg"></div>
     <div id="left">
       <div id="profileCard">
-        <p id="name">{{ this.userInfo.name }}</p>
+        <p v-if="!this.editMode" id="name">{{ this.userInfo.name }}</p>
+        <b-form-input
+            id="input-name"
+            class="input"
+            :placeholder="this.userInfo.name"
+            v-model.lazy="updatedInfo.name"
+            v-if="this.editMode"
+        ></b-form-input>
         <br />
         <b-avatar size="100px">
           <img :src="this.userInfo.profilePic" width="110" /> </b-avatar
@@ -471,6 +478,12 @@ export default {
   width: 60%;
   float: right;
   padding: 4% 0 0 0;
+}
+#input-name {
+  width: 50%;
+  height: 15%;
+  margin-left: 25%;
+  margin-bottom: 5%;
 }
 #profileCard {
   background-color: white;
