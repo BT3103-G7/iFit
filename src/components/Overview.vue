@@ -85,7 +85,8 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background: url(/static/overview_background.jpg);
-  opacity: 90%;
+  opacity: 1;
+  z-index: -1;
 }
 Footer {
   position: absolute;
