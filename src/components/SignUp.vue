@@ -320,7 +320,7 @@ export default {
 }
 #form {
   width: 60%;
-  height: 87%;
+  height: 115vh;
   margin-top: 5rem;
   margin-left: auto;
   margin-right: auto;

@@ -146,7 +146,7 @@ export default {
 <style scoped>
 #loginDiv {
   width: 40%;
-  height: 60%;
+  height: 65vh;
   margin-top: 5rem;
   margin-left: auto;
   margin-right: auto;
@@ -156,6 +156,7 @@ export default {
 }
 #background {
   background: url(/static/login_testbackground.jpg);
+  background-size: cover;
   position: absolute;
   top: 0;
   left: 0;
