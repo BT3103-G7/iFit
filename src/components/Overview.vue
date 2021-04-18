@@ -7,7 +7,7 @@
       </div>
       <div id="bottomleft">
         <PieChart v-bind:user="user"></PieChart>
-        <DoughnutChart v-bind:user="user"></DoughnutChart>
+        <DoughnutChart></DoughnutChart>
         <BarChart v-bind:user="user"></BarChart>
       </div>
       <Footer></Footer>

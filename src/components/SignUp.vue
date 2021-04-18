@@ -283,7 +283,7 @@ export default {
     sendVerification() {
       var actionCodeSettings = {
         // to change when deployed using firebase
-        url: "http://localhost:8080/login",
+        url: "https://ifit-a44ec.web.app/login",
         handleCodeInApp: true,
       };
       firebase.auth().onAuthStateChanged((firebaseUser) => {
