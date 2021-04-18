@@ -17,7 +17,7 @@ Vue.use(IconsPlugin)
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: ''
+    key: process.env.MY_GOOGLE_API
   }});
 
   Vue.use(SmartTable)
