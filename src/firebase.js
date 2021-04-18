@@ -4,13 +4,13 @@ import "firebase/auth";
 import "firebase/firestore";
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBIGrd-UhDZMJPrmvx_q0QYjBhBA5bz0ok",
-  authDomain: "bt3103-test-project-750e2.firebaseapp.com",
-  projectId: "bt3103-test-project-750e2",
-  storageBucket: "bt3103-test-project-750e2.appspot.com",
-  messagingSenderId: "424721779966",
-  appId: "1:424721779966:web:0f51a977b94f58c6f269af",
-  measurementId: "G-7DDRBMTV77"
+  apiKey: "AIzaSyBcRZrndKOcim25TxhL_eIsYoC4KOK9bKs",
+  authDomain: "ifit-a44ec.firebaseapp.com",
+  projectId: "ifit-a44ec",
+  storageBucket: "ifit-a44ec.appspot.com",
+  messagingSenderId: "375209231966",
+  appId: "1:375209231966:web:4b090938321ccf55d2d6cf",
+  measurementId: "G-NWHKJGHVJH"
 };
 
 firebase.initializeApp(firebaseConfig);
