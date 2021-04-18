@@ -16,4 +16,3 @@ jobs:
           projectId: ifit-a44ec
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-          MY_GOOGLE_API: '${{ secrets.MY_GOOGLE_API }}'
