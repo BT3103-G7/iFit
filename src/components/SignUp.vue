@@ -5,7 +5,7 @@
       <br />
       <form
         @submit.prevent="register"
-        oninput='pw2.setCustomValidity(pw2.value != pw1.value ? "Passwords do not match." : "")'
+        oninput='pw2.setCustomValidity(pw2.value != pw1.value ? "Passwords do not match." : "")' 
       >
         <b-form-group
           class="attribute"
@@ -45,13 +45,20 @@
           label="Telegram:"
           label-for="input-3"
           label-cols-sm="3"
-        >
+        >  
           <b-form-input
             id="input-3"
             v-model="tele"
             placeholder="@username"
             required
           ></b-form-input>
+          <b-form-invalid-feedback :state="validTele">
+            <span :class="has_format ? 'has_required' : ''"
+              >Your telegram username should start with a @.</span
+            >
+          </b-form-invalid-feedback>
+          <b-form-valid-feedback>
+          </b-form-valid-feedback>
         </b-form-group>
 
         <b-form-group
@@ -209,6 +216,7 @@ export default {
       has_lowercase: false,
       has_uppercase: false,
       has_special: false,
+      has_format: false
     };
   },
   watch: {
@@ -220,6 +228,9 @@ export default {
       this.has_uppercase = /[A-Z]/.test(this.password);
       this.has_special = format.test(this.password);
     },
+    tele() {
+      this.has_format = this.tele.startsWith("@");
+    }
   },
   computed: {
     valid() {
@@ -231,6 +242,9 @@ export default {
         this.has_number
       );
     },
+    validTele() {
+      return this.has_format;
+    }
   },
   methods: {
     register() {
